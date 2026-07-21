@@ -39,6 +39,12 @@ by default — check things off as you get to them.
 - [x] Explicit "Home" nav link + a fading back-to-top button (bottom-right,
   stacked above the chat widget) — added since the page is long and we
   may add standalone pages (FAQ, industry-specific landing pages) later
+- [ ] Real logo design for Cambi Growth — the current favicon/`brand-mark`
+  is still a generic placeholder mark from the Oakline era, not an actual
+  designed logo. Worth doing now that the name's settled; would need the
+  og-image, favicon, and the inline SVG brand-mark in `index.html`/
+  `thank-you.html`/`404.html` all updated together once there's a real
+  mark to use.
 
 ## Business (you)
 
