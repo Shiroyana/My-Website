@@ -14,14 +14,16 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   --bg-alt: #EFEAE0;
   --ink: #14140F;
   --ink-soft: #55534A;
-  --ink-faint: #8B8779;
+  --ink-faint: #6E6A5C;
   --line: #E3DCCB;
   --line-strong: #D3CAB4;
 
   --c-amber: #D9832E;
   --c-green: #3F7D4F;
   --c-teal: #2E6E72;
-  --accent: var(--c-amber);
+  /* Darker than --c-amber: the vibrant amber fails WCAG AA (2.6:1) on the
+     cream background at the small sizes kicker labels use. */
+  --accent: #A6591C;
 
   /* raw dark constants, remapped into semantic vars by .section-dark */
   --dark-bg: #0E1712;
@@ -41,6 +43,10 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   --bg-raised: var(--dark-bg-raised);
   --ink: var(--dark-ink);
   --ink-soft: var(--dark-ink-soft);
+  /* --ink-faint isn't remapped by default anywhere else, but the root
+     value is tuned for light backgrounds — without this override it's
+     illegible on dark ones (footer column headers, footer copyright). */
+  --ink-faint: #94A08D;
   --line: var(--dark-line);
   --line-strong: #34423A;
   --accent: #E8A75C;
@@ -943,9 +949,17 @@ section { padding: 100px 0; position: relative; }
     padding: 32px 28px;
     gap: 24px;
     transform: translateX(100%);
+    /* visibility (not just the off-screen transform) keeps the closed
+       menu's links out of the tab order — delayed on close so the slide-out
+       still plays, switched instantly on open so it's immediately reachable. */
+    visibility: hidden;
+    transition: transform 0.25s ease, visibility 0s linear 0.25s;
+  }
+  .nav.is-open {
+    transform: translateX(0);
+    visibility: visible;
     transition: transform 0.25s ease;
   }
-  .nav.is-open { transform: translateX(0); }
   .nav a { font-size: 1.1rem; }
   .nav-cta { align-self: flex-start; }
   .nav-toggle { display: flex; }

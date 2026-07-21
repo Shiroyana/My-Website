@@ -13,15 +13,15 @@ by default — check things off as you get to them.
 
 ### Content
 - [ ] Real testimonials/reviews once you have them (AAFARMA/AGM owner quotes would be strong social proof if they're willing)
-- [ ] Real screenshots of AAFARMA and AGM in the Results section (currently just favicons + text)
-- [ ] A 404 page
+- [x] Real screenshots of AAFARMA and AGM in the Results section
+- [x] A 404 page
 - [ ] Decide if you want a blog (SEO value, but only worth it if you'll actually write in it)
 
 ### Polish
-- [ ] Cross-browser check — only tested in Chromium so far, check Safari/Firefox especially for the marquee, count-up animations, and diagram
-- [ ] Accessibility pass: color contrast on the dark sections, keyboard navigation through the pricing toggle and mobile nav
+- [x] Cross-browser check — verified in Firefox and WebKit in addition to Chromium (marquee, count-up, toggle, diagram all match)
+- [x] Accessibility pass — fixed real WCAG AA contrast failures (kicker labels were 2.6:1, meta text was ~3.3:1) and a real keyboard-trap bug in the mobile nav (closed menu was still tabbable; opening it via keyboard skipped past the links). See git log for details.
 - [ ] OG image for link previews (currently only text meta tags, no image)
-- [ ] robots.txt / sitemap.xml (matters once there's a real domain to index)
+- [x] robots.txt (sitemap.xml still held until there's a real domain)
 
 ## Business (you)
 
