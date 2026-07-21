@@ -55,9 +55,15 @@ than Foundation:
   own pricing/services/process baked into the system prompt as the
   knowledge base. Simpler than full RAG (no vector DB) since the content
   is small enough to fit directly in context — upgrade to real embeddings
-  only if/when a client's FAQ set gets large. **Needs your action:** add a
-  real `ANTHROPIC_API_KEY` in Netlify site settings → Environment
-  variables, or it just returns "not configured yet."
+  only if/when a client's FAQ set gets large. Runs on `claude-haiku-4-5`
+  (switched from Sonnet 5 for cost — no meaningful quality loss for a
+  scripted FAQ bot). Has a basic per-IP rate limit (15 msgs / 10 min,
+  in-memory on the function — resets on cold start, not distributed, but
+  a real deterrent against casual abuse). Still no prompt caching and no
+  spend alert configured on the Anthropic account — worth adding once
+  there's real traffic. **Needs your action:** add a real
+  `ANTHROPIC_API_KEY` in Netlify site settings → Environment variables,
+  or it just returns "not configured yet."
 - [ ] CRM + lead routing (Growth Partner) — pick one (HubSpot free tier /
   Airtable), wire form submissions into it. You said you want to try
   HubSpot — that's a real account signup I can't do for you; once you

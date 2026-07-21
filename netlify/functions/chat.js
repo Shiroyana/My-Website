@@ -53,9 +53,41 @@ NEXT STEP: encourage people to fill out the contact form on this page
 ("Get Your Free Website Audit") to get a real, personalized audit of
 their current site.`;
 
+// Per-IP sliding-window rate limit. This lives in module scope so it
+// persists across invocations on a warm function instance — it resets
+// on cold starts and isn't shared across instances, so it's a deterrent
+// against casual abuse/scripts, not a hard guarantee under real load.
+const RATE_LIMIT = 15; // requests
+const RATE_WINDOW_MS = 10 * 60 * 1000; // per 10 minutes
+const requestLog = new Map(); // ip -> array of request timestamps
+
+const isRateLimited = (ip) => {
+  const now = Date.now();
+  const timestamps = (requestLog.get(ip) || []).filter((t) => now - t < RATE_WINDOW_MS);
+  timestamps.push(now);
+  requestLog.set(ip, timestamps);
+
+  // Bound memory: drop the oldest tracked IPs once the map gets large.
+  if (requestLog.size > 500) {
+    const oldestKey = requestLog.keys().next().value;
+    requestLog.delete(oldestKey);
+  }
+
+  return timestamps.length > RATE_LIMIT;
+};
+
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method Not Allowed' };
+  }
+
+  const ip = event.headers['x-nf-client-connection-ip'] || event.headers['client-ip'] || 'unknown';
+  if (isRateLimited(ip)) {
+    return {
+      statusCode: 429,
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ error: 'Too many messages — please wait a few minutes and try again.' }),
+    };
   }
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
@@ -95,7 +127,7 @@ exports.handler = async (event) => {
         'anthropic-version': '2023-06-01',
       },
       body: JSON.stringify({
-        model: 'claude-sonnet-5',
+        model: 'claude-haiku-4-5',
         max_tokens: 400,
         system: SYSTEM_PROMPT,
         messages: trimmed,
