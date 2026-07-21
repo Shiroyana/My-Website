@@ -1,4 +1,4 @@
-# Oakline — TODO
+# Cambi Growth — TODO
 
 Two lists: the site itself, and the business behind it. Nothing here is urgent
 by default — check things off as you get to them.
@@ -6,8 +6,8 @@ by default — check things off as you get to them.
 ## Website
 
 ### Before showing this to a real prospect
-- [x] Deploy — live at https://oakline-growth.netlify.app (real domain still pocketed; swap `canonical`/`og:url`/`og:image` in `index.html` once you have one)
-- [ ] **Connect the GitHub repo for continuous deployment** — needs your direct action, CLI automation couldn't complete the GitHub App/webhook authorization. Go to https://app.netlify.com/projects/oakline-growth/settings/deploys → "Link repository" → GitHub → `Shiroyana/My-Website` → branch `main`, build command empty, publish dir `.`. After this, `git push` alone deploys — no more manual `netlify deploy`.
+- [x] Deploy — live at https://oakline-growth.netlify.app (still the actual Netlify URL; renamed the brand to Cambi Growth and pointed `canonical`/`og:url`/`og:image`/JSON-LD in `index.html` at `getcambi.com` ahead of registering it — **needs your action:** register `getcambi.com` and point it at this Netlify site, or those tags reference a domain that doesn't resolve yet)
+- [x] Connect the GitHub repo for continuous deployment — confirmed live: Netlify now deploys straight from GitHub, `git push` to `main` alone triggers a deploy.
 - [x] Working contact form — real Netlify Form (`audit-request`) on the contact section, redirects to `thank-you.html`. Hit a real bug getting this working: the site had `ignore_html_forms: true` in Netlify's processing settings, which silently skipped form detection entirely — form appeared to submit fine (redirected correctly) but nothing was ever captured. Fixed by flipping that setting; confirmed the form is now registered with all fields + honeypot.
 - [ ] **Set up form-submission email notifications** — checked and there are currently no notification hooks configured, so real leads won't email-alert you yet. Netlify dashboard → Forms → Settings → add a notification (email is simplest).
 - [ ] Point the contact CTA at something better than a personal Gmail `mailto:` — a form (Formspree/Netlify Forms) or a business inbox *(pocketed — business email; the form now exists, still submits toward your personal Netlify account until you have a business one)*
@@ -51,7 +51,7 @@ than Foundation:
 
 - [x] Chatbot trained on FAQs (Growth tier) — built and live: a real chat
   widget (bottom-right) backed by a Netlify Function
-  (`netlify/functions/chat.js`) calling the Anthropic API, with Oakline's
+  (`netlify/functions/chat.js`) calling the Anthropic API, with Cambi Growth's
   own pricing/services/process baked into the system prompt as the
   knowledge base. Simpler than full RAG (no vector DB) since the content
   is small enough to fit directly in context — upgrade to real embeddings
@@ -96,9 +96,9 @@ than Foundation:
   done," you send the request) before automating
 - [ ] Monthly performance report template — mock one up using AAFARMA/AGM
   real data before the first one is due
-- [x] Working contact/quote forms — Oakline's own site now has one (see
+- [x] Working contact/quote forms — Cambi Growth's own site now has one (see
   above)
-- [x] Local business schema (JSON-LD) — added to Oakline's own `index.html`
+- [x] Local business schema (JSON-LD) — added to Cambi Growth's own `index.html`
   (`ProfessionalService` type, includes the three package offers)
 - [ ] Uptime monitoring — nothing is watching any site right now,
   including the client ones; UptimeRobot free tier, 10-minute setup —
