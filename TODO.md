@@ -6,12 +6,18 @@ by default — check things off as you get to them.
 ## Website
 
 ### Before showing this to a real prospect
-- [x] Deploy — live at https://oakline-growth.netlify.app (still the actual Netlify URL; renamed the brand to Cambi Growth and pointed `canonical`/`og:url`/`og:image`/JSON-LD in `index.html` at `getcambi.com` ahead of registering it — **needs your action:** register `getcambi.com` and point it at this Netlify site, or those tags reference a domain that doesn't resolve yet)
+- [x] Deploy — `getcambi.com` is registered and pointed at Netlify; `canonical`/`og:url`/`og:image`/JSON-LD in `index.html` already reference it, so nothing left to swap. `oakline-growth.netlify.app` is still the underlying Netlify site URL (fine to leave — it's infrastructure, not brand-facing).
 - [x] Connect the GitHub repo for continuous deployment — confirmed live: Netlify now deploys straight from GitHub, `git push` to `main` alone triggers a deploy.
 - [x] Working contact form — real Netlify Form (`audit-request`) on the contact section, redirects to `thank-you.html`. Hit a real bug getting this working: the site had `ignore_html_forms: true` in Netlify's processing settings, which silently skipped form detection entirely — form appeared to submit fine (redirected correctly) but nothing was ever captured. Fixed by flipping that setting; confirmed the form is now registered with all fields + honeypot.
 - [ ] **Set up form-submission email notifications** — checked and there are currently no notification hooks configured, so real leads won't email-alert you yet. Netlify dashboard → Forms → Settings → add a notification (email is simplest).
 - [ ] Point the contact CTA at something better than a personal Gmail `mailto:` — a form (Formspree/Netlify Forms) or a business inbox *(pocketed — business email; the form now exists, still submits toward your personal Netlify account until you have a business one)*
-- [ ] Add basic analytics (Plausible or GA4) so you know if anyone's actually visiting *(pocketed)*
+- [x] Add basic analytics — GA4 wired up (`G-5H09HD2RT3`) on `index.html`
+  and `thank-you.html` (skipped `404.html` — no value tracking error
+  visits). Thank-you page is the real signal here: it only loads after a
+  successful form submit, so GA4 traffic there is your actual lead count,
+  no cross-referencing Netlify Forms needed. Worth linking this GA4
+  property to Search Console (Admin → Search Console Links) so query
+  data and on-site behavior show up in one place.
 - [ ] Replace `alphavires@gmail.com` in the code with a business email once you have one *(pocketed)*
 
 ### Content
@@ -24,7 +30,12 @@ by default — check things off as you get to them.
 - [x] Cross-browser check — verified in Firefox and WebKit in addition to Chromium (marquee, count-up, toggle, diagram all match)
 - [x] Accessibility pass — fixed real WCAG AA contrast failures (kicker labels were 2.6:1, meta text was ~3.3:1) and a real keyboard-trap bug in the mobile nav (closed menu was still tabbable; opening it via keyboard skipped past the links). See git log for details.
 - [x] OG image for link previews
-- [x] robots.txt (sitemap.xml still held until there's a real domain)
+- [x] robots.txt + sitemap.xml — domain's live now, so added `sitemap.xml`
+  (just `index.html`; `thank-you.html` is `noindex` so it's excluded) and
+  pointed `robots.txt` at it. **Needs your action:** submit the sitemap in
+  Google Search Console (Sitemaps → enter `sitemap.xml`) and use URL
+  Inspection → Request Indexing on the homepage to speed up first crawl,
+  now that you've added `getcambi.com` as a property.
 - [x] Explicit "Home" nav link + a fading back-to-top button (bottom-right,
   stacked above the chat widget) — added since the page is long and we
   may add standalone pages (FAQ, industry-specific landing pages) later
@@ -75,11 +86,11 @@ than Foundation:
   than lumping every headerless caller into one shared bucket that could
   lock unrelated visitors out of each other. A retrying client can no
   longer inflate one IP's tracked request history past the 15 cap (fixed
-  a real unbounded-growth bug from the first version). Still no prompt
-  caching and no spend alert configured on the Anthropic account — worth
-  adding once there's real traffic. **Needs
-  your action:** add a real `ANTHROPIC_API_KEY` in Netlify site settings
-  → Environment variables, or it just returns "not configured yet."
+  a real unbounded-growth bug from the first version). `ANTHROPIC_API_KEY`
+  is now set in Netlify (production scope, marked as a secret value) — the
+  chatbot is fully live. Still no prompt caching and no spend alert
+  configured on the Anthropic account — worth adding once there's real
+  traffic.
 - [ ] CRM + lead routing (Growth Partner) — pick one (HubSpot free tier /
   Airtable), wire form submissions into it. You said you want to try
   HubSpot — that's a real account signup I can't do for you; once you
@@ -100,9 +111,7 @@ than Foundation:
   above)
 - [x] Local business schema (JSON-LD) — added to Cambi Growth's own `index.html`
   (`ProfessionalService` type, includes the three package offers)
-- [ ] Uptime monitoring — nothing is watching any site right now,
-  including the client ones; UptimeRobot free tier, 10-minute setup —
-  another real account signup, not something I can create for you
+- [x] Uptime monitoring — UptimeRobot set up, watching the live site.
 
 ### Later
 - [ ] Tax reserve — set aside a % of everything as it comes in, don't wait for year-end
