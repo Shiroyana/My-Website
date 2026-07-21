@@ -24,7 +24,12 @@ by default — check things off as you get to them.
 - [x] Cross-browser check — verified in Firefox and WebKit in addition to Chromium (marquee, count-up, toggle, diagram all match)
 - [x] Accessibility pass — fixed real WCAG AA contrast failures (kicker labels were 2.6:1, meta text was ~3.3:1) and a real keyboard-trap bug in the mobile nav (closed menu was still tabbable; opening it via keyboard skipped past the links). See git log for details.
 - [x] OG image for link previews
-- [x] robots.txt (sitemap.xml still held until there's a real domain)
+- [x] robots.txt + sitemap.xml — domain's live now, so added `sitemap.xml`
+  (just `index.html`; `thank-you.html` is `noindex` so it's excluded) and
+  pointed `robots.txt` at it. **Needs your action:** submit the sitemap in
+  Google Search Console (Sitemaps → enter `sitemap.xml`) and use URL
+  Inspection → Request Indexing on the homepage to speed up first crawl,
+  now that you've added `getcambi.com` as a property.
 - [x] Explicit "Home" nav link + a fading back-to-top button (bottom-right,
   stacked above the chat widget) — added since the page is long and we
   may add standalone pages (FAQ, industry-specific landing pages) later
