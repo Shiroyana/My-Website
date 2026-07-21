@@ -56,17 +56,28 @@ than Foundation:
   knowledge base. Simpler than full RAG (no vector DB) since the content
   is small enough to fit directly in context — upgrade to real embeddings
   only if/when a client's FAQ set gets large. Runs on `claude-haiku-4-5`
-  (switched from Sonnet 5 for cost — no meaningful quality loss for a
-  scripted FAQ bot, though this hasn't been tested against adversarial
-  input since it's a public endpoint with no auth). Has a per-IP rate
-  limit (15 msgs / 10 min, in-memory on the function — resets on cold
-  start, and since Netlify can run multiple warm instances at once, the
-  real ceiling under concurrent load is higher than 15; a shared store
-  like Netlify Blobs would close that gap if abuse becomes real). A
-  retrying client can no longer inflate one IP's tracked request history
-  past the 15 cap (fixed a real unbounded-growth bug from the first
-  version). Still no prompt caching and no spend alert configured on the
-  Anthropic account — worth adding once there's real traffic. **Needs
+  (switched from Sonnet 5 for cost). Because a smaller model is less
+  rigorously instruction-tuned and this is a public endpoint with no
+  auth, added a real guardrail rather than trusting the system prompt
+  alone: replies are scanned for a dollar figure that isn't in the
+  known price list (derived straight from the system prompt so it can't
+  drift), and swapped for a safe "let's get you a real quote" message if
+  one slips through — catches the worst failure mode (a fabricated
+  price shown to a prospect) even if the model ignores the "never make
+  up prices" instruction. Has a per-IP rate limit (15 msgs / 10 min,
+  in-memory on the function — resets on cold start, and since Netlify
+  can run multiple warm instances at once, the real ceiling under
+  concurrent load is higher than 15; a shared store like Netlify Blobs
+  would close that gap if abuse becomes real). Only trusts Netlify's own
+  edge-injected IP header for rate-limiting, not the spoofable
+  `client-ip` header some callers could set themselves — if that header
+  is ever missing, the request fails open (skips the rate limit) rather
+  than lumping every headerless caller into one shared bucket that could
+  lock unrelated visitors out of each other. A retrying client can no
+  longer inflate one IP's tracked request history past the 15 cap (fixed
+  a real unbounded-growth bug from the first version). Still no prompt
+  caching and no spend alert configured on the Anthropic account — worth
+  adding once there's real traffic. **Needs
   your action:** add a real `ANTHROPIC_API_KEY` in Netlify site settings
   → Environment variables, or it just returns "not configured yet."
 - [ ] CRM + lead routing (Growth Partner) — pick one (HubSpot free tier /

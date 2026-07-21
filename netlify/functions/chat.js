@@ -53,6 +53,21 @@ NEXT STEP: encourage people to fill out the contact form on this page
 ("Get Your Free Website Audit") to get a real, personalized audit of
 their current site.`;
 
+// Dollar amounts that actually appear in SYSTEM_PROMPT, derived from it
+// directly so this never drifts out of sync when prices change. Used as
+// a guardrail: Haiku is smaller and less rigorously instruction-tuned
+// than Sonnet, and "never make up prices" is a hard constraint on a
+// public, unauthenticated endpoint — this catches the case where the
+// model states a dollar figure that isn't actually in its own knowledge
+// base, rather than trusting instruction-following alone.
+const PRICE_PATTERN = /\$\d{1,3}(,\d{3})*/g;
+const KNOWN_PRICES = new Set(SYSTEM_PROMPT.match(PRICE_PATTERN) || []);
+
+const containsFabricatedPrice = (text) => {
+  const mentioned = text.match(PRICE_PATTERN) || [];
+  return mentioned.some((price) => !KNOWN_PRICES.has(price));
+};
+
 // Per-IP sliding-window rate limit. This lives in module scope so it
 // persists across invocations on a warm function instance — it resets
 // on cold starts and isn't shared across instances. Under real
@@ -97,13 +112,25 @@ exports.handler = async (event) => {
     return { statusCode: 405, body: 'Method Not Allowed' };
   }
 
-  const ip = event.headers['x-nf-client-connection-ip'] || event.headers['client-ip'] || 'unknown';
-  if (recordRequestAndCheckLimit(ip)) {
-    return {
-      statusCode: 429,
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ error: 'Too many messages — please wait a few minutes and try again.' }),
-    };
+  // Only trust Netlify's own edge-injected header — 'client-ip' isn't
+  // guaranteed by the platform and a caller could set it directly,
+  // letting them spoof a fresh identity per request to dodge the limit.
+  const ip = event.headers['x-nf-client-connection-ip'];
+  if (ip) {
+    if (recordRequestAndCheckLimit(ip)) {
+      return {
+        statusCode: 429,
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ error: 'Too many messages — please wait a few minutes and try again.' }),
+      };
+    }
+  } else {
+    // Netlify's edge normally always sets this header on real production
+    // traffic — if it's missing (local dev, an unusual proxy path), fail
+    // open rather than lumping every headerless caller into one shared
+    // bucket that unrelated visitors could exhaust for each other. Log
+    // it so a real gap in production would actually surface.
+    console.warn('chat function: missing x-nf-client-connection-ip, skipping rate limit for this request');
   }
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
@@ -161,7 +188,14 @@ exports.handler = async (event) => {
     }
 
     const data = await res.json();
-    const reply = data.content?.[0]?.text || 'Sorry, I couldn\'t come up with a reply — try asking that differently?';
+    let reply = data.content?.[0]?.text || 'Sorry, I couldn\'t come up with a reply — try asking that differently?';
+
+    // Guardrail against a fabricated price slipping through — see
+    // KNOWN_PRICES above for why this exists on the cheaper model.
+    if (containsFabricatedPrice(reply)) {
+      console.error('chat function: model reply contained an unrecognized price, discarding', reply);
+      reply = "I don't want to guess on pricing for that — let's get you a real quote. Try the contact form above and we'll follow up with exact numbers.";
+    }
 
     return {
       statusCode: 200,
