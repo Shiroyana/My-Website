@@ -6,7 +6,7 @@ by default — check things off as you get to them.
 ## Website
 
 ### Before showing this to a real prospect
-- [x] Deploy — live at https://oakline-growth.netlify.app (still the actual Netlify URL; renamed the brand to Cambi Growth and pointed `canonical`/`og:url`/`og:image`/JSON-LD in `index.html` at `getcambi.com` ahead of registering it — **needs your action:** register `getcambi.com` and point it at this Netlify site, or those tags reference a domain that doesn't resolve yet)
+- [x] Deploy — `getcambi.com` is registered and pointed at Netlify; `canonical`/`og:url`/`og:image`/JSON-LD in `index.html` already reference it, so nothing left to swap. `oakline-growth.netlify.app` is still the underlying Netlify site URL (fine to leave — it's infrastructure, not brand-facing).
 - [x] Connect the GitHub repo for continuous deployment — confirmed live: Netlify now deploys straight from GitHub, `git push` to `main` alone triggers a deploy.
 - [x] Working contact form — real Netlify Form (`audit-request`) on the contact section, redirects to `thank-you.html`. Hit a real bug getting this working: the site had `ignore_html_forms: true` in Netlify's processing settings, which silently skipped form detection entirely — form appeared to submit fine (redirected correctly) but nothing was ever captured. Fixed by flipping that setting; confirmed the form is now registered with all fields + honeypot.
 - [ ] **Set up form-submission email notifications** — checked and there are currently no notification hooks configured, so real leads won't email-alert you yet. Netlify dashboard → Forms → Settings → add a notification (email is simplest).
@@ -75,11 +75,11 @@ than Foundation:
   than lumping every headerless caller into one shared bucket that could
   lock unrelated visitors out of each other. A retrying client can no
   longer inflate one IP's tracked request history past the 15 cap (fixed
-  a real unbounded-growth bug from the first version). Still no prompt
-  caching and no spend alert configured on the Anthropic account — worth
-  adding once there's real traffic. **Needs
-  your action:** add a real `ANTHROPIC_API_KEY` in Netlify site settings
-  → Environment variables, or it just returns "not configured yet."
+  a real unbounded-growth bug from the first version). `ANTHROPIC_API_KEY`
+  is now set in Netlify (production scope, marked as a secret value) — the
+  chatbot is fully live. Still no prompt caching and no spend alert
+  configured on the Anthropic account — worth adding once there's real
+  traffic.
 - [ ] CRM + lead routing (Growth Partner) — pick one (HubSpot free tier /
   Airtable), wire form submissions into it. You said you want to try
   HubSpot — that's a real account signup I can't do for you; once you
