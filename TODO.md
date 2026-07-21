@@ -11,7 +11,13 @@ by default — check things off as you get to them.
 - [x] Working contact form — real Netlify Form (`audit-request`) on the contact section, redirects to `thank-you.html`. Hit a real bug getting this working: the site had `ignore_html_forms: true` in Netlify's processing settings, which silently skipped form detection entirely — form appeared to submit fine (redirected correctly) but nothing was ever captured. Fixed by flipping that setting; confirmed the form is now registered with all fields + honeypot.
 - [ ] **Set up form-submission email notifications** — checked and there are currently no notification hooks configured, so real leads won't email-alert you yet. Netlify dashboard → Forms → Settings → add a notification (email is simplest).
 - [ ] Point the contact CTA at something better than a personal Gmail `mailto:` — a form (Formspree/Netlify Forms) or a business inbox *(pocketed — business email; the form now exists, still submits toward your personal Netlify account until you have a business one)*
-- [ ] Add basic analytics (Plausible or GA4) so you know if anyone's actually visiting *(pocketed)*
+- [x] Add basic analytics — GA4 wired up (`G-5H09HD2RT3`) on `index.html`
+  and `thank-you.html` (skipped `404.html` — no value tracking error
+  visits). Thank-you page is the real signal here: it only loads after a
+  successful form submit, so GA4 traffic there is your actual lead count,
+  no cross-referencing Netlify Forms needed. Worth linking this GA4
+  property to Search Console (Admin → Search Console Links) so query
+  data and on-site behavior show up in one place.
 - [ ] Replace `alphavires@gmail.com` in the code with a business email once you have one *(pocketed)*
 
 ### Content
