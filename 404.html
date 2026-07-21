@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Page Not Found — Oakline</title>
+<meta name="robots" content="noindex" />
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230E1712'/%3E%3Cpath d='M32 46V24M32 24l-9 9M32 24l9 9M32 24l-6 14M32 24l6 14' stroke='%2364A672' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,340..900;1,9..144,400..600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="css/style.css" />
+<style>
+  .notfound {
+    min-height: calc(100vh - 72px);
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 80px 0;
+  }
+  .notfound-code {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(5rem, 16vw, 10rem);
+    line-height: 1;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+  }
+  .notfound-title {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(1.8rem, 3.6vw, 2.6rem);
+    margin: 12px 0 20px;
+  }
+  .notfound-sub {
+    color: var(--ink-soft);
+    font-size: 1.1rem;
+    max-width: 46ch;
+    margin-bottom: 40px;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header" id="top">
+  <div class="wrap header-row">
+    <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span>Oakline</a>
+
+    <nav class="nav" id="nav">
+      <a href="index.html#results">Results</a>
+      <a href="index.html#what-we-do">What We Do</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="index.html#process">Process</a>
+      <a href="index.html#contact" class="nav-cta">Get Free Audit</a>
+    </nav>
+
+    <button type="button" class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+  <section class="notfound section-dark">
+    <div class="hero-aurora" aria-hidden="true">
+      <span class="orb orb-a"></span>
+      <span class="orb orb-b"></span>
+    </div>
+    <div class="hero-grain" aria-hidden="true"></div>
+
+    <div class="wrap" style="position:relative; z-index:2;">
+      <p class="notfound-code reveal is-visible">404</p>
+      <h1 class="notfound-title reveal is-visible">This page took a wrong turn.</h1>
+      <p class="notfound-sub reveal is-visible">The page you're looking for doesn't exist, moved, or the link's outdated. Let's get you back on the map.</p>
+      <div class="hero-actions reveal is-visible">
+        <a href="index.html" class="btn btn-primary">Back to Home</a>
+        <a href="index.html#contact" class="btn btn-ghost">Get in Touch</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer section-dark">
+  <div class="wrap footer-grid">
+    <div>
+      <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span>Oakline</a>
+      <p class="footer-tag">Growth Partner for Local Service Businesses</p>
+    </div>
+    <div class="footer-cols">
+      <div>
+        <h4>Site</h4>
+        <a href="index.html#results">Results</a>
+        <a href="index.html#what-we-do">What We Do</a>
+        <a href="index.html#pricing">Pricing</a>
+        <a href="index.html#process">Process</a>
+      </div>
+      <div>
+        <h4>Industries</h4>
+        <span>Plumbing</span>
+        <span>HVAC</span>
+        <span>Electrical</span>
+        <span>Roofing</span>
+        <span>Restoration</span>
+        <span>Restaurants</span>
+      </div>
+    </div>
+  </div>
+  <div class="wrap footer-row">
+    <span>Oakline</span>
+    <span id="year"></span>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
