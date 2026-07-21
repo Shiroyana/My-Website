@@ -55,15 +55,31 @@ their current site.`;
 
 // Per-IP sliding-window rate limit. This lives in module scope so it
 // persists across invocations on a warm function instance — it resets
-// on cold starts and isn't shared across instances, so it's a deterrent
-// against casual abuse/scripts, not a hard guarantee under real load.
+// on cold starts and isn't shared across instances. Under real
+// concurrent load Netlify can run several warm instances at once, each
+// with its own copy of this state, so the real ceiling for one IP is
+// RATE_LIMIT * (number of warm instances), not RATE_LIMIT. Kept
+// deliberately tight for that reason — this is a deterrent against
+// casual abuse/scripts, not a hard guarantee. A shared store (Netlify
+// Blobs, Upstash) would close the gap properly if abuse becomes real.
 const RATE_LIMIT = 15; // requests
 const RATE_WINDOW_MS = 10 * 60 * 1000; // per 10 minutes
 const requestLog = new Map(); // ip -> array of request timestamps
 
-const isRateLimited = (ip) => {
+// Records this request against `ip` and reports whether it's over the
+// limit. Not a pure predicate — every call mutates requestLog — so
+// don't call it more than once per request.
+const recordRequestAndCheckLimit = (ip) => {
   const now = Date.now();
   const timestamps = (requestLog.get(ip) || []).filter((t) => now - t < RATE_WINDOW_MS);
+
+  // Reject before recording once already at the limit, so a client that
+  // ignores the 429 and keeps retrying can't grow this IP's array (and
+  // the per-call filter cost) without bound within a single window.
+  if (timestamps.length >= RATE_LIMIT) {
+    return true;
+  }
+
   timestamps.push(now);
   requestLog.set(ip, timestamps);
 
@@ -73,7 +89,7 @@ const isRateLimited = (ip) => {
     requestLog.delete(oldestKey);
   }
 
-  return timestamps.length > RATE_LIMIT;
+  return false;
 };
 
 exports.handler = async (event) => {
@@ -82,7 +98,7 @@ exports.handler = async (event) => {
   }
 
   const ip = event.headers['x-nf-client-connection-ip'] || event.headers['client-ip'] || 'unknown';
-  if (isRateLimited(ip)) {
+  if (recordRequestAndCheckLimit(ip)) {
     return {
       statusCode: 429,
       headers: { 'content-type': 'application/json' },

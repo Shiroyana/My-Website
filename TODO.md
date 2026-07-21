@@ -57,13 +57,18 @@ than Foundation:
   is small enough to fit directly in context — upgrade to real embeddings
   only if/when a client's FAQ set gets large. Runs on `claude-haiku-4-5`
   (switched from Sonnet 5 for cost — no meaningful quality loss for a
-  scripted FAQ bot). Has a basic per-IP rate limit (15 msgs / 10 min,
-  in-memory on the function — resets on cold start, not distributed, but
-  a real deterrent against casual abuse). Still no prompt caching and no
-  spend alert configured on the Anthropic account — worth adding once
-  there's real traffic. **Needs your action:** add a real
-  `ANTHROPIC_API_KEY` in Netlify site settings → Environment variables,
-  or it just returns "not configured yet."
+  scripted FAQ bot, though this hasn't been tested against adversarial
+  input since it's a public endpoint with no auth). Has a per-IP rate
+  limit (15 msgs / 10 min, in-memory on the function — resets on cold
+  start, and since Netlify can run multiple warm instances at once, the
+  real ceiling under concurrent load is higher than 15; a shared store
+  like Netlify Blobs would close that gap if abuse becomes real). A
+  retrying client can no longer inflate one IP's tracked request history
+  past the 15 cap (fixed a real unbounded-growth bug from the first
+  version). Still no prompt caching and no spend alert configured on the
+  Anthropic account — worth adding once there's real traffic. **Needs
+  your action:** add a real `ANTHROPIC_API_KEY` in Netlify site settings
+  → Environment variables, or it just returns "not configured yet."
 - [ ] CRM + lead routing (Growth Partner) — pick one (HubSpot free tier /
   Airtable), wire form submissions into it. You said you want to try
   HubSpot — that's a real account signup I can't do for you; once you
