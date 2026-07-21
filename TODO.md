@@ -26,7 +26,11 @@ by default — check things off as you get to them.
   no cross-referencing Netlify Forms needed. Worth linking this GA4
   property to Search Console (Admin → Search Console Links) so query
   data and on-site behavior show up in one place.
-- [ ] Replace `alphavires@gmail.com` in the code with a business email once you have one *(pocketed)*
+- [x] Replace `alphavires@gmail.com` in the code with a business email —
+  swapped to `getcambi@gmail.com` across the three pricing-tier "Get
+  Started" `mailto:` links in `index.html`. Just a plain Gmail inbox for
+  now (not a forwarded `@getcambi.com` address) — that's the deliberate
+  simple choice for now.
 
 ### Content
 - [ ] Real testimonials/reviews once you have them (AAFARMA/AGM owner quotes would be strong social proof if they're willing)
