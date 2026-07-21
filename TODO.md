@@ -111,9 +111,7 @@ than Foundation:
   above)
 - [x] Local business schema (JSON-LD) — added to Cambi Growth's own `index.html`
   (`ProfessionalService` type, includes the three package offers)
-- [ ] Uptime monitoring — nothing is watching any site right now,
-  including the client ones; UptimeRobot free tier, 10-minute setup —
-  another real account signup, not something I can create for you
+- [x] Uptime monitoring — UptimeRobot set up, watching the live site.
 
 ### Later
 - [ ] Tax reserve — set aside a % of everything as it comes in, don't wait for year-end
