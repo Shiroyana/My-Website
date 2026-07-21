@@ -238,4 +238,104 @@
   // Footer year
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = `© ${new Date().getFullYear()}`;
+
+  // Chat widget
+  const chatToggle = document.getElementById('chatToggle');
+  const chatPanel = document.getElementById('chatPanel');
+  const chatClose = document.getElementById('chatClose');
+  const chatForm = document.getElementById('chatForm');
+  const chatInput = document.getElementById('chatInput');
+  const chatMessages = document.getElementById('chatMessages');
+
+  if (chatToggle && chatPanel && chatForm && chatInput && chatMessages) {
+    const history = [];
+
+    const openChat = () => {
+      chatPanel.hidden = false;
+      chatToggle.classList.add('is-open');
+      chatToggle.setAttribute('aria-expanded', 'true');
+      chatInput.focus();
+    };
+    const closeChat = () => {
+      chatPanel.hidden = true;
+      chatToggle.classList.remove('is-open');
+      chatToggle.setAttribute('aria-expanded', 'false');
+    };
+
+    chatToggle.addEventListener('click', () => {
+      if (chatPanel.hidden) openChat(); else closeChat();
+    });
+    chatClose.addEventListener('click', closeChat);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !chatPanel.hidden) {
+        closeChat();
+        chatToggle.focus();
+      }
+    });
+
+    const addMessage = (role, text) => {
+      const el = document.createElement('div');
+      el.className = `chat-msg chat-msg-${role}`;
+      el.textContent = text;
+      chatMessages.appendChild(el);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+      return el;
+    };
+
+    chatForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const text = chatInput.value.trim();
+      if (!text) return;
+
+      addMessage('user', text);
+      history.push({ role: 'user', content: text });
+      chatInput.value = '';
+      chatInput.disabled = true;
+
+      const typingEl = addMessage('typing', 'Thinking…');
+
+      try {
+        const res = await fetch('/.netlify/functions/chat', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ messages: history }),
+        });
+        const data = await res.json();
+        typingEl.remove();
+
+        if (!res.ok || !data.reply) {
+          addMessage('error', data.error || 'Something went wrong — try again in a moment.');
+        } else {
+          addMessage('bot', data.reply);
+          history.push({ role: 'assistant', content: data.reply });
+        }
+      } catch {
+        typingEl.remove();
+        addMessage('error', 'Couldn\'t reach the assistant — check your connection and try again.');
+      } finally {
+        chatInput.disabled = false;
+        chatInput.focus();
+      }
+    });
+  }
+
+  // Back-to-top button — fades in once scrolled past the hero
+  const backToTop = document.getElementById('backToTop');
+  if (backToTop) {
+    let backToTopTicking = false;
+    const updateBackToTop = () => {
+      backToTop.classList.toggle('is-visible', window.scrollY > window.innerHeight * 0.6);
+    };
+    window.addEventListener('scroll', () => {
+      if (!backToTopTicking) {
+        requestAnimationFrame(() => { updateBackToTop(); backToTopTicking = false; });
+        backToTopTicking = true;
+      }
+    }, { passive: true });
+    updateBackToTop();
+
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
 })();
