@@ -26,6 +26,43 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,340..900;1,9..144,400..600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
 <link rel="stylesheet" href="css/style.css" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Oakline",
+  "description": "We build websites and customer acquisition systems for plumbing, HVAC, electrical, roofing, restoration, and restaurant businesses.",
+  "url": "https://oakline-growth.netlify.app/",
+  "image": "https://oakline-growth.netlify.app/assets/og-image.png",
+  "priceRange": "$$",
+  "areaServed": "US",
+  "sameAs": ["https://github.com/Shiroyana"],
+  "makesOffer": [
+    {
+      "@type": "Offer",
+      "name": "Foundation",
+      "description": "Website build plus ongoing hosting, security updates, and monitoring for companies wanting a professional online presence.",
+      "price": "1500.00",
+      "priceCurrency": "USD"
+    },
+    {
+      "@type": "Offer",
+      "name": "Growth",
+      "description": "Everything in Foundation plus conversion optimization, an FAQ chatbot, and local SEO.",
+      "price": "2750.00",
+      "priceCurrency": "USD"
+    },
+    {
+      "@type": "Offer",
+      "name": "Growth Partner",
+      "description": "Everything in Growth plus ongoing marketing, CRM and follow-up automation, and monthly strategy.",
+      "price": "5000.00",
+      "priceCurrency": "USD"
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -40,6 +77,7 @@
     </button>
 
     <nav class="nav" id="nav">
+      <a href="#top">Home</a>
       <a href="#results">Results</a>
       <a href="#what-we-do">What We Do</a>
       <a href="#pricing">Pricing</a>
@@ -334,7 +372,6 @@
       <ul class="addon-grid">
         <li class="reveal"><span>Google Business Profile Optimization</span><strong>$300</strong></li>
         <li class="reveal"><span>Review Automation</span><strong>$250 setup + $50/mo</strong></li>
-        <li class="reveal"><span>Virtual Phone Assistant</span><strong>$250 setup + $150/mo</strong></li>
         <li class="reveal"><span>SEO</span><strong>$400/mo</strong></li>
         <li class="reveal"><span>Blog Writing</span><strong>$300/mo</strong></li>
         <li class="reveal"><span>Landing Pages</span><strong>$300 each</strong></li>
@@ -425,10 +462,50 @@
       <p class="section-kicker reveal">Get Started</p>
       <h2 class="section-title reveal">Ready for more calls?</h2>
       <p class="contact-sub reveal">Start with a free audit of your current website — no obligation, just what's actually costing you leads.</p>
-      <div class="contact-actions reveal">
-        <a class="btn btn-primary" href="mailto:alphavires@gmail.com?subject=Free%20Website%20Audit%20Request">Get Your Free Website Audit</a>
-        <a class="btn btn-ghost" href="https://github.com/Shiroyana" target="_blank" rel="noopener">GitHub</a>
-      </div>
+
+      <form
+        name="audit-request"
+        method="POST"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        action="/thank-you.html"
+        class="contact-form reveal"
+      >
+        <input type="hidden" name="form-name" value="audit-request" />
+        <p class="hp-field" aria-hidden="true">
+          <label>Don't fill this out if you're human: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+        </p>
+
+        <div class="contact-form-row">
+          <div class="contact-field">
+            <label for="cf-name">Name</label>
+            <input id="cf-name" type="text" name="name" required autocomplete="name" />
+          </div>
+          <div class="contact-field">
+            <label for="cf-email">Email</label>
+            <input id="cf-email" type="email" name="email" required autocomplete="email" />
+          </div>
+        </div>
+        <div class="contact-form-row">
+          <div class="contact-field">
+            <label for="cf-business">Business name</label>
+            <input id="cf-business" type="text" name="business" />
+          </div>
+          <div class="contact-field">
+            <label for="cf-website">Current website (if any)</label>
+            <input id="cf-website" type="text" name="website" placeholder="yourbusiness.com" />
+          </div>
+        </div>
+        <div class="contact-field">
+          <label for="cf-message">What's going on?</label>
+          <textarea id="cf-message" name="message" rows="3" placeholder="Tell us a bit about your business and what you need."></textarea>
+        </div>
+
+        <div class="contact-actions">
+          <button type="submit" class="btn btn-primary">Get Your Free Website Audit</button>
+          <a class="btn btn-ghost" href="https://github.com/Shiroyana" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </form>
     </div>
   </section>
 
@@ -464,6 +541,33 @@
     <span id="year"></span>
   </div>
 </footer>
+
+<div class="chat-widget" id="chatWidget">
+  <button type="button" class="back-to-top" id="backToTop" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 19V5M5 12l7-7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <div class="chat-panel section-dark" id="chatPanel" hidden>
+    <div class="chat-header">
+      <span>Ask Oakline</span>
+      <button type="button" class="chat-close" id="chatClose" aria-label="Close chat">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="chat-messages" id="chatMessages" aria-live="polite">
+      <div class="chat-msg chat-msg-bot">Hey — ask me anything about pricing, what we do, or how the process works.</div>
+    </div>
+    <form class="chat-input-row" id="chatForm">
+      <input type="text" id="chatInput" placeholder="Ask a question…" autocomplete="off" aria-label="Ask a question" />
+      <button type="submit" class="chat-send" aria-label="Send">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </form>
+  </div>
+  <button type="button" class="chat-toggle" id="chatToggle" aria-label="Open chat" aria-expanded="false" aria-controls="chatPanel">
+    <svg class="chat-toggle-icon-open" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v11H8l-4 4V5Z" stroke-linejoin="round"/></svg>
+    <svg class="chat-toggle-icon-close" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg>
+  </button>
+</div>
 
 <script src="js/main.js"></script>
 </body>

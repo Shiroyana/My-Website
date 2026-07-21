@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Page Not Found — Oakline</title>
+<title>Thanks — Oakline</title>
 <meta name="robots" content="noindex" />
 
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230E1712'/%3E%3Cpath d='M32 46V24M32 24l-9 9M32 24l9 9M32 24l-6 14M32 24l6 14' stroke='%2364A672' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
@@ -14,7 +14,7 @@
 
 <link rel="stylesheet" href="css/style.css" />
 <style>
-  .notfound {
+  .thanks {
     min-height: calc(100vh - 72px);
     display: flex;
     align-items: center;
@@ -22,21 +22,23 @@
     overflow: hidden;
     padding: 80px 0;
   }
-  .notfound-code {
-    font-family: var(--serif);
-    font-weight: 600;
-    font-size: clamp(5rem, 16vw, 10rem);
-    line-height: 1;
-    color: var(--accent);
-    letter-spacing: -0.02em;
+  .thanks-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #3F7D4F, #2E6E72);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 28px;
   }
-  .notfound-title {
+  .thanks-title {
     font-family: var(--serif);
     font-weight: 500;
-    font-size: clamp(1.8rem, 3.6vw, 2.6rem);
-    margin: 12px 0 20px;
+    font-size: clamp(2rem, 4.4vw, 3rem);
+    margin-bottom: 20px;
   }
-  .notfound-sub {
+  .thanks-sub {
     color: var(--ink-soft);
     font-size: 1.1rem;
     max-width: 46ch;
@@ -69,20 +71,22 @@
 </header>
 
 <main id="main">
-  <section class="notfound section-dark">
+  <section class="thanks section-dark">
     <div class="hero-aurora" aria-hidden="true">
       <span class="orb orb-a"></span>
-      <span class="orb orb-b"></span>
+      <span class="orb orb-c"></span>
     </div>
     <div class="hero-grain" aria-hidden="true"></div>
 
     <div class="wrap" style="position:relative; z-index:2;">
-      <p class="notfound-code reveal is-visible">404</p>
-      <h1 class="notfound-title reveal is-visible">This page took a wrong turn.</h1>
-      <p class="notfound-sub reveal is-visible">The page you're looking for doesn't exist, moved, or the link's outdated. Let's get you back on the map.</p>
+      <div class="thanks-icon reveal is-visible" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#F4F0E6" stroke-width="2.4"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h1 class="thanks-title reveal is-visible">Thanks — got it.</h1>
+      <p class="thanks-sub reveal is-visible">Your request is in. We'll take a look at your site and get back to you within a day or two with your free audit.</p>
       <div class="hero-actions reveal is-visible">
         <a href="index.html" class="btn btn-primary">Back to Home</a>
-        <a href="index.html#contact" class="btn btn-ghost">Get in Touch</a>
+        <a href="index.html#pricing" class="btn btn-ghost">See Pricing</a>
       </div>
     </div>
   </section>
