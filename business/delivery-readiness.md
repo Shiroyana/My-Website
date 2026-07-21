@@ -1,7 +1,7 @@
 # Delivery Readiness — Can We Actually Build What We Sell?
 
 Honest audit: if someone bought Growth Partner + every add-on today, what
-could Oakline actually deliver, and what's still vaporware? Organized by
+could Cambi Growth actually deliver, and what's still vaporware? Organized by
 what's proven, what just needs setup, and what needs real building.
 
 **Bottom line:** the *website* half of every tier is fully deliverable
@@ -33,11 +33,11 @@ Foundation. That's the real priority list below.
 These don't need new skills, just an hour of setup each, and none are
 blocked by the pocketed items (domain/LLC/etc.):
 
-- **Working contact/quote-request forms** — currently even Oakline's own
+- **Working contact/quote-request forms** — currently even Cambi Growth's own
   site is just `mailto:`. Wire up Netlify Forms (free, since we're
-  already on Netlify) on Oakline's own site first as the proof, then
+  already on Netlify) on Cambi Growth's own site first as the proof, then
   it's the same pattern for every client site.
-- **Local business schema markup (JSON-LD)** — Oakline's own site doesn't
+- **Local business schema markup (JSON-LD)** — Cambi Growth's own site doesn't
   have this either. Cheap to add, and it's literally part of what Growth
   tier promises ("local schema optimization") — should eat your own
   cooking here first.
@@ -48,7 +48,7 @@ blocked by the pocketed items (domain/LLC/etc.):
 - **Google Business Profile optimization** — this is a checklist-driven
   service (claim, categories, photos, posts, Q&A, review-response
   cadence), not code. If you haven't done one before, do one dry run —
-  on Oakline's own (eventual) local presence, or offer it free to
+  on Cambi Growth's own (eventual) local presence, or offer it free to
   AAFARMA/AGM as a portfolio deepener.
 
 ## ❌ Real gaps — need to actually build or set up before selling

@@ -1,10 +1,10 @@
 // Zero-dependency Netlify Function — uses the Node runtime's built-in
 // fetch, so no package.json / npm install is needed for this to work.
 
-const SYSTEM_PROMPT = `You are the assistant on Oakline's website. Oakline is a
-"Growth Partner for Local Service Businesses" — we build websites and
-customer-acquisition systems for plumbing, HVAC, electrical, roofing,
-restoration, and restaurant businesses. Oakline is run by Yan Huang.
+const SYSTEM_PROMPT = `You are the assistant on Cambi Growth's website. Cambi
+Growth is a "Growth Partner for Local Service Businesses" — we build websites
+and customer-acquisition systems for plumbing, HVAC, electrical, roofing,
+restoration, and restaurant businesses. Cambi Growth is run by Yan Huang.
 
 Answer questions using ONLY the information below. Keep replies short (2-4
 sentences, chat-widget length, not essays). Be direct and warm, not
@@ -53,9 +53,84 @@ NEXT STEP: encourage people to fill out the contact form on this page
 ("Get Your Free Website Audit") to get a real, personalized audit of
 their current site.`;
 
+// Dollar amounts that actually appear in SYSTEM_PROMPT, derived from it
+// directly so this never drifts out of sync when prices change. Used as
+// a guardrail: Haiku is smaller and less rigorously instruction-tuned
+// than Sonnet, and "never make up prices" is a hard constraint on a
+// public, unauthenticated endpoint — this catches the case where the
+// model states a dollar figure that isn't actually in its own knowledge
+// base, rather than trusting instruction-following alone.
+const PRICE_PATTERN = /\$\d{1,3}(,\d{3})*/g;
+const KNOWN_PRICES = new Set(SYSTEM_PROMPT.match(PRICE_PATTERN) || []);
+
+const containsFabricatedPrice = (text) => {
+  const mentioned = text.match(PRICE_PATTERN) || [];
+  return mentioned.some((price) => !KNOWN_PRICES.has(price));
+};
+
+// Per-IP sliding-window rate limit. This lives in module scope so it
+// persists across invocations on a warm function instance — it resets
+// on cold starts and isn't shared across instances. Under real
+// concurrent load Netlify can run several warm instances at once, each
+// with its own copy of this state, so the real ceiling for one IP is
+// RATE_LIMIT * (number of warm instances), not RATE_LIMIT. Kept
+// deliberately tight for that reason — this is a deterrent against
+// casual abuse/scripts, not a hard guarantee. A shared store (Netlify
+// Blobs, Upstash) would close the gap properly if abuse becomes real.
+const RATE_LIMIT = 15; // requests
+const RATE_WINDOW_MS = 10 * 60 * 1000; // per 10 minutes
+const requestLog = new Map(); // ip -> array of request timestamps
+
+// Records this request against `ip` and reports whether it's over the
+// limit. Not a pure predicate — every call mutates requestLog — so
+// don't call it more than once per request.
+const recordRequestAndCheckLimit = (ip) => {
+  const now = Date.now();
+  const timestamps = (requestLog.get(ip) || []).filter((t) => now - t < RATE_WINDOW_MS);
+
+  // Reject before recording once already at the limit, so a client that
+  // ignores the 429 and keeps retrying can't grow this IP's array (and
+  // the per-call filter cost) without bound within a single window.
+  if (timestamps.length >= RATE_LIMIT) {
+    return true;
+  }
+
+  timestamps.push(now);
+  requestLog.set(ip, timestamps);
+
+  // Bound memory: drop the oldest tracked IPs once the map gets large.
+  if (requestLog.size > 500) {
+    const oldestKey = requestLog.keys().next().value;
+    requestLog.delete(oldestKey);
+  }
+
+  return false;
+};
+
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method Not Allowed' };
+  }
+
+  // Only trust Netlify's own edge-injected header — 'client-ip' isn't
+  // guaranteed by the platform and a caller could set it directly,
+  // letting them spoof a fresh identity per request to dodge the limit.
+  const ip = event.headers['x-nf-client-connection-ip'];
+  if (ip) {
+    if (recordRequestAndCheckLimit(ip)) {
+      return {
+        statusCode: 429,
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ error: 'Too many messages — please wait a few minutes and try again.' }),
+      };
+    }
+  } else {
+    // Netlify's edge normally always sets this header on real production
+    // traffic — if it's missing (local dev, an unusual proxy path), fail
+    // open rather than lumping every headerless caller into one shared
+    // bucket that unrelated visitors could exhaust for each other. Log
+    // it so a real gap in production would actually surface.
+    console.warn('chat function: missing x-nf-client-connection-ip, skipping rate limit for this request');
   }
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
@@ -95,7 +170,7 @@ exports.handler = async (event) => {
         'anthropic-version': '2023-06-01',
       },
       body: JSON.stringify({
-        model: 'claude-sonnet-5',
+        model: 'claude-haiku-4-5',
         max_tokens: 400,
         system: SYSTEM_PROMPT,
         messages: trimmed,
@@ -113,7 +188,14 @@ exports.handler = async (event) => {
     }
 
     const data = await res.json();
-    const reply = data.content?.[0]?.text || 'Sorry, I couldn\'t come up with a reply — try asking that differently?';
+    let reply = data.content?.[0]?.text || 'Sorry, I couldn\'t come up with a reply — try asking that differently?';
+
+    // Guardrail against a fabricated price slipping through — see
+    // KNOWN_PRICES above for why this exists on the cheaper model.
+    if (containsFabricatedPrice(reply)) {
+      console.error('chat function: model reply contained an unrecognized price, discarding', reply);
+      reply = "I don't want to guess on pricing for that — let's get you a real quote. Try the contact form above and we'll follow up with exact numbers.";
+    }
 
     return {
       statusCode: 200,

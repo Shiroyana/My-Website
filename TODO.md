@@ -1,4 +1,4 @@
-# Oakline — TODO
+# Cambi Growth — TODO
 
 Two lists: the site itself, and the business behind it. Nothing here is urgent
 by default — check things off as you get to them.
@@ -6,8 +6,8 @@ by default — check things off as you get to them.
 ## Website
 
 ### Before showing this to a real prospect
-- [x] Deploy — live at https://oakline-growth.netlify.app (real domain still pocketed; swap `canonical`/`og:url`/`og:image` in `index.html` once you have one)
-- [ ] **Connect the GitHub repo for continuous deployment** — needs your direct action, CLI automation couldn't complete the GitHub App/webhook authorization. Go to https://app.netlify.com/projects/oakline-growth/settings/deploys → "Link repository" → GitHub → `Shiroyana/My-Website` → branch `main`, build command empty, publish dir `.`. After this, `git push` alone deploys — no more manual `netlify deploy`.
+- [x] Deploy — live at https://oakline-growth.netlify.app (still the actual Netlify URL; renamed the brand to Cambi Growth and pointed `canonical`/`og:url`/`og:image`/JSON-LD in `index.html` at `getcambi.com` ahead of registering it — **needs your action:** register `getcambi.com` and point it at this Netlify site, or those tags reference a domain that doesn't resolve yet)
+- [x] Connect the GitHub repo for continuous deployment — confirmed live: Netlify now deploys straight from GitHub, `git push` to `main` alone triggers a deploy.
 - [x] Working contact form — real Netlify Form (`audit-request`) on the contact section, redirects to `thank-you.html`. Hit a real bug getting this working: the site had `ignore_html_forms: true` in Netlify's processing settings, which silently skipped form detection entirely — form appeared to submit fine (redirected correctly) but nothing was ever captured. Fixed by flipping that setting; confirmed the form is now registered with all fields + honeypot.
 - [ ] **Set up form-submission email notifications** — checked and there are currently no notification hooks configured, so real leads won't email-alert you yet. Netlify dashboard → Forms → Settings → add a notification (email is simplest).
 - [ ] Point the contact CTA at something better than a personal Gmail `mailto:` — a form (Formspree/Netlify Forms) or a business inbox *(pocketed — business email; the form now exists, still submits toward your personal Netlify account until you have a business one)*
@@ -51,13 +51,35 @@ than Foundation:
 
 - [x] Chatbot trained on FAQs (Growth tier) — built and live: a real chat
   widget (bottom-right) backed by a Netlify Function
-  (`netlify/functions/chat.js`) calling the Anthropic API, with Oakline's
+  (`netlify/functions/chat.js`) calling the Anthropic API, with Cambi Growth's
   own pricing/services/process baked into the system prompt as the
   knowledge base. Simpler than full RAG (no vector DB) since the content
   is small enough to fit directly in context — upgrade to real embeddings
-  only if/when a client's FAQ set gets large. **Needs your action:** add a
-  real `ANTHROPIC_API_KEY` in Netlify site settings → Environment
-  variables, or it just returns "not configured yet."
+  only if/when a client's FAQ set gets large. Runs on `claude-haiku-4-5`
+  (switched from Sonnet 5 for cost). Because a smaller model is less
+  rigorously instruction-tuned and this is a public endpoint with no
+  auth, added a real guardrail rather than trusting the system prompt
+  alone: replies are scanned for a dollar figure that isn't in the
+  known price list (derived straight from the system prompt so it can't
+  drift), and swapped for a safe "let's get you a real quote" message if
+  one slips through — catches the worst failure mode (a fabricated
+  price shown to a prospect) even if the model ignores the "never make
+  up prices" instruction. Has a per-IP rate limit (15 msgs / 10 min,
+  in-memory on the function — resets on cold start, and since Netlify
+  can run multiple warm instances at once, the real ceiling under
+  concurrent load is higher than 15; a shared store like Netlify Blobs
+  would close that gap if abuse becomes real). Only trusts Netlify's own
+  edge-injected IP header for rate-limiting, not the spoofable
+  `client-ip` header some callers could set themselves — if that header
+  is ever missing, the request fails open (skips the rate limit) rather
+  than lumping every headerless caller into one shared bucket that could
+  lock unrelated visitors out of each other. A retrying client can no
+  longer inflate one IP's tracked request history past the 15 cap (fixed
+  a real unbounded-growth bug from the first version). Still no prompt
+  caching and no spend alert configured on the Anthropic account — worth
+  adding once there's real traffic. **Needs
+  your action:** add a real `ANTHROPIC_API_KEY` in Netlify site settings
+  → Environment variables, or it just returns "not configured yet."
 - [ ] CRM + lead routing (Growth Partner) — pick one (HubSpot free tier /
   Airtable), wire form submissions into it. You said you want to try
   HubSpot — that's a real account signup I can't do for you; once you
@@ -74,9 +96,9 @@ than Foundation:
   done," you send the request) before automating
 - [ ] Monthly performance report template — mock one up using AAFARMA/AGM
   real data before the first one is due
-- [x] Working contact/quote forms — Oakline's own site now has one (see
+- [x] Working contact/quote forms — Cambi Growth's own site now has one (see
   above)
-- [x] Local business schema (JSON-LD) — added to Oakline's own `index.html`
+- [x] Local business schema (JSON-LD) — added to Cambi Growth's own `index.html`
   (`ProfessionalService` type, includes the three package offers)
 - [ ] Uptime monitoring — nothing is watching any site right now,
   including the client ones; UptimeRobot free tier, 10-minute setup —

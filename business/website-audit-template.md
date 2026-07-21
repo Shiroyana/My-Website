@@ -12,7 +12,7 @@ the section rather than leaving it vague.
 
 ## Website Audit: `[Business Name]`
 
-Prepared by Oakline · `[date]`
+Prepared by Cambi Growth · `[date]`
 
 ### The 10-second test
 

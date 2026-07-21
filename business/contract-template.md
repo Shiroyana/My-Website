@@ -1,4 +1,4 @@
-# Oakline — Client Services Agreement (Template)
+# Cambi Growth — Client Services Agreement (Template)
 
 > **Not legal advice.** This is a starting draft based on standard freelance
 > web-agency terms — it is not a substitute for review by an actual attorney
@@ -13,12 +13,12 @@
 
 This Agreement is entered into on `[date]` between:
 
-- **Service Provider:** `[Your legal name / LLC name]` ("Oakline," "we," "us")
+- **Service Provider:** `[Your legal name / LLC name]` ("Cambi Growth," "we," "us")
 - **Client:** `[Client business legal name]` ("Client," "you")
 
 ## 2. Scope of Work
 
-Oakline will provide the services selected below (check one):
+Cambi Growth will provide the services selected below (check one):
 
 - [ ] **Foundation** — one-time build ($`[amount]`) + $`[amount]`/month ongoing
 - [ ] **Growth** — one-time build ($`[amount]`) + $`[amount]`/month ongoing
@@ -28,15 +28,15 @@ Oakline will provide the services selected below (check one):
 Plus add-ons: `[list any add-ons purchased]`
 
 Full deliverables for the selected package are as described on
-oaklinegrowth.com/pricing as of the date of this Agreement. Anything not
+getcambi.com/pricing as of the date of this Agreement. Anything not
 listed there is out of scope unless added by a signed change order (§4).
 
 ## 3. Timeline
 
-Oakline will provide an estimated timeline at kickoff. Timelines depend on
+Cambi Growth will provide an estimated timeline at kickoff. Timelines depend on
 Client providing requested content, feedback, and approvals within 5
 business days of each request — delays on Client's side extend the
-timeline accordingly and are not a breach by Oakline.
+timeline accordingly and are not a breach by Cambi Growth.
 
 ## 4. Change Requests
 
@@ -72,7 +72,7 @@ Upon full payment, Client owns the final website design, content, and
 copy created specifically for Client. Client does **not** own:
 
 - The underlying code frameworks, component libraries, or reusable
-  templates Oakline built or licensed to deliver the site — Oakline
+  templates Cambi Growth built or licensed to deliver the site — Cambi Growth
   retains the right to reuse these across other clients.
 - Any stock photography, icons, or fonts licensed (not purchased outright)
   as part of the build, subject to the terms of those licenses.
@@ -80,14 +80,14 @@ copy created specifically for Client. Client does **not** own:
 **Client may not** resell, sublicense, or redistribute the website's
 underlying code or design as a template or product for third parties.
 
-Oakline retains the right to display the completed work in its own
+Cambi Growth retains the right to display the completed work in its own
 portfolio and marketing materials, including screenshots and a link to
 the live site, unless Client requests otherwise in writing.
 
 ## 7. Independent Contractor
 
-Oakline is an independent contractor, not an employee, partner, or joint
-venturer of Client. Oakline is responsible for its own taxes and
+Cambi Growth is an independent contractor, not an employee, partner, or joint
+venturer of Client. Cambi Growth is responsible for its own taxes and
 insurance.
 
 ## 8. Confidentiality
@@ -99,17 +99,17 @@ required to perform the work (e.g., hosting providers).
 
 ## 9. Limitation of Liability
 
-Oakline's total liability under this Agreement is limited to the amount
-Client has paid in the prior 3 months. Oakline is not liable for indirect,
+Cambi Growth's total liability under this Agreement is limited to the amount
+Client has paid in the prior 3 months. Cambi Growth is not liable for indirect,
 incidental, or consequential damages, including lost profits or business
 interruption, arising from the website's use or downtime.
 
 ## 10. Warranty & Support
 
-Oakline warrants the site will function as specified at launch. Bugs
-reported within 30 days of launch that are Oakline's error will be fixed
+Cambi Growth warrants the site will function as specified at launch. Bugs
+reported within 30 days of launch that are Cambi Growth's error will be fixed
 at no charge. This does not cover issues caused by Client edits, third-party
-plugins, or hosting outside Oakline's control.
+plugins, or hosting outside Cambi Growth's control.
 
 ## 11. Termination
 
@@ -126,6 +126,6 @@ Disputes will be resolved in the courts of `[your county]`.
 
 **Signed:**
 
-Oakline: ________________________ Date: __________
+Cambi Growth: ________________________ Date: __________
 
 Client: __________________________ Date: __________
