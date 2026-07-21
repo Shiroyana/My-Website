@@ -6,10 +6,10 @@ by default — check things off as you get to them.
 ## Website
 
 ### Before showing this to a real prospect
-- [ ] Buy a domain and deploy (Netlify/Vercel/Cloudflare Pages all have a free tier for a static site like this)
-- [ ] Point the contact CTA at something better than a personal Gmail `mailto:` — a form (Formspree/Netlify Forms) or a business inbox
-- [ ] Add basic analytics (Plausible or GA4) so you know if anyone's actually visiting
-- [ ] Replace `alphavires@gmail.com` in the code with a business email once you have one
+- [x] Deploy — live at https://oakline-growth.netlify.app (real domain still pocketed; swap `canonical`/`og:url`/`og:image` in `index.html` once you have one)
+- [ ] Point the contact CTA at something better than a personal Gmail `mailto:` — a form (Formspree/Netlify Forms) or a business inbox *(pocketed — business email)*
+- [ ] Add basic analytics (Plausible or GA4) so you know if anyone's actually visiting *(pocketed)*
+- [ ] Replace `alphavires@gmail.com` in the code with a business email once you have one *(pocketed)*
 
 ### Content
 - [ ] Real testimonials/reviews once you have them (AAFARMA/AGM owner quotes would be strong social proof if they're willing)
