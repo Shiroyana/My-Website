@@ -51,12 +51,20 @@ by default — check things off as you get to them.
 - [x] Explicit "Home" nav link + a fading back-to-top button (bottom-right,
   stacked above the chat widget) — added since the page is long and we
   may add standalone pages (FAQ, industry-specific landing pages) later
-- [ ] Real logo design for Cambi Growth — the current favicon/`brand-mark`
-  is still a generic placeholder mark from the Oakline era, not an actual
-  designed logo. Worth doing now that the name's settled; would need the
-  og-image, favicon, and the inline SVG brand-mark in `index.html`/
-  `thank-you.html`/`404.html` all updated together once there's a real
-  mark to use.
+- [x] Real logo design for Cambi Growth — replaced the placeholder inline-SVG
+  mark with the real designed icon (source: `assets/cambi-icon-source.png`).
+  Updated across all three touchpoints: favicon (`assets/favicons/favicon-16/32.png`
+  + `apple-touch-icon.png`, replacing the old inline SVG data-URI on
+  `index.html`/`thank-you.html`/`404.html`), the nav `.brand-mark` (now a
+  background-image via `assets/favicons/brand-mark.png` instead of a plain
+  CSS gradient chip), and `assets/og-image.png` (icon + "Cambi Growth"
+  wordmark, regenerated from scratch). Also caught and fixed a real bug
+  in the process: `og-image.png` was still the old Oakline-era banner
+  ("Oakline — Growth Partner for Local Service Businesses") — it had never
+  been updated when the site rebranded, so every social/chat link preview
+  was showing the old name. Source icon PNG had no real alpha channel
+  (checkerboard baked in as pixels, not transparency) — chroma-keyed it
+  out programmatically before use.
 
 ## Business (you)
 

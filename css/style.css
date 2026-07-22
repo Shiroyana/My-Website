@@ -112,7 +112,7 @@ body {
   width: 20px;
   height: 20px;
   border-radius: 5px;
-  background: linear-gradient(135deg, var(--c-green), var(--c-teal));
+  background: url("../assets/favicons/brand-mark.png") center / cover no-repeat;
   flex: 0 0 auto;
 }
 
