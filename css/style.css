@@ -302,7 +302,18 @@ body {
   to { transform: translateX(-50%); }
 }
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   .marquee-track, .orb { animation: none; }
+  /* Reveals must land visible, not just un-transitioned — killing the
+     transition alone would strand anything not yet observed at opacity 0.
+     The delay needs !important because main.js sets transitionDelay inline
+     as a style attribute, which outranks a plain stylesheet rule. */
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    transition-delay: 0s !important;
+  }
 }
 
 /* ---------- Sections generic ---------- */

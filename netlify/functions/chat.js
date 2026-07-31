@@ -23,7 +23,7 @@ anytime):
   monthly backups, uptime monitoring, minor content updates. Fits a
   2-5 employee company. Most popular add: none yet.
 
-- Growth (MOST POPULAR) — $2,750 one-time + $225/mo, or $425/mo with $0
+- Growth (MOST POPULAR) — $2,750 one-time + $225/mo, or $500/mo with $0
   down. Everything in Foundation plus: online quote requests, financing
   page, review showcase, FAQ, before/after gallery, service area pages, a
   chatbot trained on the client's FAQs, instant lead qualification &
@@ -160,6 +160,22 @@ exports.handler = async (event) => {
     role: m.role === 'assistant' ? 'assistant' : 'user',
     content: String(m.content || '').slice(0, 1000),
   }));
+
+  // The Messages API rejects a conversation that opens on an assistant
+  // turn. The widget's history alternates user/assistant, so once it grows
+  // past 10 entries the slice above lands mid-exchange and starts on an
+  // assistant reply — which 400s. Drop any leading assistant turns.
+  while (trimmed.length && trimmed[0].role === 'assistant') {
+    trimmed.shift();
+  }
+
+  if (trimmed.length === 0) {
+    return {
+      statusCode: 400,
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ error: 'No message provided.' }),
+    };
+  }
 
   try {
     const res = await fetch('https://api.anthropic.com/v1/messages', {

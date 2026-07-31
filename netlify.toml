@@ -1,3 +1,23 @@
 [build]
   publish = "."
   functions = "netlify/functions"
+
+# Security headers. No CSP: the page relies on inline <script> for gtag and
+# the JSON-LD block, so a strict policy would need hashes or nonces that a
+# static build can't generate. Revisit if those move to external files.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=(), payment=()"
+
+# Images only. css/style.css and js/main.js are deliberately left on
+# Netlify's default (revalidate via ETag) — their filenames aren't
+# content-hashed, so a long max-age would serve stale CSS/JS after a deploy
+# with no way to bust it.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"

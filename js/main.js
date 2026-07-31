@@ -1,4 +1,11 @@
 (() => {
+  // Motion preference. CSS covers the declarative animations; this covers
+  // the two that are driven from JS (the pricing count-up and the
+  // back-to-top smooth scroll), which a stylesheet can't reach.
+  const reduceMotion = window.matchMedia
+    ? window.matchMedia('(prefers-reduced-motion: reduce)')
+    : { matches: false };
+
   // Industry marquee — build enough repeated groups that each half of the
   // track is at least as wide as the visible bar, so the seamless loop
   // (translateX 0 -> -50%) never runs out of content mid-cycle and jumps.
@@ -94,6 +101,10 @@
   const countEls = document.querySelectorAll('.count[data-count]');
   const animateCount = (el) => {
     const target = parseInt(el.getAttribute('data-count'), 10) || 0;
+    if (reduceMotion.matches) {
+      el.textContent = target.toLocaleString('en-US');
+      return;
+    }
     const duration = 900;
     const start = performance.now();
     const tick = (now) => {
@@ -254,12 +265,14 @@
       chatPanel.hidden = false;
       chatToggle.classList.add('is-open');
       chatToggle.setAttribute('aria-expanded', 'true');
+      chatToggle.setAttribute('aria-label', 'Close chat');
       chatInput.focus();
     };
     const closeChat = () => {
       chatPanel.hidden = true;
       chatToggle.classList.remove('is-open');
       chatToggle.setAttribute('aria-expanded', 'false');
+      chatToggle.setAttribute('aria-label', 'Open chat');
     };
 
     chatToggle.addEventListener('click', () => {
@@ -335,7 +348,7 @@
     updateBackToTop();
 
     backToTop.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: reduceMotion.matches ? 'auto' : 'smooth' });
     });
   }
 })();
