@@ -8,14 +8,15 @@ by default — check things off as you get to them.
 ### Before showing this to a real prospect
 - [x] Deploy — `getcambi.com` is registered and pointed at Netlify; `canonical`/`og:url`/`og:image`/JSON-LD in `index.html` already reference it, so nothing left to swap. `oakline-growth.netlify.app` is still the underlying Netlify site URL (fine to leave — it's infrastructure, not brand-facing).
 - [x] Connect the GitHub repo for continuous deployment — confirmed live: Netlify now deploys straight from GitHub, `git push` to `main` alone triggers a deploy.
-- [ ] **Netlify production deploys are currently paused — free-tier build
-  minutes are used up for this billing cycle.** Pushes to `main` land in
-  the repo but won't actually go live until the cycle resets (check
-  Netlify's billing page for the reset date) or the plan is upgraded.
-  Site itself stays up on the last successful deploy in the meantime.
-  Until this clears: keep committing to `dev` as normal, but hold off on
-  merging/pushing to `main` so commits don't pile up silently un-deployed
-  — check this box once a fresh push to `main` actually shows up live.
+- [x] ~~Netlify production deploys paused — free-tier build minutes used
+  up.~~ Resolved: paid plan purchased, so deploys run again and a push to
+  `main` goes live as normal.
+- [ ] **Standing practice: batch merges to `main`, don't push per commit.**
+  The paid plan raises the build-minute allowance, it doesn't make it
+  unlimited — every push to `main` still spends a production deploy. So:
+  commit and push to `dev` freely (no deploy cost), then merge to `main`
+  once a batch is actually ready to go live. This isn't a task to check
+  off; it's how the repo is worked. Leaving it unchecked as a reminder.
 - [x] Working contact form — real Netlify Form (`audit-request`) on the contact section, redirects to `thank-you.html`. Hit a real bug getting this working: the site had `ignore_html_forms: true` in Netlify's processing settings, which silently skipped form detection entirely — form appeared to submit fine (redirected correctly) but nothing was ever captured. Fixed by flipping that setting; confirmed the form is now registered with all fields + honeypot.
 - [ ] **Set up form-submission email notifications** — checked and there are currently no notification hooks configured, so real leads won't email-alert you yet. Netlify dashboard → Forms → Settings → add a notification (email is simplest).
 - [ ] Point the contact CTA at something better than a personal Gmail `mailto:` — a form (Formspree/Netlify Forms) or a business inbox *(pocketed — business email; the form now exists, still submits toward your personal Netlify account until you have a business one)*
