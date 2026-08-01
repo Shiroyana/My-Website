@@ -103,6 +103,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 10px;
+  white-space: nowrap;
   font-family: var(--serif);
   font-weight: 600;
   font-size: 1.25rem;
@@ -127,6 +128,7 @@ body {
   color: var(--ink-soft);
   transition: color 0.15s ease;
   position: relative;
+  white-space: nowrap;
 }
 .nav a:hover { color: var(--ink); }
 
@@ -994,8 +996,11 @@ section { padding: 100px 0; position: relative; }
   .footer-cols { gap: 40px; }
 }
 
-@media (max-width: 720px) {
-  .lg-only { display: none; }
+/* The horizontal nav stops fitting around 900px: below that the brand,
+   "What We Do" and the CTA all wrap to two lines, which is where iPad
+   portrait (768) and iPad Mini (744) sit. Collapse to the drawer there
+   rather than waiting for the 720px phone breakpoint. */
+@media (max-width: 900px) {
   .nav {
     position: fixed;
     inset: 72px 0 0 0;
@@ -1019,6 +1024,10 @@ section { padding: 100px 0; position: relative; }
   .nav a { font-size: 1.1rem; }
   .nav-cta { align-self: flex-start; }
   .nav-toggle { display: flex; }
+}
+
+@media (max-width: 720px) {
+  .lg-only { display: none; }
 
   .pillar-grid { grid-template-columns: 1fr; }
 
