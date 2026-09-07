@@ -114,10 +114,15 @@ than Foundation:
   lock unrelated visitors out of each other. A retrying client can no
   longer inflate one IP's tracked request history past the 15 cap (fixed
   a real unbounded-growth bug from the first version). `ANTHROPIC_API_KEY`
-  is now set in Netlify (production scope, marked as a secret value) — the
-  chatbot is fully live. Still no prompt caching and no spend alert
-  configured on the Anthropic account — worth adding once there's real
-  traffic.
+  is set in Netlify (marked as a secret value) — the chatbot is live. It
+  was first added under the wrong name (`Claude` instead of
+  `ANTHROPIC_API_KEY`), which is why the widget briefly showed "Chat
+  isn't configured yet" — Netlify can't rename an env var in place, so
+  that key was deleted and re-added under the correct name with a fresh
+  value. The code reads `process.env.ANTHROPIC_API_KEY` literally
+  (`netlify/functions/chat.js`), so the variable name must match exactly.
+  Still no prompt caching and no spend alert configured on the Anthropic
+  account — worth adding once there's real traffic.
 - [ ] CRM + lead routing (Growth Partner) — pick one (HubSpot free tier /
   Airtable), wire form submissions into it. You said you want to try
   HubSpot — that's a real account signup I can't do for you; once you
