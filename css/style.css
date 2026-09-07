@@ -21,6 +21,11 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   --ink-faint: #6E6A5C;
   --line: #E3DCCB;
   --line-strong: #D3CAB4;
+  /* --line-strong is a hairline for dividers; as a *button* border it only
+     reaches 1.6:1 and visibly dissolves into the background. Ghost buttons
+     get their own boundary tuned past the 3:1 WCAG 1.4.11 floor. */
+  --btn-ghost-line: #9C8B6E;
+  --btn-ghost-bg: rgba(255,255,255,0.55);
 
   --c-amber: #D9832E;
   --c-green: #3F7D4F;
@@ -53,6 +58,10 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   --ink-faint: #94A08D;
   --line: var(--dark-line);
   --line-strong: #34423A;
+  --btn-ghost-line: #6B7E71;
+  /* The hero's blurred orbs drift behind its ghost button, so the border
+     alone can't be trusted: the fill gives it a stable ground to sit on. */
+  --btn-ghost-bg: rgba(14,23,18,0.8);
   --accent: #E8A75C;
   background: var(--bg);
   color: var(--ink);
@@ -187,7 +196,8 @@ body {
 .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 28px -8px rgba(217,131,46,0.65); }
 
 .btn-ghost {
-  border: 1px solid var(--line-strong);
+  border: 1px solid var(--btn-ghost-line);
+  background: var(--btn-ghost-bg);
   color: var(--ink);
 }
 .btn-ghost:hover { border-color: var(--ink); transform: translateY(-2px); }
@@ -407,10 +417,83 @@ section { padding: 100px 0; position: relative; }
   font-size: 0.96rem;
 }
 
+/* ---------- Results teaser (home) ---------- */
+/* The full case studies live on work.html; the home page only advertises
+   them, so this is one big arrow-terminated link rather than a list. */
+.work-teaser { padding: 96px 0; }
+.teaser-link {
+  display: grid;
+  grid-template-columns: auto 1fr 24px;
+  align-items: center;
+  gap: 28px;
+  margin-top: 40px;
+  padding: 28px 8px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  transition: background 0.2s ease, padding-left 0.2s ease;
+}
+.teaser-link:hover { background: var(--bg-alt); padding-left: 20px; }
+.teaser-link:hover .work-arrow { transform: translateX(4px); color: var(--c-amber); }
+.teaser-marks { display: flex; }
+/* Overlapped marks read as a set at a glance; the negative margin is undone
+   on the first child so the row still starts flush with the text above it. */
+.teaser-marks .work-mark { margin-left: -14px; }
+.teaser-marks .work-mark:first-child { margin-left: 0; }
+.teaser-text strong {
+  display: block;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 1.4rem;
+  margin-bottom: 6px;
+}
+.teaser-text span { color: var(--ink-soft); font-size: 0.96rem; line-height: 1.6; }
+
+/* ---------- How pricing works (home) ---------- */
+.pay { padding: 96px 0; background: var(--bg-alt); }
+.pay .pillar-grid { margin-top: 40px; background: var(--bg); border-color: var(--line); }
+.pay-note {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  font-size: 0.88rem !important;
+  color: var(--ink-faint) !important;
+}
+.pay-cta {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 40px;
+}
+.pay-cta span { color: var(--ink-soft); font-size: 0.94rem; }
+
+/* ---------- Subpage head & CTA ---------- */
+.page-head { position: relative; overflow: hidden; padding: 128px 0 72px; }
+.page-head-inner { position: relative; z-index: 2; max-width: 720px; }
+.page-title {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(2.4rem, 6vw, 3.8rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 10px 0 20px;
+}
+.page-sub { color: var(--ink-soft); font-size: 1.05rem; line-height: 1.7; max-width: 60ch; }
+.page-cta { padding: 80px 0; border-top: 1px solid var(--line); }
+.page-cta-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+.page-cta-inner p { color: var(--ink-soft); margin-top: 10px; max-width: 46ch; line-height: 1.7; }
+
 /* ---------- Work / Results ---------- */
 .work-list { border-top: 1px solid var(--line); }
 .work-row { border-bottom: 1px solid var(--line); }
-.work-row a {
+.work-row a,
+.work-row .work-inner {
   display: grid;
   grid-template-columns: 56px 56px 1fr 168px 24px;
   align-items: center;
@@ -561,7 +644,7 @@ section { padding: 100px 0; position: relative; }
   transition: transform 0.35s cubic-bezier(.16,.8,.28,1);
   z-index: 0;
 }
-.pricing-toggle.mode-zerodown .toggle-thumb {
+.pricing-toggle:not(.mode-zerodown) .toggle-thumb {
   transform: translateX(100%);
 }
 .toggle-btn {
@@ -1035,7 +1118,8 @@ section { padding: 100px 0; position: relative; }
 
   .pillar-grid { grid-template-columns: 1fr; }
 
-  .work-row a {
+  .work-row a,
+  .work-row .work-inner {
     grid-template-columns: 1fr 24px;
     grid-template-areas:
       "mark arrow"
@@ -1049,6 +1133,17 @@ section { padding: 100px 0; position: relative; }
   .work-shot { grid-area: shot; width: 100%; margin-top: 16px; }
 
   .proof-note { flex-direction: column; align-items: flex-start; }
+
+  .teaser-link {
+    grid-template-columns: 1fr 24px;
+    grid-template-areas:
+      "marks arrow"
+      "text  text";
+    gap: 16px;
+  }
+  .teaser-marks { grid-area: marks; }
+  .teaser-text { grid-area: text; }
+  .page-cta-inner { flex-direction: column; align-items: flex-start; }
 
   .addon-grid { grid-template-columns: 1fr; }
   .addon-grid li { border-right: none !important; }
