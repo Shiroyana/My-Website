@@ -13,10 +13,11 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "geolocation=(), microphone=(), camera=(), payment=()"
 
-# Images only. css/style.css and js/main.js are deliberately left on
-# Netlify's default (revalidate via ETag) — their filenames aren't
-# content-hashed, so a long max-age would serve stale CSS/JS after a deploy
-# with no way to bust it.
+# Static assets (images, fonts). css/style.css and js/main.js are
+# deliberately left on Netlify's default (revalidate via ETag): their
+# filenames aren't content-hashed, so a long max-age would serve stale
+# CSS/JS after a deploy with no way to bust it. The self-hosted font
+# files never change, so the 30-day cache here suits them well.
 [[headers]]
   for = "/assets/*"
   [headers.values]

@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Cambi Growth — Growth Partner for Local Service Businesses</title>
+<title>Cambi Growth: Growth Partner for Local Service Businesses</title>
 <meta name="description" content="We build websites and customer acquisition systems for plumbing, HVAC, electrical, roofing, restoration, pharmacy, and restaurant businesses. More calls. More quotes. More jobs." />
 <link rel="canonical" href="https://getcambi.com/" />
 
-<meta property="og:title" content="Cambi Growth — Growth Partner for Local Service Businesses" />
+<meta property="og:title" content="Cambi Growth: Growth Partner for Local Service Businesses" />
 <meta property="og:description" content="Websites and lead-generation systems for plumbing, HVAC, electrical, roofing, restoration, pharmacy, and restaurant businesses." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://getcambi.com/" />
@@ -15,7 +15,7 @@
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Cambi Growth — Growth Partner for Local Service Businesses" />
+<meta name="twitter:title" content="Cambi Growth: Growth Partner for Local Service Businesses" />
 <meta name="twitter:description" content="Websites and lead-generation systems for plumbing, HVAC, electrical, roofing, restoration, pharmacy, and restaurant businesses." />
 <meta name="twitter:image" content="https://getcambi.com/assets/og-image.png" />
 
@@ -24,11 +24,10 @@
 <link rel="icon" href="assets/favicons/favicon-16.png" sizes="16x16" />
 <link rel="apple-touch-icon" href="assets/favicons/apple-touch-icon.png" />
 
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,340..900;1,9..144,400..600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-
+<link rel="preload" href="assets/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/dashersw/liquid-glass-js@78cb6ccb0b9987bb60a88b14ccbd13a9e6e8ab2a/glass.css" />
 
 <!-- Google Analytics (GA4) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-5H09HD2RT3"></script>
@@ -75,10 +74,36 @@
   ]
 }
 </script>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.185.1/examples/jsm/"
+  }
+}
+</script>
 </head>
 <body>
 
 <a class="skip-link" href="#main">Skip to content</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+  <symbol id="i-browser" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4m0 1a1 1 0 0 1 1 -1h14a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-14a1 1 0 0 1 -1 -1z"/><path d="M4 8h16"/><path d="M8 4v4"/><path d="M9.5 14.5l1.5 1.5l3 -3"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10"/><path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2"/></symbol>
+  <symbol id="i-filter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v2.172a2 2 0 0 1 -.586 1.414l-4.414 4.414v7l-6 2v-8.5l-4.48 -4.928a2 2 0 0 1 -.52 -1.345v-2.227z"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"/><path d="M21 21l-6 -6"/></symbol>
+  <symbol id="i-automation" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z"/><path d="M10 9v6l5 -3z"/></symbol>
+  <symbol id="i-wallet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8v-3a1 1 0 0 0 -1 -1h-10a2 2 0 0 0 0 4h12a1 1 0 0 1 1 1v3m0 4v3a1 1 0 0 1 -1 1h-12a2 2 0 0 1 -2 -2v-12"/><path d="M20 12v4h-4a2 2 0 0 1 0 -4h4"/></symbol>
+  <symbol id="i-cash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"/><path d="M3 6m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z"/><path d="M18 12l.01 0"/><path d="M6 12l.01 0"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5l0 14"/><path d="M5 12l14 0"/></symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l14 0"/><path d="M13 18l6 -6"/><path d="M13 6l6 6"/></symbol>
+  <symbol id="i-arrow-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5l0 14"/><path d="M18 11l-6 -6"/><path d="M6 11l6 -6"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14l11 -11"/><path d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6l-12 12"/><path d="M6 6l12 12"/></symbol>
+  <symbol id="i-github" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19l16 0"/><path d="M4 15l4 -6l4 2l4 -5l4 4"/></symbol>
+</defs></svg>
 
 <header class="site-header" id="top">
   <div class="wrap header-row">
@@ -111,22 +136,43 @@
     <div class="hero-grain" aria-hidden="true"></div>
 
     <div class="wrap hero-inner">
-      <p class="kicker reveal">Growth Partner for Local Service Businesses</p>
-      <h1 class="hero-title reveal">
-        <span class="line">More Calls.</span>
-        <span class="line line-accent">More Quotes.</span>
-        <span class="line">More Jobs.</span>
-      </h1>
-      <p class="hero-sub reveal">
-        Your reputation on the job is excellent. Online, it should look that
-        way too. We build websites and lead-generation systems for
-        plumbing, HVAC, electrical, roofing, restoration, pharmacy, and
-        restaurant businesses — built to turn visitors into booked tables and jobs.
-      </p>
-      <div class="hero-actions reveal">
-        <a href="#contact" class="btn btn-primary">Get Your Free Website Audit</a>
-        <a href="pricing.html" class="btn btn-ghost">See Pricing</a>
+      <div class="hero-copy">
+        <p class="hero-eyebrow reveal">Growth Partner for Local Service Businesses</p>
+        <h1 class="hero-title reveal">
+          <span class="line">More Calls.</span>
+          <span class="line line-accent">More Quotes.</span>
+          <span class="line">More Jobs.</span>
+        </h1>
+        <p class="hero-sub reveal">
+          Your work already earns trust in person. We build the website and
+          lead system that earns it online too.
+        </p>
+        <div class="hero-actions reveal">
+          <a href="#contact" class="btn btn-primary">Get your free audit</a>
+          <a href="pricing.html" class="btn btn-ghost">See pricing</a>
+        </div>
       </div>
+
+      <figure class="hero-media reveal" id="heroCarousel">
+        <div class="frame">
+          <div class="frame-bar">
+            <i aria-hidden="true"></i><i aria-hidden="true"></i><i aria-hidden="true"></i>
+            <span id="frameLabel">AAFARMA Inc.</span>
+          </div>
+          <div class="frame-stage" id="heroStage">
+            <div class="frame-track" id="heroTrack">
+              <img src="assets/screenshots/aafarma.jpg" data-label="AAFARMA Inc." alt="Homepage of AAFARMA Inc., a neighborhood pharmacy site built by Cambi Growth" width="640" height="400" fetchpriority="high" />
+              <img src="assets/screenshots/agm.jpg" data-label="African Green Manor" alt="Homepage of African Green Manor, a golf cart dealership site built by Cambi Growth" width="640" height="400" />
+              <img src="assets/screenshots/vitalcare.jpg" data-label="VitalCare Essential Supplies" alt="Homepage of VitalCare Essential Supplies, a medical equipment supplier site built by Cambi Growth" width="640" height="400" />
+            </div>
+          </div>
+        </div>
+        <div class="frame-dots" id="heroDots">
+          <button type="button" class="is-active" aria-label="Show AAFARMA Inc." aria-current="true"></button>
+          <button type="button" aria-label="Show African Green Manor" aria-current="false"></button>
+          <button type="button" aria-label="Show VitalCare Essential Supplies" aria-current="false"></button>
+        </div>
+      </figure>
     </div>
   </section>
 
@@ -134,131 +180,116 @@
   <div class="marquee" aria-hidden="true">
     <div class="marquee-track" id="marqueeTrack">
       <span class="marquee-group">
-        <span>Plumbing</span><span>·</span><span>HVAC</span><span>·</span><span>Electrical</span><span>·</span>
-        <span>Roofing</span><span>·</span><span>Restoration</span><span>·</span><span>Pharmacies</span><span>·</span><span>Restaurants</span><span>·</span>
+        <span>Plumbing</span><span>HVAC</span><span>Electrical</span><span>Roofing</span><span>Restoration</span><span>Pharmacies</span><span>Restaurants</span>
       </span>
     </div>
   </div>
 
   <!-- ============ SALES STORY ============ -->
   <section class="story">
-    <div class="wrap story-inner">
-      <p class="story-line reveal">Most local service businesses have<br class="lg-only" /> excellent reputations.</p>
-      <p class="story-line reveal">But online, their business<br class="lg-only" /> doesn't reflect that.</p>
-      <p class="story-line reveal">Potential customers judge your<br class="lg-only" /> company within seconds.</p>
-      <p class="story-line reveal">An outdated website creates doubt<br class="lg-only" /> before they ever pick up the phone.</p>
-      <p class="story-line story-punch reveal">We fix that.</p>
-      <p class="story-detail reveal">
-        Our websites aren't designed to win design awards. They're built to
-        generate more calls, more quote requests, and ultimately more jobs.
-      </p>
+    <div class="wrap story-grid">
+      <div class="story-lines">
+        <p class="story-line reveal">Most local service businesses have earned an excellent reputation.</p>
+        <p class="story-line reveal">Online, that reputation rarely shows.</p>
+        <p class="story-line reveal">A customer decides in seconds, and an outdated site plants doubt before the phone ever rings.</p>
+      </div>
+      <div class="story-panel reveal">
+        <p class="story-punch">We fix that.</p>
+        <p class="story-detail">
+          Our sites aren't built to win design awards. They're built for more
+          calls, more quote requests, and more booked jobs.
+        </p>
+        <ul class="story-proof">
+          <li><strong>3</strong><span>live client sites</span></li>
+          <li><strong>&lt;1s</strong><span>load time on every build</span></li>
+          <li><strong>1</strong><span>person, design through launch</span></li>
+        </ul>
+
+        <div class="story-work" id="results">
+          <h2>Businesses we've helped get found online.</h2>
+          <a class="teaser-link" href="work.html">
+            <span class="teaser-marks" aria-hidden="true">
+              <span class="work-mark"><img src="assets/favicons/aafarma.png" alt="" width="26" height="26" loading="lazy" /></span>
+              <span class="work-mark"><img src="assets/favicons/agm.png" alt="" width="26" height="26" loading="lazy" /></span>
+              <span class="work-mark"><img src="assets/favicons/vitalcare.png" alt="" width="26" height="26" loading="lazy" /></span>
+            </span>
+            <span class="teaser-text">
+              <strong>See the work</strong>
+              <span>A neighborhood pharmacy, a golf cart dealership, and a durable medical equipment supplier.</span>
+            </span>
+            <span class="teaser-arrow" aria-hidden="true"><svg class="ico"><use href="#i-arrow-right"/></svg></span>
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- ============ WHAT WE DO ============ -->
   <section class="pillars" id="what-we-do">
     <div class="wrap">
-      <p class="section-kicker reveal">What We Do</p>
-      <h2 class="section-title reveal">We build customer<br class="lg-only" /> acquisition systems.</h2>
+      <p class="eyebrow reveal">What We Do</p>
+      <h2 class="section-title reveal">We build customer acquisition systems.</h2>
 
       <div class="pillar-grid">
-        <div class="pillar-card reveal" style="--accent-c: var(--c-amber);">
-          <span class="pillar-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4" stroke-linecap="round"/></svg>
-          </span>
-          <h3>Modern Websites</h3>
-          <p>Fast, mobile-first sites designed to convert visitors into calls — not win design awards.</p>
+        <div class="pillar-card span-3 tint-amber reveal" style="--accent-c: var(--c-amber);">
+          <span class="pillar-icon" aria-hidden="true"><svg class="ico"><use href="#i-browser"/></svg></span>
+          <h3>Modern websites</h3>
+          <p>Fast, mobile-first sites designed to convert visitors into calls, not to win design awards.</p>
         </div>
-        <div class="pillar-card reveal" style="--accent-c: var(--c-teal);">
-          <span class="pillar-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5h16v11H8l-4 4V5Z"/><path d="M8 10h8M8 13h5" stroke-linecap="round"/></svg>
-          </span>
-          <h3>24/7 Customer Chat</h3>
+        <div class="pillar-card span-3 reveal" style="--accent-c: var(--c-teal);">
+          <span class="pillar-icon" aria-hidden="true"><svg class="ico"><use href="#i-chat"/></svg></span>
+          <h3>24/7 customer chat</h3>
           <p>A trained chatbot that answers FAQs and qualifies leads while you're on a job.</p>
         </div>
         <div class="pillar-card reveal" style="--accent-c: var(--c-green);">
-          <span class="pillar-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h16l-6 8v6l-4 2v-8L4 4Z" stroke-linejoin="round"/></svg>
-          </span>
-          <h3>Automated Lead Capture</h3>
+          <span class="pillar-icon" aria-hidden="true"><svg class="ico"><use href="#i-filter"/></svg></span>
+          <h3>Automated lead capture</h3>
           <p>Quote requests, missed-call text-back, and contact routing that catches every lead.</p>
         </div>
-        <div class="pillar-card reveal" style="--accent-c: var(--c-amber);">
-          <span class="pillar-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35" stroke-linecap="round"/></svg>
-          </span>
-          <h3>SEO Optimization</h3>
+        <div class="pillar-card tint-teal reveal" style="--accent-c: var(--c-teal);">
+          <span class="pillar-icon" aria-hidden="true"><svg class="ico"><use href="#i-search"/></svg></span>
+          <h3>SEO optimization</h3>
           <p>Local SEO and Google Business Profile work that gets you found before your competitors.</p>
         </div>
-        <div class="pillar-card reveal" style="--accent-c: var(--c-teal);">
-          <span class="pillar-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M18 6l-2.5 2.5M8.5 15.5L6 18" stroke-linecap="round"/><circle cx="12" cy="12" r="3.2"/></svg>
-          </span>
-          <h3>Business Automation</h3>
+        <div class="pillar-card reveal" style="--accent-c: var(--c-amber);">
+          <span class="pillar-icon" aria-hidden="true"><svg class="ico"><use href="#i-automation"/></svg></span>
+          <h3>Business automation</h3>
           <p>CRM integration, follow-ups, and review systems that run themselves.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ RESULTS TEASER ============ -->
-  <section class="work-teaser" id="results">
-    <div class="wrap">
-      <p class="section-kicker reveal">Real Results</p>
-      <h2 class="section-title reveal">Businesses we've helped get found online.</h2>
-
-      <a class="teaser-link reveal" href="work.html">
-        <span class="teaser-marks" aria-hidden="true">
-          <span class="work-mark"><img src="assets/favicons/aafarma.png" alt="" width="28" height="28" loading="lazy" /></span>
-          <span class="work-mark"><img src="assets/favicons/agm.png" alt="" width="28" height="28" loading="lazy" /></span>
-          <span class="work-mark"><img src="assets/favicons/vitalcare.png" alt="" width="28" height="28" loading="lazy" /></span>
-        </span>
-        <span class="teaser-text">
-          <strong>See the work</strong>
-          <span>A neighborhood pharmacy, a golf cart dealership, and a durable medical equipment supplier.</span>
-        </span>
-        <span class="work-arrow" aria-hidden="true">&rarr;</span>
-      </a>
-    </div>
-  </section>
-
   <!-- ============ HOW PRICING WORKS ============ -->
   <section class="pay" id="pricing">
     <div class="wrap">
-      <p class="section-kicker reveal">Pricing</p>
       <h2 class="section-title reveal">How pricing works.</h2>
-      <p class="section-sub reveal">Three packages, two ways to pay for whichever one fits, and add-ons for anything a package doesn't cover.</p>
+      <p class="section-lead reveal">Three packages, two ways to pay for whichever one fits, and add-ons for anything a package doesn't cover.</p>
 
-      <div class="pillar-grid">
-        <div class="pillar-card reveal" style="--accent-c: var(--c-green);">
-          <span class="pillar-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 9h18M3 9a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2M3 9v8a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9" /><path d="M7 14h4" stroke-linecap="round"/></svg>
-          </span>
-          <h3>$0 Down</h3>
+      <div class="pay-band">
+        <div class="pay-col reveal">
+          <span class="pay-ico" aria-hidden="true"><svg class="ico"><use href="#i-wallet"/></svg></span>
+          <h3>$0 down</h3>
           <p>Nothing to pay to get started. The build cost rolls into one flat monthly payment, so a new site doesn't have to wait for a slow season to end.</p>
-          <p class="pay-note">6-month minimum term, billed monthly. After that it's month-to-month — cancel anytime.</p>
+          <p class="pay-note">6-month minimum term, billed monthly. After that it's month to month, cancel anytime.</p>
         </div>
-        <div class="pillar-card reveal" style="--accent-c: var(--c-teal);">
-          <span class="pillar-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v18" stroke-linecap="round"/><path d="M16.5 7.5C15.8 6.2 14 5.5 12 5.5c-2.5 0-4 1.1-4 3s1.7 2.7 4 3.2c2.6.6 4.4 1.3 4.4 3.3 0 2-1.8 3.2-4.4 3.2-2.2 0-4-.8-4.6-2.2" stroke-linecap="round"/></svg>
-          </span>
-          <h3>Pay Upfront</h3>
+        <div class="pay-col reveal">
+          <span class="pay-ico" aria-hidden="true"><svg class="ico"><use href="#i-cash"/></svg></span>
+          <h3>Pay upfront</h3>
           <p>A one-time build fee, then a much smaller monthly that covers hosting, security, monitoring and support. Costs less overall if the cash is there.</p>
           <p class="pay-note">No minimum term. The monthly is what keeps the site fast, patched and backed up.</p>
         </div>
-        <div class="pillar-card reveal" style="--accent-c: var(--c-amber);">
-          <span class="pillar-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg>
-          </span>
-          <h3>Add-Ons</h3>
-          <p>Anything a package doesn't cover — SEO, blog writing, review automation, extra landing pages — bolts onto any plan at any time, billed on top of your monthly.</p>
+        <div class="pay-col reveal">
+          <span class="pay-ico" aria-hidden="true"><svg class="ico"><use href="#i-plus"/></svg></span>
+          <h3>Add-ons</h3>
+          <p>Anything a package doesn't cover, from SEO to blog writing to review automation, bolts onto any plan at any time, billed on top of your monthly.</p>
           <p class="pay-note">Add them when you need them, drop them once they've done their job.</p>
         </div>
       </div>
 
       <div class="pay-cta reveal">
-        <a href="pricing.html" class="btn btn-primary">See Full Pricing &amp; Add-Ons</a>
-        <span>Foundation, Growth and Growth Partner — with every feature listed.</span>
+        <a href="pricing.html" class="btn btn-primary">See full pricing and add-ons</a>
+        <span>Foundation, Growth and Growth Partner, with every feature listed.</span>
       </div>
     </div>
   </section>
@@ -266,21 +297,21 @@
   <!-- ============ PROCESS ============ -->
   <section class="process section-dark" id="process">
     <div class="wrap">
-      <p class="section-kicker reveal">How It Works</p>
-      <h2 class="section-title reveal">From first look to monthly growth.</h2>
+      <p class="eyebrow reveal">How It Works</p>
+      <h2 class="section-title process-header reveal">From first look to monthly growth.</h2>
 
       <div class="process-track">
         <div class="process-line" id="processLine" aria-hidden="true"></div>
         <ol class="process-list">
-          <li class="reveal"><span class="num">01</span><h3>Discovery</h3><p>A short conversation about your business, your customers, and your goals.</p></li>
-          <li class="reveal"><span class="num">02</span><h3>Website Audit</h3><p>We review your current site — or lack of one — and show you what it's costing you.</p></li>
-          <li class="reveal"><span class="num">03</span><h3>Custom Homepage Mockup</h3><p>A real, clickable mockup of your new homepage, before you commit to anything.</p></li>
-          <li class="reveal"><span class="num">04</span><h3>Zoom Call</h3><p>We walk through the mockup together and answer every question.</p></li>
-          <li class="reveal"><span class="num">05</span><h3>Proposal</h3><p>A clear, itemized proposal. No surprises.</p></li>
-          <li class="reveal"><span class="num">06</span><h3>Deposit</h3><p>A deposit secures your spot and kicks off the build.</p></li>
-          <li class="reveal"><span class="num">07</span><h3>Website</h3><p>We design and build your full site, with you reviewing progress along the way.</p></li>
-          <li class="reveal"><span class="num">08</span><h3>Launch</h3><p>Your site goes live, tested on real devices, ready for traffic.</p></li>
-          <li class="reveal"><span class="num">09</span><h3>Monthly Growth</h3><p>Ongoing optimization, support, and reporting — this is where growth compounds.</p></li>
+          <li class="reveal"><span class="dot">01</span><h3>Discovery</h3><p>A short conversation about your business, your customers, and your goals.</p></li>
+          <li class="reveal"><span class="dot">02</span><h3>Website audit</h3><p>We review your current site, or lack of one, and show you what it's costing you.</p></li>
+          <li class="reveal"><span class="dot">03</span><h3>Custom homepage mockup</h3><p>A real, clickable mockup of your new homepage, before you commit to anything.</p></li>
+          <li class="reveal"><span class="dot">04</span><h3>Zoom call</h3><p>We walk through the mockup together and answer every question.</p></li>
+          <li class="reveal"><span class="dot">05</span><h3>Proposal</h3><p>A clear, itemized proposal. No surprises.</p></li>
+          <li class="reveal"><span class="dot">06</span><h3>Deposit</h3><p>A deposit secures your spot and kicks off the build.</p></li>
+          <li class="reveal"><span class="dot">07</span><h3>Website</h3><p>We design and build your full site, with you reviewing progress along the way.</p></li>
+          <li class="reveal"><span class="dot">08</span><h3>Launch</h3><p>Your site goes live, tested on real devices, ready for traffic.</p></li>
+          <li class="reveal"><span class="dot">09</span><h3>Monthly growth</h3><p>Ongoing optimization, support, and reporting. This is where growth compounds.</p></li>
         </ol>
       </div>
     </div>
@@ -289,27 +320,21 @@
   <!-- ============ FUTURE VISION ============ -->
   <section class="vision">
     <div class="wrap">
-      <p class="section-kicker reveal">Where This Goes</p>
-      <h2 class="section-title reveal">You're not buying a website.<br class="lg-only" /> You're buying a growth system.</h2>
+      <h2 class="section-title reveal">You're not buying a website. You're buying a growth system.</h2>
 
-      <div class="diagram">
-        <div class="d-node d-root reveal">Growth Partner</div>
-        <div class="d-line d-v1"></div>
-        <div class="d-node d-website reveal">Website</div>
-        <div class="d-line d-v2"></div>
-
-        <div class="d-row">
-          <div class="d-bar d-bar-top" aria-hidden="true"></div>
-          <div class="d-bar d-bar-bottom" aria-hidden="true"></div>
-          <div class="d-node d-branch reveal" style="--d:0ms;"><div class="d-tick d-tick-top" aria-hidden="true"></div>SEO<div class="d-tick d-tick-bottom" aria-hidden="true"></div></div>
-          <div class="d-node d-branch reveal" style="--d:80ms;"><div class="d-tick d-tick-top" aria-hidden="true"></div>Automation<div class="d-tick d-tick-bottom" aria-hidden="true"></div></div>
-          <div class="d-node d-branch reveal" style="--d:160ms;"><div class="d-tick d-tick-top" aria-hidden="true"></div>Analytics<div class="d-tick d-tick-bottom" aria-hidden="true"></div></div>
+      <div class="flow">
+        <div class="flow-node is-root reveal">Growth Partner</div>
+        <div class="flow-pipe" aria-hidden="true"></div>
+        <div class="flow-node reveal">Website</div>
+        <div class="flow-branch reveal">
+          <span class="chip">SEO</span>
+          <span class="chip">Automation</span>
+          <span class="chip">Analytics</span>
         </div>
-
-        <div class="d-line d-v3"></div>
-        <div class="d-node d-system reveal">CRM + Automation + Reviews</div>
-        <div class="d-line d-v4"></div>
-        <div class="d-node d-result reveal">More Leads <span aria-hidden="true">→</span> More Revenue</div>
+        <div class="flow-pipe" aria-hidden="true"></div>
+        <div class="flow-node is-system reveal">CRM, automation and reviews</div>
+        <div class="flow-pipe" aria-hidden="true"></div>
+        <div class="flow-node is-result reveal"><span>More leads, more revenue <svg class="ico" aria-hidden="true"><use href="#i-chart"/></svg></span></div>
       </div>
 
       <p class="vision-line reveal">Every other freelancer is selling you a page. We're building you a system.</p>
@@ -320,16 +345,15 @@
   <section class="about">
     <div class="wrap about-grid">
       <div class="about-mark reveal" aria-hidden="true">
-        <svg viewBox="0 0 48 48" width="56" height="56" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M24 40V16M24 16l-11 10M24 16l11 10M24 16l-7 16M24 16l7 16" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg viewBox="0 0 48 48" width="52" height="52" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M24 40V16M24 16l-11 10M24 16l11 10M24 16l-7 16M24 16l7 16" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
       <div class="reveal">
-        <p class="section-kicker">Built By Someone Who Ships</p>
         <h2 class="section-title">Design and engineering, from one person.</h2>
         <p class="about-text">
           Cambi Growth is run by Yan Huang, a developer and designer with a
-          background spanning finance and software engineering. Every site
-          is built end to end — no account managers, no agency markup, no
-          game of telephone.
+          background across finance and software engineering. Every site is
+          built end to end, with no account managers, no agency markup, and
+          no game of telephone.
         </p>
       </div>
     </div>
@@ -342,9 +366,8 @@
       <span class="orb orb-c"></span>
     </div>
     <div class="wrap contact-inner">
-      <p class="section-kicker reveal">Get Started</p>
       <h2 class="section-title reveal">Ready for more calls?</h2>
-      <p class="contact-sub reveal">Start with a free audit of your current website — no obligation, just what's actually costing you leads.</p>
+      <p class="contact-sub reveal">Start with a free audit of your current website. No obligation, just what's actually costing you leads.</p>
 
       <form
         name="audit-request"
@@ -385,8 +408,7 @@
         </div>
 
         <div class="contact-actions">
-          <button type="submit" class="btn btn-primary">Get Your Free Website Audit</button>
-          <a class="btn btn-ghost" href="https://github.com/Shiroyana" target="_blank" rel="noopener">GitHub</a>
+          <button type="submit" class="btn btn-primary">Get your free audit</button>
         </div>
       </form>
     </div>
@@ -410,49 +432,47 @@
       </div>
       <div>
         <h4>Industries</h4>
-        <span>Plumbing</span>
-        <span>HVAC</span>
-        <span>Electrical</span>
-        <span>Roofing</span>
-        <span>Restoration</span>
-        <span>Pharmacies</span>
-        <span>Restaurants</span>
+        <p class="footer-industries">Plumbing, HVAC, electrical, roofing, restoration, pharmacies, and restaurants.</p>
       </div>
     </div>
   </div>
   <div class="wrap footer-row">
     <span>Cambi Growth</span>
+    <a href="https://github.com/Shiroyana" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-github"/></svg>GitHub</a>
     <span id="year"></span>
   </div>
 </footer>
 
 <div class="chat-widget" id="chatWidget">
   <button type="button" class="back-to-top" id="backToTop" aria-label="Back to top">
-    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 19V5M5 12l7-7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <svg class="ico" aria-hidden="true"><use href="#i-arrow-up"/></svg>
   </button>
   <div class="chat-panel section-dark" id="chatPanel" hidden>
     <div class="chat-header">
       <span>Ask Cambi</span>
       <button type="button" class="chat-close" id="chatClose" aria-label="Close chat">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg>
+        <svg class="ico" aria-hidden="true"><use href="#i-x"/></svg>
       </button>
     </div>
     <div class="chat-messages" id="chatMessages" aria-live="polite">
-      <div class="chat-msg chat-msg-bot">Hey — ask me anything about pricing, what we do, or how the process works.</div>
+      <div class="chat-msg chat-msg-bot">Hey, ask me anything about pricing, what we do, or how the process works.</div>
     </div>
     <form class="chat-input-row" id="chatForm">
-      <input type="text" id="chatInput" placeholder="Ask a question…" autocomplete="off" aria-label="Ask a question" maxlength="1000" />
+      <input type="text" id="chatInput" placeholder="Ask a question" autocomplete="off" aria-label="Ask a question" maxlength="1000" />
       <button type="submit" class="chat-send" aria-label="Send">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="ico" aria-hidden="true"><use href="#i-send"/></svg>
       </button>
     </form>
   </div>
   <button type="button" class="chat-toggle" id="chatToggle" aria-label="Open chat" aria-expanded="false" aria-controls="chatPanel">
-    <svg class="chat-toggle-icon-open" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v11H8l-4 4V5Z" stroke-linejoin="round"/></svg>
-    <svg class="chat-toggle-icon-close" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg>
+    <svg class="ico chat-toggle-icon-open" aria-hidden="true"><use href="#i-chat"/></svg>
+    <svg class="ico chat-toggle-icon-close" aria-hidden="true"><use href="#i-x"/></svg>
   </button>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/dashersw/liquid-glass-js@78cb6ccb0b9987bb60a88b14ccbd13a9e6e8ab2a/container.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/dashersw/liquid-glass-js@78cb6ccb0b9987bb60a88b14ccbd13a9e6e8ab2a/button.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

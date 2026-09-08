@@ -1,12 +1,12 @@
 (() => {
   // Motion preference. CSS covers the declarative animations; this covers
-  // the two that are driven from JS (the pricing count-up and the
-  // back-to-top smooth scroll), which a stylesheet can't reach.
+  // the pricing count-up and the back-to-top smooth scroll, which a
+  // stylesheet can't reach.
   const reduceMotion = window.matchMedia
     ? window.matchMedia('(prefers-reduced-motion: reduce)')
     : { matches: false };
 
-  // Industry marquee — build enough repeated groups that each half of the
+  // Industry marquee - build enough repeated groups that each half of the
   // track is at least as wide as the visible bar, so the seamless loop
   // (translateX 0 -> -50%) never runs out of content mid-cycle and jumps.
   const marqueeTrack = document.getElementById('marqueeTrack');
@@ -18,12 +18,11 @@
       const groupWidth = marqueeTrack.firstElementChild.getBoundingClientRect().width;
       if (!groupWidth) return;
       const repeats = Math.ceil(containerWidth / groupWidth) + 1;
-      const half = templateHTML.repeat(repeats);
-      marqueeTrack.innerHTML = half + half;
+      marqueeTrack.innerHTML = templateHTML.repeat(repeats * 2);
 
-      // Keep scroll speed constant (~30px/s) regardless of how much
-      // content that took, since a wider half otherwise has to travel
-      // further in the same fixed duration and visibly speeds up.
+      // Keep scroll speed constant (~30px/s) regardless of how much content
+      // that took, since a wider half otherwise travels further in the same
+      // fixed duration and visibly speeds up.
       const halfWidth = repeats * groupWidth;
       marqueeTrack.style.animationDuration = `${(halfWidth / 30).toFixed(1)}s`;
     };
@@ -37,27 +36,79 @@
     });
   }
 
+  // Hero carousel - rotates the client screenshots in the browser frame.
+  // Auto-advance pauses on hover/focus and stops for good once someone uses
+  // the indicators, which is the WCAG 2.2.2 pause mechanism for this.
+  const heroTrack = document.getElementById('heroTrack');
+  const heroDots = document.getElementById('heroDots');
+  if (heroTrack && heroDots) {
+    const slides = Array.from(heroTrack.querySelectorAll('img'));
+    const dots = Array.from(heroDots.querySelectorAll('button'));
+    const label = document.getElementById('frameLabel');
+    const carousel = document.getElementById('heroCarousel');
+    const INTERVAL = 5000;
+    let index = 0;
+    let timer = null;
+    let userTookOver = false;
+
+    const show = (n) => {
+      index = (n + slides.length) % slides.length;
+      // Slide the whole track by whole slide-widths. Transform only, so the
+      // browser can composite it without touching layout.
+      heroTrack.style.transform = `translate3d(${index * -100}%, 0, 0)`;
+      slides.forEach((img, i) => img.setAttribute('aria-hidden', String(i !== index)));
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('is-active', i === index);
+        dot.setAttribute('aria-current', String(i === index));
+      });
+      if (label) label.textContent = slides[index].dataset.label || '';
+    };
+    const stop = () => {
+      if (timer) { clearInterval(timer); timer = null; }
+    };
+    const start = () => {
+      if (userTookOver || reduceMotion.matches || timer || slides.length < 2) return;
+      timer = setInterval(() => show(index + 1), INTERVAL);
+    };
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        userTookOver = true;
+        stop();
+        show(i);
+      });
+    });
+
+    if (carousel) {
+      carousel.addEventListener('mouseenter', stop);
+      carousel.addEventListener('mouseleave', start);
+      carousel.addEventListener('focusin', stop);
+      carousel.addEventListener('focusout', start);
+    }
+    // Don't animate against a tab nobody is looking at.
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stop(); else start();
+    });
+
+    show(0);
+    start();
+  }
+
   // Mobile nav toggle
   const toggle = document.getElementById('navToggle');
   const nav = document.getElementById('nav');
-
   if (toggle && nav) {
     const closeNav = () => {
       nav.classList.remove('is-open');
       toggle.classList.remove('is-open');
       toggle.setAttribute('aria-expanded', 'false');
     };
-
     toggle.addEventListener('click', () => {
       const isOpen = nav.classList.toggle('is-open');
       toggle.classList.toggle('is-open', isOpen);
       toggle.setAttribute('aria-expanded', String(isOpen));
     });
-
-    nav.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', closeNav);
-    });
-
+    nav.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeNav));
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && nav.classList.contains('is-open')) {
         closeNav();
@@ -80,7 +131,6 @@
         el.style.transitionDelay = `${Math.min(i * 70, 420)}ms`;
       });
     });
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -95,6 +145,27 @@
     revealEls.forEach((el) => observer.observe(el));
   } else {
     revealEls.forEach((el) => el.classList.add('is-visible'));
+  }
+
+  // Process spine fill - fallback for browsers without scroll-driven CSS
+  // animations (animation-timeline: view()). Under @supports that CSS wins
+  // and .is-filled's transition is disabled, so this is a no-op there.
+  const processLine = document.getElementById('processLine');
+  if (processLine && 'IntersectionObserver' in window) {
+    const lineObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            processLine.classList.add('is-filled');
+            lineObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.35 }
+    );
+    lineObserver.observe(processLine.parentElement || processLine);
+  } else if (processLine) {
+    processLine.classList.add('is-filled');
   }
 
   // Count-up numbers (pricing)
@@ -142,7 +213,6 @@
       btn.addEventListener('click', () => {
         const mode = btn.getAttribute('data-mode');
         if (pricingGrid.getAttribute('data-mode') === mode) return;
-
         toggleBtns.forEach((b) => {
           const active = b === btn;
           b.classList.toggle('is-active', active);
@@ -150,7 +220,6 @@
         });
         pricingToggle.classList.toggle('mode-zerodown', mode === 'zerodown');
         pricingGrid.setAttribute('data-mode', mode);
-
         pricingSection.querySelectorAll('.mode-content').forEach((el) => {
           const isMatch = el.getAttribute('data-mode') === mode;
           el.hidden = !isMatch;
@@ -159,90 +228,6 @@
           }
         });
       });
-    });
-  }
-
-  // Process vertical progress line
-  const processTrack = document.querySelector('.process-track');
-  const processLine = document.getElementById('processLine');
-  if (processTrack && processLine) {
-    const updateProgress = () => {
-      const rect = processTrack.getBoundingClientRect();
-      const vh = window.innerHeight;
-      const total = rect.height;
-      const started = vh * 0.75 - rect.top;
-      const pct = Math.max(0, Math.min(1, started / (total + vh * 0.5)));
-      processLine.style.setProperty('--progress', `${pct * 100}%`);
-    };
-    let ticking = false;
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        requestAnimationFrame(() => { updateProgress(); ticking = false; });
-        ticking = true;
-      }
-    }, { passive: true });
-    window.addEventListener('resize', updateProgress);
-    updateProgress();
-  }
-
-  // Diagram fork/merge bars — measure real tick positions instead of
-  // guessing a fixed percentage, since branch nodes have unequal widths
-  // ("Automation" vs "SEO"/"Analytics") which throws off any fixed guess.
-  // Branch widths are also equalized first: flex `justify-content: center`
-  // only centers the whole row as a block, so unless the two outer nodes
-  // (SEO, Analytics) are equal width, the middle node (Automation) ends up
-  // off-center under Website even though the block itself is centered.
-  const diagramRow = document.querySelector('.d-row');
-  if (diagramRow) {
-    const updateDiagramBars = () => {
-      const branches = Array.from(diagramRow.querySelectorAll('.d-branch'));
-      const topBar = diagramRow.querySelector('.d-bar-top');
-      const bottomBar = diagramRow.querySelector('.d-bar-bottom');
-      if (branches.length < 2 || !topBar || !bottomBar) return;
-
-      // Centering the middle node only requires the two outer (flanking)
-      // nodes to match each other — the middle node's own width is
-      // irrelevant to the math. Equalizing all three (rather than just
-      // the outer pair) would widen the row unnecessarily and risks
-      // wrapping sooner on narrow viewports.
-      const outer = [branches[0], branches[branches.length - 1]];
-      outer.forEach((b) => { b.style.minWidth = ''; });
-      const outerWidth = Math.max(...outer.map((b) => b.getBoundingClientRect().width));
-      outer.forEach((b) => { b.style.minWidth = `${outerWidth}px`; });
-
-      const rowRect = diagramRow.getBoundingClientRect();
-      const first = branches[0].getBoundingClientRect();
-      const last = branches[branches.length - 1].getBoundingClientRect();
-      const wrapped = Math.abs(first.top - last.top) > 1;
-
-      const ticks = diagramRow.querySelectorAll('.d-tick');
-      if (wrapped) {
-        topBar.style.display = 'none';
-        bottomBar.style.display = 'none';
-        ticks.forEach((t) => { t.style.display = 'none'; });
-        return;
-      }
-
-      const leftPx = (first.left + first.width / 2) - rowRect.left;
-      const rightPx = rowRect.right - (last.left + last.width / 2);
-      [topBar, bottomBar].forEach((bar) => {
-        bar.style.display = '';
-        bar.style.left = `${leftPx}px`;
-        bar.style.right = `${rightPx}px`;
-      });
-      ticks.forEach((t) => { t.style.display = ''; });
-    };
-
-    updateDiagramBars();
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(updateDiagramBars);
-    }
-    let diagramTicking = false;
-    window.addEventListener('resize', () => {
-      if (!diagramTicking) {
-        requestAnimationFrame(() => { updateDiagramBars(); diagramTicking = false; });
-        diagramTicking = true;
-      }
     });
   }
 
@@ -260,7 +245,6 @@
 
   if (chatToggle && chatPanel && chatForm && chatInput && chatMessages) {
     const history = [];
-
     const openChat = () => {
       chatPanel.hidden = false;
       chatToggle.classList.add('is-open');
@@ -274,7 +258,6 @@
       chatToggle.setAttribute('aria-expanded', 'false');
       chatToggle.setAttribute('aria-label', 'Open chat');
     };
-
     chatToggle.addEventListener('click', () => {
       if (chatPanel.hidden) openChat(); else closeChat();
     });
@@ -299,14 +282,11 @@
       e.preventDefault();
       const text = chatInput.value.trim();
       if (!text) return;
-
       addMessage('user', text);
       history.push({ role: 'user', content: text });
       chatInput.value = '';
       chatInput.disabled = true;
-
-      const typingEl = addMessage('typing', 'Thinking…');
-
+      const typingEl = addMessage('typing', 'Thinking...');
       try {
         const res = await fetch('/.netlify/functions/chat', {
           method: 'POST',
@@ -315,16 +295,15 @@
         });
         const data = await res.json();
         typingEl.remove();
-
         if (!res.ok || !data.reply) {
-          addMessage('error', data.error || 'Something went wrong — try again in a moment.');
+          addMessage('error', data.error || 'Something went wrong, try again in a moment.');
         } else {
           addMessage('bot', data.reply);
           history.push({ role: 'assistant', content: data.reply });
         }
       } catch {
         typingEl.remove();
-        addMessage('error', 'Couldn\'t reach the assistant — check your connection and try again.');
+        addMessage('error', "Couldn't reach the assistant. Check your connection and try again.");
       } finally {
         chatInput.disabled = false;
         chatInput.focus();
@@ -332,21 +311,23 @@
     });
   }
 
-  // Back-to-top button — fades in once scrolled past the hero
+  // Back-to-top - visible once the first section has scrolled off the top.
+  // Observes that section instead of listening on every scroll frame.
   const backToTop = document.getElementById('backToTop');
+  const firstSection = document.querySelector('main > section');
+  if (backToTop && firstSection && 'IntersectionObserver' in window) {
+    const topObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const scrolledPast = !entry.isIntersecting && entry.boundingClientRect.top < 0;
+          backToTop.classList.toggle('is-visible', scrolledPast);
+        });
+      },
+      { threshold: 0 }
+    );
+    topObserver.observe(firstSection);
+  }
   if (backToTop) {
-    let backToTopTicking = false;
-    const updateBackToTop = () => {
-      backToTop.classList.toggle('is-visible', window.scrollY > window.innerHeight * 0.6);
-    };
-    window.addEventListener('scroll', () => {
-      if (!backToTopTicking) {
-        requestAnimationFrame(() => { updateBackToTop(); backToTopTicking = false; });
-        backToTopTicking = true;
-      }
-    }, { passive: true });
-    updateBackToTop();
-
     backToTop.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: reduceMotion.matches ? 'auto' : 'smooth' });
     });
