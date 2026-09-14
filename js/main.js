@@ -147,25 +147,42 @@
     revealEls.forEach((el) => el.classList.add('is-visible'));
   }
 
-  // Process spine fill - fallback for browsers without scroll-driven CSS
-  // animations (animation-timeline: view()). Under @supports that CSS wins
-  // and .is-filled's transition is disabled, so this is a no-op there.
+  // Process spine fill. This used to be CSS scroll-driven animation
+  // (animation-timeline: view()) with an IntersectionObserver fallback for
+  // browsers without it - but that meant two genuinely different behaviors
+  // depending on support, and Firefox (no support as of this writing) was
+  // silently always on the fallback, which just timed a flat 1.6s fill off
+  // a single 35%-visible trigger: it raced ahead of the numbered steps
+  // regardless of how fast someone actually scrolled, since it wasn't
+  // tracking scroll position at all. One IntersectionObserver-driven
+  // implementation now, everywhere, no window.scroll listener: a dense
+  // threshold list gets the observer to fire every ~2.5% of intersection
+  // change, and each firing recomputes real "how far scrolled through the
+  // track" progress from the entry's own rect math (the same 0%-at-top-
+  // entering, 100%-at-bottom-exiting range the CSS cover timeline uses),
+  // written to a --fill custom property the line reads.
   const processLine = document.getElementById('processLine');
-  if (processLine && 'IntersectionObserver' in window) {
+  const processTrack = processLine ? processLine.parentElement : null;
+  if (processLine && processTrack && 'IntersectionObserver' in window && !reduceMotion.matches) {
+    const steps = 40;
+    const thresholds = Array.from({ length: steps + 1 }, (_, i) => i / steps);
     const lineObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            processLine.classList.add('is-filled');
-            lineObserver.unobserve(entry.target);
-          }
+          const rect = entry.boundingClientRect;
+          const root = entry.rootBounds || { top: 0, bottom: window.innerHeight };
+          const total = rect.height + (root.bottom - root.top);
+          const progress = total > 0
+            ? Math.min(1, Math.max(0, (root.bottom - rect.top) / total))
+            : 0;
+          processLine.style.setProperty('--fill', progress.toFixed(3));
         });
       },
-      { threshold: 0.35 }
+      { threshold: thresholds }
     );
-    lineObserver.observe(processLine.parentElement || processLine);
+    lineObserver.observe(processTrack);
   } else if (processLine) {
-    processLine.classList.add('is-filled');
+    processLine.style.setProperty('--fill', '1');
   }
 
   // Count-up numbers (pricing)

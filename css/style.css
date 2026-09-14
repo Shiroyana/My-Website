@@ -838,18 +838,19 @@ section {
   background: var(--line-strong);
   overflow: hidden;
 }
+.process-line {
+  --fill: 0;
+}
 .process-line::after {
   content: "";
   position: absolute;
   inset: 0;
   background: linear-gradient(180deg, var(--c-green), var(--c-teal));
-  transform: scaleY(0);
+  transform: scaleY(var(--fill));
   transform-origin: top;
-}
-/* Fallback fill: IntersectionObserver adds .is-filled (was a scroll listener) */
-.process-line.is-filled::after {
-  transform: scaleY(1);
-  transition: transform 1.6s var(--ease);
+  /* Short transition smooths the observer's discrete threshold steps (see
+     main.js) into what reads as a continuous fill while scrolling. */
+  transition: transform 0.2s linear;
 }
 .process-list {
   position: relative;
@@ -877,25 +878,6 @@ section {
 .process-list h3 { font-size: var(--fs-h3); margin-bottom: 0.3em; }
 .process-list p { color: var(--ink-soft); font-size: 0.95rem; max-width: 48ch; }
 
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .process-line::after {
-      animation: process-fill linear both;
-      animation-timeline: view();
-      /* Was cover 8%-82%: the fill reached full scaleY(1) while the last
-         couple of numbered steps below it were still unrevealed, so the
-         line visibly raced ahead of the list instead of tracking it.
-         Spanning (near) the full cover range ties the fill to the same
-         scroll distance the steps reveal across. */
-      animation-range: cover 2% cover 98%;
-    }
-    .process-line.is-filled::after { transition: none; }
-  }
-}
-@keyframes process-fill {
-  from { transform: scaleY(0); }
-  to { transform: scaleY(1); }
-}
 
 /* ---------- Future vision - deterministic CSS flow (was JS-measured div bars) ---------- */
 .vision { background: var(--bg-raised); text-align: center; }
@@ -1608,7 +1590,10 @@ section {
   /* Carousel still switches on click, it just cuts instead of sliding;
      main.js also skips the auto-rotate entirely under this preference. */
   .frame-track { transition: none; }
-  .process-line::after { transform: scaleY(1); animation: none; }
+  /* main.js sets --fill:1 directly and skips the observer under this
+     preference; this just drops the smoothing transition so that jump
+     is instant instead of a 0.2s slide. */
+  .process-line::after { transition: none; }
   /* Reveals must land visible, not just un-transitioned - killing the
      transition alone would strand anything not yet observed at opacity 0.
      transition-delay needs !important because main.js sets it inline. */
