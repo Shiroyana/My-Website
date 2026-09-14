@@ -32,18 +32,18 @@ anytime):
   optimization, monthly performance report. Fits a 5-20 employee company.
 
 - Growth Partner: $5,000 one-time + $600/mo, or $1,100/mo with $0 down.
-  Everything in Growth plus: monthly landing pages, seasonal promotions,
-  blog posts, conversion optimization, CRM integration, email & SMS
-  follow-ups, missed-call text-back, lead routing, an appointment
-  assistant, an FAQ assistant, an internal knowledge base, monthly
-  business review, priority support, unlimited monitoring. Fits
-  established, multi-crew companies.
+  Everything in Growth plus: monthly promotions & updates, blog posts,
+  conversion optimization, CRM integration, email & SMS follow-ups,
+  missed-call text-back, lead routing, an appointment assistant, an FAQ
+  assistant, an internal knowledge base, monthly business review,
+  priority support, unlimited monitoring. Fits established, multi-crew
+  companies.
 
 ADD-ONS (can be added to any package at any time, billed on top of the
 monthly, and dropped whenever they're no longer needed): Google Business
 Profile Optimization $300, Review Automation $250 setup + $50/mo, SEO
-$50/mo, Blog Writing $200/mo, Landing Pages $300 each, Emergency Support
-$100/mo.
+$50/mo, Blog Writing $200/mo, Product Catalog (inquire for price),
+Monthly Promotions & Updates $100/mo, 24/7 Emergency Support $100/mo.
 
 SITE MAP: full package pricing and the add-on list live on /pricing.html;
 past client work lives on /work.html. Point people there when they ask to

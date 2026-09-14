@@ -119,6 +119,18 @@
 
   // Reveal-on-scroll, staggered within each container
   const revealEls = Array.from(document.querySelectorAll('.reveal'));
+  // The process spine's fill is driven off this same observer/trigger,
+  // one step per numbered item, rather than an independent scroll-geometry
+  // estimate. Two earlier attempts both used a geometric proxy (a CSS
+  // scroll-timeline, then a rect-math IntersectionObserver) and both drifted
+  // out of sync with when the numbers actually appear - one finished before
+  // the last steps had revealed, the other required the whole track to
+  // scroll fully past the top of the viewport, well after someone had
+  // already read the last step. Tying --fill to a literal count of how many
+  // steps have revealed makes it the same event as the reveal, not an
+  // approximation of it.
+  const processLine = document.getElementById('processLine');
+  const processSteps = processLine ? Array.from(document.querySelectorAll('.process-list li.reveal')) : [];
   if ('IntersectionObserver' in window && revealEls.length) {
     const groups = new Map();
     revealEls.forEach((el) => {
@@ -137,35 +149,26 @@
           if (entry.isIntersecting) {
             entry.target.classList.add('is-visible');
             observer.unobserve(entry.target);
+            if (processSteps.includes(entry.target)) {
+              const revealed = processSteps.filter((el) => el.classList.contains('is-visible')).length;
+              processLine.style.setProperty('--fill', (revealed / processSteps.length).toFixed(3));
+            }
           }
         });
       },
-      { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+      // No bottom rootMargin: a negative one here shrinks the effective
+      // viewport before anything counts as intersecting, which is fine for
+      // elements with room to scroll further past them, but the very last
+      // element on the page has nowhere further to go - at max scroll it can
+      // sit inside that excluded strip forever, never crossing 15% within
+      // it. That silently left the last process step's text (and now its
+      // spine segment) stuck unrevealed even after scrolling to the bottom.
+      { threshold: 0.15 }
     );
     revealEls.forEach((el) => observer.observe(el));
   } else {
     revealEls.forEach((el) => el.classList.add('is-visible'));
-  }
-
-  // Process spine fill - fallback for browsers without scroll-driven CSS
-  // animations (animation-timeline: view()). Under @supports that CSS wins
-  // and .is-filled's transition is disabled, so this is a no-op there.
-  const processLine = document.getElementById('processLine');
-  if (processLine && 'IntersectionObserver' in window) {
-    const lineObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            processLine.classList.add('is-filled');
-            lineObserver.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.35 }
-    );
-    lineObserver.observe(processLine.parentElement || processLine);
-  } else if (processLine) {
-    processLine.classList.add('is-filled');
+    if (processLine) processLine.style.setProperty('--fill', '1');
   }
 
   // Count-up numbers (pricing)
