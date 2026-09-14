@@ -882,7 +882,12 @@ section {
     .process-line::after {
       animation: process-fill linear both;
       animation-timeline: view();
-      animation-range: cover 8% cover 82%;
+      /* Was cover 8%-82%: the fill reached full scaleY(1) while the last
+         couple of numbered steps below it were still unrevealed, so the
+         line visibly raced ahead of the list instead of tracking it.
+         Spanning (near) the full cover range ties the fill to the same
+         scroll distance the steps reveal across. */
+      animation-range: cover 2% cover 98%;
     }
     .process-line.is-filled::after { transition: none; }
   }
@@ -1375,6 +1380,12 @@ section {
   .addon-grid { grid-template-columns: 1fr; }
   .addon-grid li { border-right: 0 !important; }
 }
+/* The nth-child(Nn) rules above only zero the right border on cells that
+   complete a full row. An item count that doesn't divide evenly leaves a
+   trailing partial row whose last cell still has nothing to its right -
+   this catches that cell at every column count, including 1. Placed after
+   the breakpoint rules above so it wins the tie on equal specificity. */
+.addon-grid li:last-child { border-right: 0; }
 
 /* ---------- Footer ---------- */
 .site-footer { padding: var(--space-2xl) 0 var(--space-l); }
