@@ -830,6 +830,7 @@ section {
   .process-track { grid-column: 2; grid-row: 1 / span 2; }
 }
 .process-line {
+  --fill: 0;
   position: absolute;
   left: 15px;
   top: 8px;
@@ -837,9 +838,6 @@ section {
   width: 2px;
   background: var(--line-strong);
   overflow: hidden;
-}
-.process-line {
-  --fill: 0;
 }
 .process-line::after {
   content: "";
@@ -1590,10 +1588,9 @@ section {
   /* Carousel still switches on click, it just cuts instead of sliding;
      main.js also skips the auto-rotate entirely under this preference. */
   .frame-track { transition: none; }
-  /* main.js sets --fill:1 directly and skips the observer under this
-     preference; this just drops the smoothing transition so that jump
-     is instant instead of a 0.2s slide. */
-  .process-line::after { transition: none; }
+  /* Matches .reveal below: fully settled immediately, not gated behind
+     scrolling through every step. */
+  .process-line::after { transition: none; transform: scaleY(1); }
   /* Reveals must land visible, not just un-transitioned - killing the
      transition alone would strand anything not yet observed at opacity 0.
      transition-delay needs !important because main.js sets it inline. */

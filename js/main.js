@@ -119,6 +119,18 @@
 
   // Reveal-on-scroll, staggered within each container
   const revealEls = Array.from(document.querySelectorAll('.reveal'));
+  // The process spine's fill is driven off this same observer/trigger,
+  // one step per numbered item, rather than an independent scroll-geometry
+  // estimate. Two earlier attempts both used a geometric proxy (a CSS
+  // scroll-timeline, then a rect-math IntersectionObserver) and both drifted
+  // out of sync with when the numbers actually appear - one finished before
+  // the last steps had revealed, the other required the whole track to
+  // scroll fully past the top of the viewport, well after someone had
+  // already read the last step. Tying --fill to a literal count of how many
+  // steps have revealed makes it the same event as the reveal, not an
+  // approximation of it.
+  const processLine = document.getElementById('processLine');
+  const processSteps = processLine ? Array.from(document.querySelectorAll('.process-list li.reveal')) : [];
   if ('IntersectionObserver' in window && revealEls.length) {
     const groups = new Map();
     revealEls.forEach((el) => {
@@ -137,52 +149,26 @@
           if (entry.isIntersecting) {
             entry.target.classList.add('is-visible');
             observer.unobserve(entry.target);
+            if (processSteps.includes(entry.target)) {
+              const revealed = processSteps.filter((el) => el.classList.contains('is-visible')).length;
+              processLine.style.setProperty('--fill', (revealed / processSteps.length).toFixed(3));
+            }
           }
         });
       },
-      { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+      // No bottom rootMargin: a negative one here shrinks the effective
+      // viewport before anything counts as intersecting, which is fine for
+      // elements with room to scroll further past them, but the very last
+      // element on the page has nowhere further to go - at max scroll it can
+      // sit inside that excluded strip forever, never crossing 15% within
+      // it. That silently left the last process step's text (and now its
+      // spine segment) stuck unrevealed even after scrolling to the bottom.
+      { threshold: 0.15 }
     );
     revealEls.forEach((el) => observer.observe(el));
   } else {
     revealEls.forEach((el) => el.classList.add('is-visible'));
-  }
-
-  // Process spine fill. This used to be CSS scroll-driven animation
-  // (animation-timeline: view()) with an IntersectionObserver fallback for
-  // browsers without it - but that meant two genuinely different behaviors
-  // depending on support, and Firefox (no support as of this writing) was
-  // silently always on the fallback, which just timed a flat 1.6s fill off
-  // a single 35%-visible trigger: it raced ahead of the numbered steps
-  // regardless of how fast someone actually scrolled, since it wasn't
-  // tracking scroll position at all. One IntersectionObserver-driven
-  // implementation now, everywhere, no window.scroll listener: a dense
-  // threshold list gets the observer to fire every ~2.5% of intersection
-  // change, and each firing recomputes real "how far scrolled through the
-  // track" progress from the entry's own rect math (the same 0%-at-top-
-  // entering, 100%-at-bottom-exiting range the CSS cover timeline uses),
-  // written to a --fill custom property the line reads.
-  const processLine = document.getElementById('processLine');
-  const processTrack = processLine ? processLine.parentElement : null;
-  if (processLine && processTrack && 'IntersectionObserver' in window && !reduceMotion.matches) {
-    const steps = 40;
-    const thresholds = Array.from({ length: steps + 1 }, (_, i) => i / steps);
-    const lineObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const rect = entry.boundingClientRect;
-          const root = entry.rootBounds || { top: 0, bottom: window.innerHeight };
-          const total = rect.height + (root.bottom - root.top);
-          const progress = total > 0
-            ? Math.min(1, Math.max(0, (root.bottom - rect.top) / total))
-            : 0;
-          processLine.style.setProperty('--fill', progress.toFixed(3));
-        });
-      },
-      { threshold: thresholds }
-    );
-    lineObserver.observe(processTrack);
-  } else if (processLine) {
-    processLine.style.setProperty('--fill', '1');
+    if (processLine) processLine.style.setProperty('--fill', '1');
   }
 
   // Count-up numbers (pricing)
