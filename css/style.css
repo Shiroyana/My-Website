@@ -264,6 +264,12 @@ section {
 }
 
 /* ---------- Header ---------- */
+/* The blur tint lives on a ::before, not on .site-header itself. A
+   backdrop-filter (like transform/filter/perspective) creates a new
+   containing block for position:fixed descendants - putting it on
+   .site-header trapped the full-screen .nav drawer inside this 68px bar
+   instead of the viewport, which is what made the mobile hamburger menu
+   open into a tiny broken sliver instead of covering the screen. */
 .site-header {
   position: sticky;
   top: 0;
@@ -273,9 +279,19 @@ section {
 }
 @supports ((backdrop-filter: blur(10px)) or (-webkit-backdrop-filter: blur(10px))) {
   .site-header {
+    background: transparent;
+    border-bottom-color: transparent;
+  }
+  .site-header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
     background: color-mix(in srgb, var(--bg) 86%, transparent);
+    border-bottom: 1px solid var(--line);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    pointer-events: none;
   }
 }
 .header-row {
@@ -591,7 +607,9 @@ section {
   }
   .story-lines { max-width: 28ch; }
 }
-@media (max-width: 640px) { .story-lines { max-width: 26ch; } }
+@media (max-width: 640px) {
+  .story-lines { max-width: 26ch; text-align: center; margin-inline: auto; }
+}
 
 .story-line {
   font-family: var(--font-display);
@@ -971,14 +989,26 @@ section {
   margin-inline: auto;
 }
 /* Stacked on narrow screens: the horizontal bus has nothing to span, so it
-   goes and the chips chain vertically off the trunk pipe instead. */
+   goes. But three plain stacked pills with the same connector as the rest
+   of the trunk just read as three more sequential steps, losing the point
+   that SEO/Automation/Analytics are one parallel step, not three - so they
+   get grouped into one bordered panel instead, with a single pipe running
+   in and a single pipe running out. */
 @media (max-width: 520px) {
-  .flow-branch { grid-template-columns: 1fr; gap: 0; padding-top: 30px; }
+  .flow-branch {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    max-width: 300px;
+    margin-top: 30px;
+    padding: 22px 18px 20px;
+    background: var(--bg-alt);
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+  }
+  .flow-branch::before { top: -30px; height: 30px; }
   .flow-branch::after { display: none; }
-  .flow-branch .chip { margin-top: 20px; }
-  .flow-branch .chip::before { top: -20px; height: 20px; }
-  .flow-branch .chip:first-child { margin-top: 0; }
-  .flow-branch .chip:first-child::before { display: none; }
+  .flow-branch .chip { background: var(--bg-raised); }
+  .flow-branch .chip::before { display: none; }
 }
 
 /* ---------- About ---------- */
