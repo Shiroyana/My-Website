@@ -2,5 +2,34 @@
 Thumbs.db
 *.log
 
+# dependencies and builds
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
+
+# env (only .env.example is committed)
+.env
+.env.*
+!.env.example
+
 # Local Netlify folder
 .netlify
+
+# Taste Skill and Hallmark working files (screenshots, chrome profiles)
+.taste-skill/chrome-*
+.taste-skill/shots/
+shots/
+
+# Local tooling (reinstall skills from skills-lock.json with `npx skills`)
+.claude/skills/
+.agents/skills/
+.taste-skill/*
+!.taste-skill/waivers.json
+!.taste-skill/gate.json
+.hallmark/
+
+# Large local reports (regenerate; not needed in the repo)
+docs/screenshots/
+docs/lighthouse/

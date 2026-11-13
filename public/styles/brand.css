@@ -1,0 +1,517 @@
+﻿/*
+  Cambi Growth tokens and the few page styles DESIGN.md allows on top of the Taste Skill kit
+  (public/assets/system.css, imported before this file in layout.tsx). Colours come only from
+  DESIGN.md. Never add a hue here that is not on that sheet.
+*/
+
+:root {
+  /* Taste kit palette, set from the brand (start.mjs brand, inverse set to the logo greens) */
+  --p-bg: #f7f3ec;
+  --p-surface: #efeae0;
+  --p-ink: #14140f;
+  --p-muted: #55534a;
+  --p-accent: #a6591c;
+  --p-accent-ink: #f7f3ec;
+  --p-action: #a6591c;
+  --p-action-ink: #f7f3ec;
+  --p-inv-bg: #0e1712;
+  --p-inv-surface: #172019;
+  --p-inv-ink: #f4f0e6;
+  --p-inv-muted: #b9c2b4;
+  --p-inv-accent: #e8a75c;
+  --p-inv-accent-ink: #0e1712;
+  --p-inv-action: #e8a75c;
+  --p-inv-action-ink: #0e1712;
+
+  --font-display: var(--font-onest), system-ui, sans-serif;
+  --font-text: var(--font-onest), system-ui, sans-serif;
+  --display-weight: 400;
+  --display-tracking: -0.035em;
+  --display-tracking-xl: -0.04em;
+
+  /* brand extras (DESIGN.md) */
+  --c-logo-tile: #1b281f;
+  --c-logo-green: #6aaf65;
+  --c-amber: #d9832e;
+  --c-teal: #2e6e72;
+  --c-sunken: #ece4d5;
+  --c-on-dark: #f4f0e6;
+  --timber-100: #f1dfc6;
+  --timber-300: #e2b27a;
+  --timber-500: #d9832e;
+  --timber-700: #a6591c;
+  --timber-900: #5a2f0e;
+  --c-error: #8c3a0e;
+  --c-success: #3f7d4f;
+
+  /* translucent brand values (glass, blueprint lines, shadows) */
+  --glass-dark-fill: rgb(14 23 18 / 0.9);
+  --line-on-dark: rgb(244 240 230 / 0.14);
+  --line-on-dark-strong: rgb(244 240 230 / 0.18);
+  --bp-ink: rgb(244 240 230 / 0.55);
+  --bp-minor-ink: rgb(244 240 230 / 0.06);
+  --bp-major-ink: rgb(244 240 230 / 0.12);
+  --glass-hi-dark: rgb(255 255 255 / 0.1);
+  --glass-shade-dark: rgb(0 0 0 / 0.25);
+  --glass-light-fill: rgb(247 243 236 / 0.9);
+  --glass-light-edge: rgb(255 255 255 / 0.5);
+  --glass-hi-light: rgb(255 255 255 / 0.95);
+  --glass-sheen: rgb(255 255 255 / 0.9);
+  --shade-ink-soft: rgb(20 20 15 / 0.08);
+  --lift-shadow: rgb(20 20 15 / 0.5);
+  --teal-grid: rgb(46 110 114 / 0.07);
+  --tap-highlight: rgb(166 89 28 / 0.18);
+  --field-line: #8a7a60; /* field edges: 3.3:1 on the field fill, 3.5:1 on cards (WCAG 1.4.11) */
+}
+
+/* page-wide interaction basics (Vercel Web Interface Guidelines) */
+html {
+  color-scheme: light;
+  -webkit-tap-highlight-color: var(--tap-highlight);
+}
+a,
+button,
+select,
+summary,
+label {
+  touch-action: manipulation;
+}
+/* native selects keep the page's colours in Windows dark mode */
+.field select {
+  background-color: var(--c-sunken);
+  color: var(--p-ink);
+}
+/* field edges at 3:1 or better against the field and the card (WCAG 1.4.11) */
+.field :is(input, select, textarea) {
+  border-color: var(--field-line);
+}
+/* nothing ever scrolls the page sideways */
+html,
+body {
+  overflow-x: clip;
+}
+/* anchors land below the fixed nav */
+[id] {
+  scroll-margin-top: calc(var(--nav) + var(--s-4));
+}
+/* the open phone menu never scrolls the page behind it */
+.nav.is-open {
+  overscroll-behavior: contain;
+}
+/* the submit button's spinner while the request is sending */
+.spinner {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  animation: spin 700ms linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation-duration: 2s;
+  }
+}
+
+/* the kit's error red is off-brand: errors use the deep accent shade, always with words */
+.form {
+  --error: var(--c-error);
+}
+
+/* ---------- Glass: nav, package cards, hero float card only (DESIGN.md, Glass) ---------- */
+.glass-dark {
+  background: var(--glass-dark-fill);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid var(--line-on-dark);
+  box-shadow:
+    inset 0 1px 0 var(--glass-hi-dark),
+    inset 0 -1px 0 var(--glass-shade-dark);
+}
+.glass-light {
+  /* a flat cream fill; the sheen along the top edge is an inset light, never a gradient under text */
+  background: var(--glass-light-fill);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid var(--glass-light-edge);
+  box-shadow:
+    inset 0 1px 0 var(--glass-hi-light),
+    inset 0 28px 36px -30px var(--glass-sheen),
+    inset 0 -1px 0 var(--shade-ink-soft);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass-dark {
+    background: var(--p-inv-bg);
+  }
+  .glass-light {
+    background: var(--p-bg);
+  }
+}
+
+/* the nav: the kit's split bar on the inverse ground, as dark glass. Its hairline is the glass edge. */
+.nav.glass-dark {
+  border-width: 0 0 1px;
+}
+.nav__logo img {
+  height: 28px;
+  width: 28px;
+  border-radius: 7px;
+}
+
+/* ---------- Blueprint sheet: dark green with a fine drafting grid ---------- */
+.bp-sheet {
+  --bp-minor: var(--bp-minor-ink);
+  --bp-major: var(--bp-major-ink);
+  background-color: var(--p-inv-bg);
+  background-image:
+    linear-gradient(var(--bp-major) 1px, transparent 1px),
+    linear-gradient(90deg, var(--bp-major) 1px, transparent 1px),
+    linear-gradient(var(--bp-minor) 1px, transparent 1px),
+    linear-gradient(90deg, var(--bp-minor) 1px, transparent 1px);
+  background-size:
+    64px 64px,
+    64px 64px,
+    8px 8px,
+    8px 8px;
+  background-position: -1px -1px;
+}
+
+/* drawing marks inside SVGs */
+.bp-line {
+  stroke: var(--bp-ink);
+  stroke-width: 1;
+  fill: none;
+  vector-effect: non-scaling-stroke;
+}
+.bp-line--hi {
+  stroke: var(--c-logo-green);
+}
+.bp-label {
+  fill: var(--p-inv-ink);
+  font: 500 13px/1 var(--font-text);
+  font-variant-numeric: tabular-nums;
+}
+.bp-label--muted {
+  fill: var(--p-inv-muted);
+}
+
+/* ---------- Hero visual: the still drawing, with the live 3D laid over it on capable screens ---------- */
+.hero-visual {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--line-on-dark);
+}
+.hero-visual__still,
+.hero-visual__live {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.hero-visual__live {
+  opacity: 0;
+  transition: opacity 600ms var(--ease);
+}
+.hero-visual__live[data-ready] {
+  opacity: 1;
+}
+.hero-visual__live canvas {
+  display: block;
+}
+.hero-visual__still {
+  object-fit: contain;
+  padding: var(--s-5);
+  transition: opacity 600ms var(--ease);
+}
+.hero-visual:has(.hero-visual__live[data-ready]) .hero-visual__still {
+  opacity: 0;
+}
+
+/* ---------- Timber edge: a three-band lamination stripe, twice on the site at most ---------- */
+.timber-edge {
+  position: relative;
+}
+.timber-edge::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  border-radius: var(--r-lg) var(--r-lg) 0 0;
+  background: linear-gradient(
+    var(--timber-300) 0 33%,
+    var(--timber-500) 33% 66%,
+    var(--timber-700) 66% 100%
+  );
+  pointer-events: none;
+}
+
+/* the hero's float card never covers the drawing on a phone */
+@media (max-width: 639px) {
+  .hero-visual .ly-float {
+    display: none;
+  }
+}
+
+/* a statement section (the word-highlight moment) sits in the middle of its one screen */
+/* (the kit makes every section's .wrap a flex column; this centres it, matching its specificity) */
+main > section.statement > .wrap:not(.grid) {
+  justify-content: center;
+  gap: var(--s-4);
+}
+
+/* package card: what is included, as a short list under the summary */
+.plan-list {
+  display: grid;
+  gap: var(--s-2);
+  margin-top: auto;
+  padding-top: var(--s-4);
+  border-top: 1px solid var(--line);
+  font-size: var(--t-small);
+  color: var(--muted);
+}
+.plan-list li {
+  padding-left: var(--s-4);
+  position: relative;
+}
+.plan-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 8px;
+  height: 1px;
+  background: var(--accent);
+}
+
+/* read by screen readers, not shown */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* a numbered list of steps: the number on a blueprint dimension tick */
+.steps-list {
+  display: grid;
+  gap: var(--s-5);
+}
+.steps-list > li {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: var(--s-4);
+  align-items: start;
+}
+.steps-list > li p {
+  margin-top: var(--s-1);
+}
+.steps-list__n {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  font-size: var(--t-small);
+  font-weight: 500;
+}
+
+/* packages comparison table: scrolls inside its own box on a phone, never the page */
+.table-scroll {
+  /* positioned, so the visually-hidden cell labels (position: absolute) are clipped here too */
+  position: relative;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+}
+.compare {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+  font-size: var(--t-small);
+}
+.compare th,
+.compare td {
+  padding: var(--s-3) var(--s-4);
+  border-bottom: 1px solid var(--line);
+  text-align: center;
+}
+.compare thead th {
+  vertical-align: bottom;
+  font-weight: 500;
+  background: var(--surface);
+}
+.compare tbody th,
+.compare thead th:first-child {
+  text-align: left;
+  font-weight: 500;
+}
+.compare tbody tr:last-child > * {
+  border-bottom: 0;
+}
+.compare__price {
+  display: block;
+  font-weight: 400;
+  color: var(--muted);
+}
+.compare__yes {
+  color: var(--c-success);
+  font-weight: 500;
+}
+.compare__no {
+  color: var(--muted);
+}
+
+/* case studies: the honest empty state */
+.empty-state {
+  margin-bottom: var(--card-gap);
+  border-color: var(--line-on-dark);
+  min-height: 220px;
+  justify-content: flex-end;
+}
+.empty-state .t-label {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  color: var(--muted);
+}
+.empty-state .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--c-logo-green);
+}
+
+/* a clearly marked photo placeholder until the owner's photograph arrives */
+.photo-slot {
+  border-color: var(--line-on-dark);
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+/* contact details as rows */
+.contact-rows > div {
+  display: grid;
+  gap: var(--s-1);
+  padding-block: var(--s-4);
+  border-bottom: 1px solid var(--line);
+}
+.contact-rows dd {
+  margin: 0;
+}
+
+/* Real content never overflows into the next section: the kit fixes each section at exactly its
+   screens; here a section is at least its screens and grows when its content needs more. */
+@media (min-width: 640px) {
+  main > :is(section, .section):not(.hero) {
+    height: auto;
+    min-height: calc(var(--h, 1) * 100svh);
+  }
+  main > :is(section, .section):not(.hero) > :is(.wrap, .container) {
+    height: auto;
+  }
+}
+/* (under 640px the kit already lets a section grow, at least --hm screens) */
+
+/* On a phone: the home page's package cards drop their include lists (they stay on /packages), and
+   the client sites sit two to a row with just their names, so each section fits its screen. */
+@media (max-width: 639px) {
+  #packages .plan-list {
+    display: none;
+  }
+  .work-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .work-grid > .card {
+    grid-column: auto;
+  }
+  .work-grid > .card > p:not(.t-card) {
+    display: none;
+  }
+  .work-grid .t-card {
+    font-size: var(--t-small);
+  }
+}
+
+/* a section head inside a grid cell keeps its lines together at the top */
+.grid > .section-head,
+.grid > * > .section-head {
+  align-self: start;
+  align-content: start;
+}
+
+/* a card's heading has room before what follows it */
+.card > h2 + *,
+.card > .t-card + * {
+  margin-top: var(--s-4);
+}
+
+/* label over value, for rows whose values are sentences */
+.rows--stacked > li {
+  grid-template-columns: 1fr;
+}
+
+/* a linked plan card lifts 2px on hover and focus, like every linked card (Taste house rule 5) */
+a.card.card--plan {
+  transition:
+    transform var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease);
+}
+/* hover lifts and casts the shadow; keyboard focus lifts too but keeps the kit's instant outline ring
+   (box-shadow is transitioned, so it never draws the focus ring) */
+a.card.card--plan:focus-visible {
+  transform: translateY(-2px);
+}
+a.card.card--plan:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 1px 0 var(--glass-sheen),
+    0 12px 30px -16px var(--lift-shadow);
+}
+@media (prefers-reduced-motion: reduce) {
+  a.card.card--plan {
+    transition: none;
+  }
+  a.card.card--plan:hover,
+  a.card.card--plan:focus-visible {
+    transform: none;
+  }
+}
+
+/* a plan card's action sits on its last line */
+.card__action {
+  margin-top: var(--s-2);
+  align-self: flex-start;
+  white-space: nowrap;
+}
+
+/* two weights only (DESIGN.md): emphasis is 500, never bold */
+strong,
+b {
+  font-weight: 500;
+}
+
+/* tabular figures for prices and scores */
+.figures {
+  font-variant-numeric: tabular-nums;
+}
+
+/* placeholders the owner must replace are marked plainly (DESIGN.md: clearly marked placeholders) */
+.placeholder-note {
+  font-size: var(--t-label);
+  font-weight: 500;
+  color: var(--muted);
+}

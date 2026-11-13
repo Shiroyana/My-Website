@@ -1,6 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /404.html
-Disallow: /thank-you.html
-
-Sitemap: https://getcambi.com/sitemap.xml

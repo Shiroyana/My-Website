@@ -1,0 +1,175 @@
+.sheet {
+  margin: 0;
+  display: grid;
+  gap: var(--s-5);
+  padding: var(--s-6);
+  background: var(--c-sunken);
+  color: var(--p-ink);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-lg);
+  /* a faint drafting grid on the paper, in teal */
+  background-image:
+    linear-gradient(var(--teal-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--teal-grid) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+.top {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--s-6);
+  align-items: center;
+}
+
+.kicker {
+  font-size: var(--t-label);
+  font-weight: 500;
+  color: var(--p-muted);
+}
+
+.score {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-2);
+  font-family: var(--font-display);
+  font-size: var(--t-stat);
+  line-height: 1;
+  margin-top: var(--s-2);
+}
+.score > span:first-child {
+  font-size: clamp(48px, 5vw, 72px);
+  letter-spacing: -0.04em;
+}
+.outOf {
+  color: var(--p-muted);
+}
+
+/* the three fixes, joined to the score by a teal leader line */
+.fixes {
+  display: grid;
+  gap: var(--s-2);
+  counter-reset: fix;
+  border-left: 1px solid var(--c-teal);
+  padding-left: var(--s-5);
+  font-size: var(--t-small);
+}
+.fixes li {
+  counter-increment: fix;
+  position: relative;
+}
+.fixes li::before {
+  content: counter(fix);
+  position: absolute;
+  left: calc(-1 * var(--s-5) - 10px);
+  top: 0.05em;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--c-sunken);
+  border: 1px solid var(--c-teal);
+  color: var(--p-ink);
+  font-size: 12px;
+  line-height: 18px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--t-small);
+}
+.table th,
+.table td {
+  text-align: left;
+  padding: var(--s-2) var(--s-2);
+  border-bottom: 1px solid var(--line-strong);
+  vertical-align: top;
+}
+.table thead th {
+  font-size: var(--t-label);
+  font-weight: 500;
+  color: var(--p-muted);
+}
+.table tbody th {
+  font-weight: 500;
+}
+.num {
+  text-align: right !important;
+  white-space: nowrap;
+}
+
+.fixMark {
+  display: inline-block;
+  margin-right: var(--s-2);
+  padding: 0 var(--s-2);
+  border: 1px solid var(--c-teal);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--p-ink);
+}
+
+/* the title block, lower right, like an architectural sheet */
+.titleBlock {
+  justify-self: end;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  border: 1px solid var(--p-ink);
+  margin: 0;
+  font-size: var(--t-label);
+}
+.titleBlock > div {
+  padding: var(--s-2) var(--s-3);
+  border-left: 1px solid var(--p-ink);
+}
+.titleBlock > div:first-child {
+  border-left: 0;
+}
+.titleBlock dt {
+  color: var(--p-muted);
+}
+.titleBlock dd {
+  margin: 0;
+  font-weight: 500;
+}
+
+@media (max-width: 639px) {
+  .sheet {
+    padding: var(--s-4);
+  }
+  .top {
+    grid-template-columns: 1fr;
+    gap: var(--s-4);
+  }
+  .table thead {
+    display: none;
+  }
+  .table tr {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    border-bottom: 1px solid var(--line-strong);
+    padding-block: var(--s-2);
+  }
+  .table th,
+  .table td {
+    border: 0;
+    padding: 0 var(--s-1);
+  }
+  .table td:not(.num) {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    color: var(--p-muted);
+  }
+  .titleBlock {
+    justify-self: stretch;
+    grid-template-columns: 1fr;
+  }
+  .titleBlock > div {
+    border-left: 0;
+    border-top: 1px solid var(--p-ink);
+  }
+  .titleBlock > div:first-child {
+    border-top: 0;
+  }
+}

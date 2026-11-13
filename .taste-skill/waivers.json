@@ -1,0 +1,17 @@
+[
+  {
+    "check": "effects-fit",
+    "target": "(the page)",
+    "reason": "The client's brief asks for exactly one 3D hero (@react-three/fiber) on this service page; it is the only WebGL, loads lazily on wide capable screens only, and a server-rendered still drawing shows on phones, low-power devices and under reduced motion. Approved by the client (DESIGN.md order of authority)."
+  },
+  {
+    "check": "shader-lint",
+    "target": "common",
+    "reason": "'#include <common>' is a three.js preprocessor include that three.js replaces with source before the shader reaches the GPU; 'common' never appears as a GLSL identifier. The hero also keeps its still drawing unless every shader program reports runnable (TimberFrame3D.tsx)."
+  },
+  {
+    "check": "cta",
+    "target": "div.grid > div.span-6.start-7 > figure.gVCE0a_sheet.bp-sheet > div.gVCE0a_record",
+    "reason": "Not an offer: the drawing shows an example shop's own price list (labelled Example) as AI assistants will read it. Nothing here is sold, so it takes no action; the packages section below carries the priced cards and their actions."
+  }
+]

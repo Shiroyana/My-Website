@@ -1,0 +1,10 @@
+.next
+node_modules
+.claude
+.agents
+.taste-skill
+public/assets
+docs/seo
+business
+TODO.md
+public/styles

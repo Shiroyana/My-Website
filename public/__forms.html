@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="robots" content="noindex"><title>Forms</title></head>
+<body>
+<!-- Registers the audit form with Netlify Forms at deploy time. Never shown to visitors: the real form
+     is in src/components/AuditForm.tsx and posts here from the server action (src/app/audit/actions.ts). -->
+<form name="audit-request" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input name="bot-field">
+  <input name="business">
+  <input name="trade">
+  <input name="borough">
+  <input name="website">
+  <input name="phone">
+  <input name="email">
+</form>
+</body>
+</html>

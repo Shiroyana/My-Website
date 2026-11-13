@@ -1,0 +1,359 @@
+{
+ "start": "2026-11-12T22:36:23.828Z",
+ "round": 3,
+ "idle": 0,
+ "errors": 0,
+ "status": "open",
+ "history": [
+  {
+   "at": "2026-11-13T02:09:54.255Z",
+   "mode": "manual",
+   "status": "fail",
+   "fails": 4,
+   "round": 1,
+   "reused": false,
+   "stopHookActive": false
+  },
+  {
+   "at": "2026-11-13T02:14:19.230Z",
+   "mode": "manual",
+   "status": "fail",
+   "fails": 4,
+   "round": 2,
+   "reused": false,
+   "stopHookActive": false
+  },
+  {
+   "at": "2026-11-13T02:27:44.643Z",
+   "mode": "manual",
+   "status": "open",
+   "fails": 1,
+   "round": 3,
+   "reused": false,
+   "stopHookActive": false
+  }
+ ],
+ "max": 3,
+ "marker": {
+  "page": null,
+  "dir": "C:\\Users\\shiro\\OneDrive\\Documents\\Projects\\My-Website",
+  "kind": "service",
+  "start": "2026-11-12T22:36:23.828Z",
+  "by": "start.mjs",
+  "url": "http://localhost:3000/",
+  "category": "AI booking setup for NYC trade shops",
+  "primary": "Get my free audit"
+ },
+ "manual": true,
+ "roundKey": "9c844de632cccae7:4d41fc82",
+ "roundFree": false,
+ "idleFree": false,
+ "blockKey": null,
+ "fp": "9c844de632cccae7",
+ "page": "http://localhost:3000/",
+ "found": {
+  "fails": [
+   {
+    "check": "shader-lint",
+    "where": "chunks/20c-1-zggjl64.js \"common\"",
+    "msg": "a shader uses \"common\" as a name (line 7: #include <common>): GLSL ES reserves it, so a strict GPU rejects the whole shader and the picture stays empty",
+    "fix": "rename it (flat, smooth, centroid, sample, patch, input, output, filter and the rest are GLSL ES reserved words)",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "shader-lint"
+    ],
+    "wheres": [
+     "chunks/20c-1-zggjl64.js \"common\""
+    ]
+   },
+   {
+    "check": "cta",
+    "where": "div.grid > div.span-6.start-7 > figure.gVCE0a_sheet.bp-sheet > div.gVCE0a_record \"Shop record Example Water heater repair \"",
+    "msg": "1 priced card with no action in or under it",
+    "fix": "add the action: a button in the hero, one on every priced item, one in the closing section",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "cta"
+    ],
+    "wheres": [
+     "div.grid > div.span-6.start-7 > figure.gVCE0a_sheet.bp-sheet > div.gVCE0a_record \"Shop record Example Water heater repair \""
+    ]
+   },
+   {
+    "check": "effects-fit",
+    "where": "(the page)",
+    "msg": "a service page asks for 2 WebGL contexts (canvas, div): shader effects are for tech, software, AI and gaming pages",
+    "fix": "take the WebGL effects off this page: lead with its photographs, flat colour and type (effects are for tech, software, AI and gaming pages)",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "effects-fit"
+    ],
+    "wheres": [
+     "(the page)"
+    ]
+   },
+   {
+    "check": "contrast",
+    "where": "div.wrap > div.section-head > p > a.link \"See case studies\"",
+    "msg": "body text over a effect reads at 1.0:1 at its worst tenth (needs 4.5:1), on a busy ground",
+    "fix": "put the text on a calm part of the picture, or on a solid panel",
+    "widths": [
+     390
+    ],
+    "from": "consistency",
+    "ids": [
+     "contrast"
+    ],
+    "wheres": [
+     "div.wrap > div.section-head > p > a.link \"See case studies\""
+    ]
+   }
+  ],
+  "warns": [
+   {
+    "check": "scroll-reveal",
+    "where": "section#how \"Three steps from audit to booked jobs Yo\"",
+    "msg": "starts \"opacity\" (0.4 s) the moment it is scrolled into view (an IntersectionObserver) on div.mo-ph__words (inside a dealt moment's section, [data-moment]: an enter moment is expected on every kind; its still is judged under reduced motion)",
+    "fix": "show it at rest: no fade, rise or unmask when it is scrolled into view",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "pinned",
+    "where": "section#how > div.wrap.mo-ph \"Three steps from audit to booked jobs Yo\"",
+    "msg": "held on screen for 2 screens of scroll (position: sticky) while the page moves on (inside a dealt moment's section, [data-moment]: expected on every kind, two moments at most, house rule; its still is judged under reduced motion)",
+    "fix": "let the section scroll with the page",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "text-only",
+    "where": "section#faq \"Questions owners ask first\"",
+    "msg": "the section is only text: no picture, icon, mock or effect in it",
+    "fix": "give the section a visual: a photograph that fits, the real icons, or a UI fragment on a ground",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "cta",
+    "where": "section#how \"Three steps from audit to booked jobs\"",
+    "msg": "a section over 1.5 screens long with no link or button in it",
+    "fix": "add the action: a button in the hero, one on every priced item, one in the closing section",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "copy-headings",
+    "where": "h2#work-h \"Client websites we built and run\"",
+    "msg": "\"Client websites we built and run\" names no product, part, place or section (the one brand line a page may have)",
+    "fix": "name the thing in every heading: the product, a part, the place or a section noun",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "copy-headings",
+    "where": "div.wrap > div.grid > a.card.card--plan:nth-of-type(3) > h3 \"Agent-ready monthly\"",
+    "msg": "the card title \"Agent-ready monthly\" names no product, part, place or section (2 card titles like it) (and 1 more like it: \"Voice add-on\")",
+    "fix": "name the thing in every heading: the product, a part, the place or a section noun",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "section-gaps",
+    "where": "section#how / section#packages",
+    "msg": "147px between these sections, -43% against the median 259px of gaps at a change of ground",
+    "fix": "use one gap between sections (all within 25% of each other)",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "section-gaps",
+    "where": "section#work / footer#contact",
+    "msg": "342px between these sections, +32% against the median 259px of gaps at a change of ground",
+    "fix": "use one gap between sections (all within 25% of each other)",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "section-gaps",
+    "where": "section#record / section#how",
+    "msg": "uneven space at the edge of a band: 99px outside its edge, 160px inside it (the space on either side of a change of ground reads as one gap only when the two match)",
+    "fix": "use one gap between sections (all within 25% of each other)",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "photo-set",
+    "where": "div.grid.work-grid > a.card.card--open:nth-of-type(1) > div.frame.frame--photo > img.frame__img \"aafarma.jpg\"",
+    "msg": "6 photographs in more than one look: lightness from 0.19 to 0.90; saturation from 0.18 to 0.53; the odd one out is aafarma.jpg",
+    "fix": "grade the photographs to one look (light, colour, warmth), or replace the odd one out",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "photo-credit",
+    "where": "(the page text)",
+    "msg": "1 library source (wikimedia): the page credits wikimedia; confirm each shows the client's own product, place or people",
+    "fix": "confirm the library photograph shows the client's own product, place or people; otherwise replace it",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "orphan",
+    "where": "div.gVCE0a_record > dl.gVCE0a_rows > div.gVCE0a_row:nth-of-type(1) > dd.figures \"$250 to $450\"",
+    "msg": "its last line holds only \"$450\" (and 1 more like it: \"Mon to Sat, 7:00 to 19:0\")",
+    "fix": "rebalance the text (text-wrap: pretty, or a shorter line) so the last line holds more than one short word",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "action-repeat",
+    "where": "header.nav.nav--split > div.wrap.nav__bar > div.nav__actions > a.btn.btn--primary \"get my free audit\"",
+    "msg": "\"get my free audit\" shows 2 times on the first screen at 1440px (nav, hero): the nav's button and the hero's; nothing else on the screen may repeat it",
+    "fix": "show the action once a screen besides the nav's button: the hero's, the close's or the phone bar's, never all at once",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "scroll-reveal",
+    "where": "section#problem > div.wrap > p.mo-wh__text \"AI assistants now search and even phone \"",
+    "msg": "starts \"color\" (0.2 s) the moment it is scrolled into view (an IntersectionObserver) on span.mo-w:nth-of-type(1) (inside a dealt moment's section, [data-moment]: an enter moment is expected on every kind; its still is judged under reduced motion)",
+    "fix": "show it at rest: no fade, rise or unmask when it is scrolled into view",
+    "widths": [
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "contrast",
+    "where": "h2#close-h \"Get booked by AI, not just found.\"",
+    "msg": "large text over a effect reads at 1.8:1 at its worst tenth (needs 3:1), on a busy ground",
+    "fix": "put the text on a calm part of the picture, or on a solid panel",
+    "widths": [
+     390
+    ],
+    "from": "consistency"
+   }
+  ],
+  "crashed": [],
+  "seconds": {
+   "consistency": 152,
+   "layout": 7
+  }
+ },
+ "open": [
+  {
+   "check": "contrast",
+   "where": "div.wrap > div.section-head > p > a.link \"See case studies\"",
+   "msg": "body text over a effect reads at 1.0:1 at its worst tenth (needs 4.5:1), on a busy ground",
+   "fix": "put the text on a calm part of the picture, or on a solid panel",
+   "widths": [
+    390
+   ],
+   "from": "consistency",
+   "ids": [
+    "contrast"
+   ],
+   "wheres": [
+    "div.wrap > div.section-head > p > a.link \"See case studies\""
+   ]
+  }
+ ],
+ "waived": [
+  {
+   "check": "shader-lint",
+   "where": "chunks/20c-1-zggjl64.js \"common\"",
+   "msg": "a shader uses \"common\" as a name (line 7: #include <common>): GLSL ES reserves it, so a strict GPU rejects the whole shader and the picture stays empty",
+   "fix": "rename it (flat, smooth, centroid, sample, patch, input, output, filter and the rest are GLSL ES reserved words)",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "shader-lint"
+   ],
+   "wheres": [
+    "chunks/20c-1-zggjl64.js \"common\""
+   ],
+   "reason": "'#include <common>' is a three.js preprocessor include that three.js replaces with source before the shader reaches the GPU; 'common' never appears as a GLSL identifier. The hero also keeps its still drawing unless every shader program reports runnable (TimberFrame3D.tsx)."
+  },
+  {
+   "check": "cta",
+   "where": "div.grid > div.span-6.start-7 > figure.gVCE0a_sheet.bp-sheet > div.gVCE0a_record \"Shop record Example Water heater repair \"",
+   "msg": "1 priced card with no action in or under it",
+   "fix": "add the action: a button in the hero, one on every priced item, one in the closing section",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "cta"
+   ],
+   "wheres": [
+    "div.grid > div.span-6.start-7 > figure.gVCE0a_sheet.bp-sheet > div.gVCE0a_record \"Shop record Example Water heater repair \""
+   ],
+   "reason": "Not an offer: the drawing shows an example shop's own price list (labelled Example) as AI assistants will read it. Nothing here is sold, so it takes no action; the packages section below carries the priced cards and their actions."
+  },
+  {
+   "check": "effects-fit",
+   "where": "(the page)",
+   "msg": "a service page asks for 2 WebGL contexts (canvas, div): shader effects are for tech, software, AI and gaming pages",
+   "fix": "take the WebGL effects off this page: lead with its photographs, flat colour and type (effects are for tech, software, AI and gaming pages)",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "effects-fit"
+   ],
+   "wheres": [
+    "(the page)"
+   ],
+   "reason": "The client's brief asks for exactly one 3D hero (@react-three/fiber) on this service page; it is the only WebGL, loads lazily on wide capable screens only, and a server-rendered still drawing shows on phones, low-power devices and under reduced motion. Approved by the client (DESIGN.md order of authority)."
+  }
+ ],
+ "warnCount": 15,
+ "at": "2026-11-13T02:27:44.644Z",
+ "openTold": true
+}

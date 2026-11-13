@@ -1,0 +1,50 @@
+{
+ "note": "Credits for the photographs in this folder: photos.mjs credits prints the footer block for the ones the pages use.",
+ "photos": [
+  {
+   "file": "photo-f26889597.webp",
+   "files": [
+    "photo-f26889597-500.webp",
+    "photo-f26889597-960.webp",
+    "photo-f26889597.webp"
+   ],
+   "id": "f26889597",
+   "alt": "Broadway looking north from Barclay Street",
+   "by": "Oarabile Mudongo",
+   "licence": "Public domain",
+   "licenceUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+   "page": "https://commons.wikimedia.org/wiki/File:Broadway_looking_north_from_Barclay_Street.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f56892310.webp",
+   "files": [
+    "photo-f56892310-500.webp",
+    "photo-f56892310-960.webp",
+    "photo-f56892310.webp"
+   ],
+   "id": "f56892310",
+   "alt": "HVAC Airmen provide more than summer comfort 150805-F-HB285-031",
+   "by": "Airman 1st Class Megan Myhre",
+   "licence": "Public domain",
+   "licenceUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+   "page": "https://commons.wikimedia.org/wiki/File:HVAC_Airmen_provide_more_than_summer_comfort_150805-F-HB285-031.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f160025964.webp",
+   "files": [
+    "photo-f160025964-500.webp",
+    "photo-f160025964-960.webp",
+    "photo-f160025964.webp"
+   ],
+   "id": "f160025964",
+   "alt": "379th ECES HVAC technicians combat rising temperatures (8502255)",
+   "by": "U.S. Air Force AFCENT by Airman 1st Class Derrick Bole",
+   "licence": "Public domain",
+   "licenceUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+   "page": "https://commons.wikimedia.org/wiki/File:379th_ECES_HVAC_technicians_combat_rising_temperatures_(8502255).jpg",
+   "source": "Wikimedia Commons"
+  }
+ ]
+}

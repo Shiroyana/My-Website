@@ -1,24 +1,9 @@
 [build]
-  publish = "."
-  functions = "netlify/functions"
+  command = "npm run build"
+  publish = ".next"
 
-# Security headers. No CSP: the page relies on inline <script> for gtag and
-# the JSON-LD block, so a strict policy would need hashes or nonces that a
-# static build can't generate. Revisit if those move to external files.
-[[headers]]
-  for = "/*"
-  [headers.values]
-    X-Frame-Options = "SAMEORIGIN"
-    X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "strict-origin-when-cross-origin"
-    Permissions-Policy = "geolocation=(), microphone=(), camera=(), payment=()"
+[build.environment]
+  NODE_VERSION = "22"
 
-# Static assets (images, fonts). css/style.css and js/main.js are
-# deliberately left on Netlify's default (revalidate via ETag): their
-# filenames aren't content-hashed, so a long max-age would serve stale
-# CSS/JS after a deploy with no way to bust it. The self-hosted font
-# files never change, so the 30-day cache here suits them well.
-[[headers]]
-  for = "/assets/*"
-  [headers.values]
-    Cache-Control = "public, max-age=2592000"
+# Next.js runs on Netlify's Next.js runtime (detected automatically).
+# Security headers are set in next.config.ts so they apply locally and in production alike.

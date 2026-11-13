@@ -1,0 +1,39 @@
+{
+  "name": "cambi-growth",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "dependencies": {
+    "@netlify/blobs": "^11.1.9",
+    "@react-three/fiber": "^9.8.2",
+    "next": "^16.4.6",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "server-only": "^0.0.1",
+    "three": "^0.187.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@types/three": "^0.187.0",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.4.6",
+    "prettier": "^3.10.1",
+    "puppeteer-core": "^25.17.0",
+    "typescript": "^5.9.3"
+  }
+}
