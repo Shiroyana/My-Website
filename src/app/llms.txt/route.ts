@@ -1,4 +1,14 @@
-import { SITE_URL, faqs, packages, priceLabel, rubric, site } from "@/lib/site";
+﻿import {
+  SITE_URL,
+  aiLine,
+  audit,
+  faqs,
+  rubric,
+  site,
+  tiers,
+  upfrontLabel,
+  zeroDownLabel,
+} from "@/lib/site";
 
 export const dynamic = "force-static";
 
@@ -14,14 +24,18 @@ export function GET() {
     `- Contact: ${site.email}`,
     `- Start here: free AI readiness audit at ${SITE_URL}/audit`,
     "",
-    "## Packages",
+    "## Packages and prices (USD)",
     "",
-    ...packages.map(
-      (p) =>
-        `- [${p.name}](${SITE_URL}${p.id === "audit" ? "/audit" : `/packages#${p.id}`}): ${priceLabel(p)}. ${p.summary}`,
-    ),
+    `- [${audit.name}](${SITE_URL}/audit): free. ${audit.summary}`,
+    ...tiers.flatMap((t) => [
+      `- [${t.name}](${SITE_URL}/packages#${t.id}) (${t.fits}): ${t.summary}`,
+      `  - Standard: ${upfrontLabel(t)}`,
+      `  - $0 down: ${zeroDownLabel(t)}`,
+      `  - Includes: ${t.includes.join("; ")}`,
+    ]),
+    `- [${aiLine.name}](${SITE_URL}/packages#${aiLine.id}) (optional add-on, price on request): ${aiLine.summary}`,
     "",
-    'Prices shown as "$X" are not yet published; email for a quote.',
+    "Every shop starts with the free audit. The setup already paid counts toward a higher tier.",
     "",
     "## The audit's seven checks (100 points)",
     "",

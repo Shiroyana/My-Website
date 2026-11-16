@@ -225,9 +225,60 @@ body {
   display: block;
 }
 .hero-visual__still {
-  object-fit: contain;
-  padding: var(--s-5);
+  /* the still is a capture of the finished 3D build in this same frame: cover keeps the two aligned */
+  object-fit: cover;
   transition: opacity 600ms var(--ease);
+}
+/* tablets: the frame is wide and short, so show the whole building and drop the float card */
+@media (min-width: 640px) and (max-width: 1023px) {
+  /* (the kit sets cover on .hero__media > img, so this needs the longer selector) */
+  .hero-visual > img.hero-visual__still {
+    object-fit: contain;
+  }
+  .hero-visual .ly-float {
+    display: none;
+  }
+}
+/* the hero's controls, top right of the frame once the build has finished: X-ray and replay */
+.hero-tools {
+  position: absolute;
+  top: var(--s-4);
+  right: var(--s-4);
+  z-index: 2;
+  display: flex;
+  gap: var(--s-2);
+}
+.hero-tool {
+  min-width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  color: var(--p-inv-ink);
+  font: 500 var(--t-small) / 1 var(--font-text);
+  cursor: pointer;
+  transition:
+    background-color var(--dur) var(--ease),
+    color var(--dur) var(--ease);
+}
+.hero-tool--text {
+  padding: 0 var(--s-4);
+}
+.hero-tool:hover {
+  color: var(--p-inv-accent);
+}
+.hero-tool[aria-pressed="true"] {
+  background: var(--p-inv-accent);
+  color: var(--p-inv-accent-ink);
+}
+.hero-tool:focus-visible {
+  outline: 2px solid var(--p-inv-accent);
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-tool {
+    transition: none;
+  }
 }
 .hero-visual:has(.hero-visual__live[data-ready]) .hero-visual__still {
   opacity: 0;
@@ -273,7 +324,7 @@ main > section.statement > .wrap:not(.grid) {
   padding-top: var(--s-4);
   border-top: 1px solid var(--line);
   font-size: var(--t-small);
-  color: var(--muted);
+  color: var(--ink); /* text people read is ink (7:1 or better), never muted */
 }
 .plan-list li {
   padding-left: var(--s-4);
@@ -446,6 +497,12 @@ main > section.statement > .wrap:not(.grid) {
   }
 }
 
+/* question sections take only the height they need (no empty half screen under the answers) */
+main > :is(section, .section).section--fit {
+  min-height: 0;
+  height: auto;
+}
+
 /* a section head inside a grid cell keeps its lines together at the top */
 .grid > .section-head,
 .grid > * > .section-head {
@@ -491,11 +548,237 @@ a.card.card--plan:hover {
   }
 }
 
-/* a plan card's action sits on its last line */
-.card__action {
-  margin-top: var(--s-2);
-  align-self: flex-start;
+/* FAQ across the full width: two columns of questions from 1024px, one on smaller screens */
+@media (min-width: 1024px) {
+  .faq.faq--cols {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--s-8);
+  }
+  /* the kit drops the top padding of the first row only; the second column's first row matches it */
+  .faq.faq--cols > details:nth-child(2) {
+    padding-top: 0;
+  }
+  /* a shorter answer keeps its question and text together instead of stretching to the row */
+  .faq.faq--cols > details {
+    align-content: start;
+  }
+}
+
+/* case studies: the evidence as a dated line, the date on a rule like a dimension tick */
+.evidence {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--line);
+}
+.evidence__item {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr) auto;
+  gap: var(--s-2) var(--s-6);
+  align-items: baseline;
+  padding-block: var(--s-5);
+  border-bottom: 1px solid var(--line);
+}
+.evidence__when {
+  font-weight: 500;
+  color: var(--accent);
+}
+.evidence__fact {
+  max-width: 68ch;
+}
+.evidence__source {
+  font-size: var(--t-small);
   white-space: nowrap;
+}
+@media (max-width: 767px) {
+  .evidence__item {
+    grid-template-columns: 1fr;
+  }
+  .evidence__source {
+    white-space: normal;
+  }
+}
+
+/* a checkbox with its label as one hit target */
+.check {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  min-height: 44px;
+  font-size: var(--t-small);
+  font-weight: 500;
+  cursor: pointer;
+}
+.check input {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--accent);
+  flex: none;
+}
+
+/* ---------- Plan prices and the pay-up-front / $0-down switch ---------- */
+.tier-price {
+  display: grid;
+  gap: var(--s-2);
+  min-height: 104px; /* the same price block height in every card, so the lists line up */
+  align-content: start;
+}
+.tier-price__line {
+  display: grid;
+  gap: 2px;
+}
+.tier-price__mode {
+  font-size: var(--t-label);
+  font-weight: 500;
+  color: var(--muted);
+}
+.tier-price__main {
+  font-family: var(--font-display);
+  font-size: var(--t-h3);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--ink);
+}
+.tier-price__note {
+  font-size: var(--t-small);
+  color: var(--muted);
+}
+/* without JavaScript both lines show, smaller; with the switch, one line at a time */
+[data-pay-mode="upfront"] [data-pay="zerodown"],
+[data-pay-mode="zerodown"] [data-pay="upfront"] {
+  display: none;
+}
+:not([data-pay-mode]) > * .tier-price__line + .tier-price__line .tier-price__main {
+  font-size: var(--t-card);
+}
+
+.pay-toggle-slot {
+  min-height: 44px; /* holds the switch's space before hydration: no layout shift */
+  min-width: 232px;
+}
+.pay-toggle {
+  display: inline-flex;
+  padding: 3px;
+  gap: 3px;
+  border-radius: 999px;
+  border: 1px solid var(--line-on-dark);
+  background: var(--glass-dark-fill);
+}
+.pay-toggle__btn {
+  min-height: 38px;
+  padding: 0 var(--s-4);
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: var(--p-inv-muted);
+  font: 500 var(--t-small) / 1 var(--font-text);
+  cursor: pointer;
+  transition:
+    background-color var(--dur) var(--ease),
+    color var(--dur) var(--ease);
+}
+.pay-toggle__btn:hover {
+  color: var(--p-inv-ink);
+}
+.pay-toggle__btn[aria-pressed="true"] {
+  background: var(--p-inv-accent);
+  color: var(--p-inv-accent-ink);
+}
+.pay-toggle__btn:focus-visible {
+  outline: 2px solid var(--p-inv-accent);
+  outline-offset: 2px;
+}
+/* on cream sections */
+.pay-toggle--light {
+  border-color: var(--line-strong);
+  background: var(--c-sunken);
+}
+.pay-toggle--light .pay-toggle__btn {
+  color: var(--p-muted);
+}
+.pay-toggle--light .pay-toggle__btn:hover {
+  color: var(--p-ink);
+}
+.pay-toggle--light .pay-toggle__btn[aria-pressed="true"] {
+  background: var(--p-accent);
+  color: var(--p-accent-ink);
+}
+.pay-toggle--light .pay-toggle__btn:focus-visible {
+  outline-color: var(--p-accent);
+}
+
+/* the AI-to-AI line under the plans */
+.addon-note {
+  margin-top: var(--s-5);
+  font-size: var(--t-small);
+  color: var(--muted);
+  max-width: 72ch;
+}
+.addon {
+  margin-top: var(--s-8);
+  padding-top: var(--s-6);
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: var(--s-3);
+  max-width: 72ch;
+}
+.addon .plan-list {
+  margin-top: 0;
+}
+
+/* comparison table: a value cell reads as text, not a mark */
+.compare td > span:not([class]) {
+  font-size: var(--t-small);
+}
+.compare__price + .compare__price {
+  margin-top: 2px;
+}
+/* plan names in the header never break ("Free audit" on one line) */
+.compare__name {
+  white-space: nowrap;
+}
+/* every column the same width: the label column and the four plans */
+.compare {
+  table-layout: fixed;
+}
+.compare th,
+.compare td {
+  width: 20%;
+}
+/* header: every plan name on the same line, prices underneath */
+.compare thead th {
+  vertical-align: top;
+}
+/* a figure like "$1,125/mo" never splits across lines */
+.compare__fig {
+  white-space: nowrap;
+}
+
+/* the founding-partner link under the package cards */
+.founding-link {
+  margin-top: var(--s-6);
+}
+.founding-link .link {
+  min-height: 44px;
+}
+
+/* a plan card's action sits on its last line */
+/* plan cards: title, price, then the list straight under a divider at the same height in every card;
+   the action sits on the bottom line of every card, whatever the list length */
+.card--plan .plan-list {
+  margin-top: 0;
+}
+/* tablet and small laptop: plan cards 2 by 2 (DESIGN.md), so titles stay on one line */
+@media (min-width: 640px) and (max-width: 1279px) {
+  .grid > .card--plan.span-3 {
+    grid-column: auto / span 6;
+  }
+}
+.card__action {
+  margin-top: auto;
+  padding-top: var(--s-4);
+  align-self: flex-start;
 }
 
 /* two weights only (DESIGN.md): emphasis is 500, never bold */

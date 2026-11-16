@@ -1,4 +1,4 @@
-import { SITE_URL, faqs, packages, site, type Package } from "./site";
+﻿import { SITE_URL, ZERO_DOWN_MONTHS, aiLine, audit, faqs, site, tiers } from "./site";
 
 const ORG_ID = `${SITE_URL}/#business`;
 
@@ -37,58 +37,88 @@ export function organizationJsonLd() {
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Packages",
-      itemListElement: packages.map((p) => ({
+      itemListElement: [audit.id, ...tiers.map((t) => t.id), aiLine.id].map((id) => ({
         "@type": "Offer",
-        itemOffered: { "@id": serviceId(p) },
+        itemOffered: { "@id": serviceId(id) },
       })),
     },
   };
 }
 
-function serviceId(p: Package) {
-  return `${SITE_URL}/packages#${p.id}`;
+function serviceId(id: string) {
+  return `${SITE_URL}/packages#${id}`;
 }
 
-/** One Service + Offer per package. Prices the owner has not set are left out of the Offer. */
+const audience = {
+  "@type": "BusinessAudience",
+  audienceType: "HVAC, plumbing and electrical contractors",
+};
+
+const monthly = (price: number, name: string) => ({
+  "@type": "UnitPriceSpecification",
+  name,
+  price,
+  priceCurrency: "USD",
+  unitText: "MONTH",
+  referenceQuantity: { "@type": "QuantitativeValue", value: 1, unitCode: "MON" },
+});
+
+/**
+ * One Service per offer: the free audit, each tier with its two ways to pay (setup up front plus the
+ * standard monthly, or $0 down with a higher monthly for the first 12 months), and the AI-to-AI line
+ * (no price while it is tested).
+ */
 export function servicesJsonLd() {
+  const service = (id: string, name: string, description: string, offers: unknown) => ({
+    "@type": "Service",
+    "@id": serviceId(id),
+    name,
+    serviceType: name,
+    description,
+    provider: { "@id": ORG_ID },
+    areaServed,
+    audience,
+    ...(offers ? { offers } : {}),
+  });
+
   return {
     "@context": "https://schema.org",
-    "@graph": packages.map((p) => {
-      const offer: Record<string, unknown> = {
+    "@graph": [
+      service(audit.id, audit.name, audit.summary, {
         "@type": "Offer",
-        url: p.id === "audit" ? `${SITE_URL}/audit` : serviceId(p),
+        url: `${SITE_URL}/audit`,
+        price: 0,
+        priceCurrency: "USD",
         availability: "https://schema.org/InStock",
-        areaServed,
-      };
-      if (p.price != null) {
-        offer.priceCurrency = "USD";
-        if (p.unit === "month") {
-          offer.priceSpecification = {
-            "@type": "UnitPriceSpecification",
-            price: p.price,
+      }),
+      ...tiers.map((t) =>
+        service(t.id, t.name, t.summary, [
+          {
+            "@type": "Offer",
+            name: `${t.name}, standard (setup up front)`,
+            url: serviceId(t.id),
             priceCurrency: "USD",
-            unitText: "MONTH",
-            referenceQuantity: { "@type": "QuantitativeValue", value: 1, unitCode: "MON" },
-          };
-        } else {
-          offer.price = p.price;
-        }
-      }
-      return {
-        "@type": "Service",
-        "@id": serviceId(p),
-        name: p.name,
-        serviceType: p.name,
-        description: p.summary,
-        provider: { "@id": ORG_ID },
-        areaServed,
-        audience: {
-          "@type": "BusinessAudience",
-          audienceType: "HVAC, plumbing and electrical contractors",
-        },
-        offers: offer,
-      };
-    }),
+            availability: "https://schema.org/InStock",
+            priceSpecification: [
+              { "@type": "PriceSpecification", name: "Setup", price: t.setup, priceCurrency: "USD" },
+              monthly(t.monthly, "Monthly"),
+            ],
+          },
+          {
+            "@type": "Offer",
+            name: `${t.name}, $0 down`,
+            url: serviceId(t.id),
+            priceCurrency: "USD",
+            availability: "https://schema.org/InStock",
+            priceSpecification: [
+              monthly(t.zeroDownMonthly, `Monthly for the first ${ZERO_DOWN_MONTHS} months`),
+              monthly(t.monthly, `Monthly from month ${ZERO_DOWN_MONTHS + 1}`),
+            ],
+          },
+        ]),
+      ),
+      service(aiLine.id, aiLine.name, aiLine.summary, null),
+    ],
   };
 }
 

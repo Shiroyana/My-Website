@@ -22,7 +22,7 @@ export default function WorkPage() {
       >
         <div className="wrap">
           <div className="section-head">
-            <h1 id="hero-h" className="t-h2">
+            <h1 id="hero-h">
               Web design work for our existing clients
             </h1>
             <p>

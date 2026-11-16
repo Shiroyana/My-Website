@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -12,7 +12,7 @@ export default function PrivacyPage() {
     <section className="section legal" aria-labelledby="hero-h">
       <div className="wrap">
         <div className="measure stack-5">
-          <h1 id="hero-h" className="t-h2">
+          <h1 id="hero-h">
             Privacy
           </h1>
           <p className="muted t-small">Last updated November 2026</p>

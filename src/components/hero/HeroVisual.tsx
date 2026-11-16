@@ -1,14 +1,14 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { Component, useEffect, useState, type ReactNode } from "react";
+import { Component, useEffect, useRef, useState, type ReactNode } from "react";
 
 const TimberFrame3D = dynamic(() => import("./TimberFrame3D"), { ssr: false });
 
 /** Live 3D only on a wide screen, a capable device, with motion allowed and data not saved. */
 function canRunLive(): boolean {
   if (typeof window === "undefined") return false;
-  // ?still forces the still drawing (to measure the page without the 3D)
+  // ?still forces the still image (to measure the page without the 3D)
   if (new URLSearchParams(window.location.search).has("still")) return false;
   if (!window.matchMedia("(min-width: 1024px)").matches) return false;
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return false;
@@ -41,11 +41,29 @@ class Quiet extends Component<{ children: ReactNode }, { failed: boolean }> {
 
 /**
  * The hero picture. `children` is the server-rendered still (the LCP element everywhere); the live
- * 3D loads after the page is idle and fades in over it once its first frame is drawn.
+ * 3D loads after the page is idle and fades in over it once its first frame is drawn. When the
+ * build has finished, a button lets the visitor watch it again.
  */
 export function HeroVisual({ children }: { children: ReactNode }) {
   const [live, setLive] = useState(false);
   const [ready, setReady] = useState(false);
+  const [run, setRun] = useState(0);
+  const [doneRun, setDoneRun] = useState(-1);
+  const settled = doneRun === run;
+
+  // X-ray: on while the pointer is over the building, or pinned with the button
+  const [hover, setHover] = useState(false);
+  const [pinned, setPinned] = useState(false);
+  const [fading, setFading] = useState(false);
+  const fadeTimer = useRef<number | undefined>(undefined);
+  const xray = settled && (hover || pinned);
+  /** keep the 3D loop running long enough for the walls to finish fading */
+  const fade = () => {
+    setFading(true);
+    window.clearTimeout(fadeTimer.current);
+    fadeTimer.current = window.setTimeout(() => setFading(false), 900);
+  };
+  useEffect(() => () => window.clearTimeout(fadeTimer.current), []);
 
   useEffect(() => {
     if (!canRunLive()) return;
@@ -59,11 +77,67 @@ export function HeroVisual({ children }: { children: ReactNode }) {
     <>
       {children}
       {live ? (
-        <div className="hero-visual__live" data-ready={ready ? "" : undefined}>
-          <Quiet>
-            <TimberFrame3D onReady={() => setReady(true)} />
-          </Quiet>
-        </div>
+        <>
+          <div
+            className="hero-visual__live"
+            data-ready={ready ? "" : undefined}
+            onPointerEnter={() => {
+              setHover(true);
+              fade();
+            }}
+            onPointerLeave={() => {
+              setHover(false);
+              fade();
+            }}
+          >
+            <Quiet>
+              <TimberFrame3D
+                run={run}
+                settled={settled}
+                xray={xray}
+                fading={fading}
+                onReady={() => setReady(true)}
+                onSettled={() => setDoneRun(run)}
+              />
+            </Quiet>
+          </div>
+          {ready && settled ? (
+            <div className="hero-tools">
+              {/* the same X-ray as hovering the building, for keyboards and touch screens */}
+              <button
+                type="button"
+                className="hero-tool hero-tool--text glass-dark"
+                aria-pressed={pinned}
+                onClick={() => {
+                  setPinned((p) => !p);
+                  fade();
+                }}
+              >
+                X-ray
+              </button>
+              <button
+                type="button"
+                className="hero-tool glass-dark"
+                aria-label="Replay the build animation"
+                onClick={() => {
+                  setPinned(false);
+                  setRun((r) => r + 1);
+                }}
+              >
+                <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true">
+                  <path
+                    d="M4 10a6 6 0 1 0 2-4.5M4 3.5V6h2.5"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+            </div>
+          ) : null}
+        </>
       ) : null}
     </>
   );

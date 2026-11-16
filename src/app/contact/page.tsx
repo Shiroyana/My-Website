@@ -23,7 +23,7 @@ export default function ContactPage() {
         <div className="wrap">
           <div className="grid">
             <div className="span-6 section-head">
-              <h1 id="hero-h" className="t-h2">
+              <h1 id="hero-h">
                 Contact Cambi Growth
               </h1>
               <p>

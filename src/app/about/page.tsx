@@ -37,7 +37,7 @@ export default function AboutPage() {
           <div className="grid">
             <div className="span-6 split-col">
               <div className="section-head">
-                <h1 id="hero-h" className="t-h2">
+                <h1 id="hero-h">
                   An NYC business that builds for NYC shops
                 </h1>
                 <p>

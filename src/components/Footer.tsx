@@ -16,7 +16,10 @@ export function Footer() {
         <div className="closing__cta close--type">
           <div className="section-head">
             <h2 id="close-h">{site.brandLine}.</h2>
-            <p>The audit is free, and the report is yours to keep.</p>
+            <p>
+              Google&rsquo;s AI already calls shops like yours for prices. The free audit shows what
+              it hears.
+            </p>
           </div>
           <a className="btn btn--primary btn--xl btn--wide" href={MAIN_ACTION.href}>
             {MAIN_ACTION.label}

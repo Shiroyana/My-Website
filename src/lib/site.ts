@@ -23,86 +23,119 @@ export const site = {
 /** Main action, word for word everywhere it appears (Taste copy rule 5). */
 export const MAIN_ACTION = { label: "Get my free audit", href: "/audit" } as const;
 
-export type Package = {
-  id: string;
+/**
+ * Pricing (roadmap.md, Pricing plans). Every shop starts with the free audit, then picks a tier and
+ * pays one of two ways: the setup up front for the standard monthly, or $0 down with a higher monthly
+ * for the first 12 months, after which it drops to the standard monthly.
+ */
+export const audit = {
+  id: "audit",
+  name: "Free audit",
+  summary:
+    "Your shop scored out of 100 across seven checks, a one-page report and the three fixes that matter most.",
+  includes: [
+    "ChatGPT, Gemini and Google asked to find and price a job at your shop",
+    "Google Business Profile, website and phone checked against each other",
+    "Score out of 100 with a one-page report and the top three fixes",
+  ],
+  fits: "Every shop, before anything else",
+} as const;
+
+export type Tier = {
+  id: "starter" | "booked" | "partner";
   name: string;
-  /** null = the owner has not set the price yet; shown as "from $X". */
-  price: number | null;
-  unit: "one-time" | "month" | "free";
+  fits: string;
+  setup: number;
+  monthly: number;
+  /** $0 down: this monthly for ZERO_DOWN_MONTHS, then `monthly` */
+  zeroDownMonthly: number;
   summary: string;
   includes: string[];
-  suits: string;
   featured?: boolean;
 };
 
-export const packages: Package[] = [
+export const ZERO_DOWN_MONTHS = 12;
+
+export const tiers: Tier[] = [
   {
-    id: "audit",
-    name: "Free audit",
-    price: 0,
-    unit: "free",
+    id: "starter",
+    name: "Starter",
+    fits: "1 to 3 trucks",
+    setup: 2250,
+    monthly: 375,
+    zeroDownMonthly: 600,
     summary:
-      "Your shop scored out of 100 across seven checks, a one-page report and the three fixes that matter most.",
+      "A new website built for AI assistants, with your prices, hours and area they can read directly.",
     includes: [
-      "Google Business Profile, website and phone checked against each other",
-      "ChatGPT, Gemini and Google asked to find and price a job at your shop",
-      "Score out of 100 with a one-page report",
-      "The top three fixes, in plain words",
+      "A new website, up to 6 pages, with hosting (or AI-readable pages added to yours)",
+      "Price book for your 10 most common jobs",
+      "MCP connection: AI assistants read your prices, hours and area directly",
+      "Google Business Profile cleaned up, with prices and a request link",
+      "Request form you confirm within 15 minutes",
+      "Monthly checks, up to 2 price updates a month, and a report of every AI agent that asked",
     ],
-    suits: "Every shop, before anything else",
   },
   {
-    id: "setup",
-    name: "Agent-ready setup",
-    price: null,
-    unit: "one-time",
+    id: "booked",
+    name: "Booked",
+    fits: "4 to 10 trucks, on Jobber, Housecall Pro, ServiceTitan or a calendar",
+    setup: 3750,
+    monthly: 600,
+    zeroDownMonthly: 940,
     summary:
-      "A price workshop with you, a cleaned-up Google profile, a services page AI can read and a booking link.",
+      "Live open slots from your schedule, so AI assistants can request real bookings that you confirm.",
     includes: [
-      "90-minute price workshop: ranges for your 10 to 15 most common jobs",
-      "Google Business Profile fixed: hours, services, area, prices, booking link",
-      "A services page with your price ranges, readable by AI assistants",
-      "Online booking or a request form connected to how you schedule today",
-      "Before and after tests in ChatGPT, Gemini, Claude and Google",
+      "Everything in Starter, plus live open slots from your scheduling tool or calendar",
+      "MCP booking: verified AI agents can request a booking that you confirm",
+      "Price book for your top 20 jobs, plus diagnostic and emergency fees",
+      "A page for each service and each borough you cover",
+      "Weekly checks and unlimited price updates",
+      "New AI booking channels added as they launch, at a standard setup fee",
     ],
-    suits: "Shops with 1 to 10 trucks that want booked jobs from AI search",
     featured: true,
   },
   {
-    id: "monthly",
-    name: "Agent-ready monthly",
-    price: null,
-    unit: "month",
-    summary:
-      "Weekly checks of your hours, prices and listings, price updates when you change them, and a monthly report.",
+    id: "partner",
+    name: "Growth Partner",
+    fits: "Multi-crew shops that want to be first on every new AI channel",
+    setup: 6000,
+    monthly: 1125,
+    zeroDownMonthly: 1650,
+    summary: "Everything in Booked, first in line for every new AI channel, and a say in what we build.",
     includes: [
-      "Weekly checks that hours, prices and listings still match",
-      "Price book updates whenever you change a price",
-      "Monthly report: assistant test results and booking requests",
+      "Everything in Booked, for every trade you run",
+      "New AI channels first, with no setup fee",
+      "Your own allow and block rules for each AI agent",
+      "Quarterly strategy review",
+      "Quarterly roadmap call with other partner shops",
     ],
-    suits: "Shops after setup that want it kept right",
-  },
-  {
-    id: "voice",
-    name: "Voice add-on",
-    price: null,
-    unit: "month",
-    summary:
-      "An AI answering service for after-hours and overflow calls that quotes from your price book and says it is an AI.",
-    includes: [
-      "Answers only after hours or when your line is busy, to start",
-      "Quotes your ranges and takes the job details",
-      "Says it is an AI at the start of every call",
-      "You hear test calls before it goes live",
-    ],
-    suits: "Shops that miss calls on the job or after hours",
   },
 ];
 
-export function priceLabel(p: Package): string {
-  if (p.unit === "free") return "Free";
-  const amount = p.price == null ? "$X" : `$${p.price.toLocaleString("en-US")}`;
-  return p.unit === "month" ? `from ${amount} a month` : `from ${amount}`;
+/** The AI-to-AI line: an opt-in add-on, priced on request while it is tested (roadmap H9). */
+export const aiLine = {
+  id: "ai-line",
+  name: "AI-to-AI line",
+  summary:
+    "An optional line that only talks to other AIs, like Google’s assistant calling to check your prices. People who call always reach you.",
+  includes: [
+    "Answers calls placed by AI assistants only, never people",
+    "Gives your price ranges, hours and area from your price book",
+    "Never takes a booking by phone: bookings go through you",
+    "Off by default; you turn it on",
+  ],
+} as const;
+
+export const money = (n: number) => `$${n.toLocaleString("en-US")}`;
+
+/** "$2,250 setup + $375/mo" */
+export function upfrontLabel(t: Tier) {
+  return `${money(t.setup)} setup + ${money(t.monthly)}/mo`;
+}
+
+/** "$600/mo for 12 months, then $375/mo" */
+export function zeroDownLabel(t: Tier) {
+  return `${money(t.zeroDownMonthly)}/mo for ${ZERO_DOWN_MONTHS} months, then ${money(t.monthly)}/mo`;
 }
 
 /** The seven checks of the Agent Readiness Score (from the pivot plan's rubric). */
@@ -123,7 +156,11 @@ export const faqs = [
   },
   {
     q: "Will a robot answer my phone?",
-    a: "Only if you add the voice option, and only after hours or when your line is busy. It says it is an AI, and you hear test calls before it goes live.",
+    a: "No. People who call always reach you or your team. The only voice option is an add-on that talks to other AIs, like Google’s assistant calling to check your prices, and it stays off unless you turn it on.",
+  },
+  {
+    q: "Who are these AI agents booking my jobs?",
+    a: "We check which AI assistant is asking and who it acts for before it can see your open slots or request a booking. Your monthly report lists every one, and you confirm each booking yourself.",
   },
   {
     q: "Do I need new scheduling software?",

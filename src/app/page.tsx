@@ -6,7 +6,9 @@ import { JsonLd } from "@/components/JsonLd";
 import { ShopRecord } from "@/components/ShopRecord";
 import { faqJsonLd, servicesJsonLd } from "@/lib/jsonld";
 import { photos } from "@/lib/photos";
-import { MAIN_ACTION, clients, faqs, packages, priceLabel, site } from "@/lib/site";
+import { PayToggle } from "@/components/PayToggle";
+import { FreePrice, TierPrice } from "@/components/TierPrice";
+import { MAIN_ACTION, aiLine, audit, clients, faqs, site, tiers } from "@/lib/site";
 
 /*
   type: service Â· site-kind other
@@ -78,13 +80,15 @@ export default function Home() {
             </div>
             <div className="hero__media span-6 start-7 hero-visual">
               <HeroVisual>
-                {/* eslint-disable-next-line @next/next/no-img-element -- a generated SVG, the LCP image */}
+                {/* eslint-disable-next-line @next/next/no-img-element -- a capture of the finished 3D build (scripts/capture-hero-still.mjs), the LCP image */}
                 <img
                   className="hero-visual__still"
-                  src="/hero-still.svg"
-                  alt="Drawing of a three-storey mass timber frame: glulam columns and beams on a six-metre grid, with cross-laminated timber floors and the top floor still going in."
-                  width={756}
-                  height={630}
+                  src="/hero/duplex-628.webp"
+                  srcSet="/hero/duplex-628.webp 628w, /hero/duplex-1256.webp 1256w"
+                  sizes="(max-width: 1023px) 100vw, 628px"
+                  alt="A two-storey mass timber duplex with glass fronts: glulam columns and beams, cross-laminated timber floors, and the heating ducts, plumbing and wiring visible inside, with heat pumps and solar panels on the roof."
+                  width={628}
+                  height={716}
                   fetchPriority="high"
                   decoding="async"
                 />
@@ -191,61 +195,78 @@ export default function Home() {
         style={{ ["--h" as string]: 1 }}
       >
         <div className="wrap">
-          <div className="section-head">
-            <h2 id="packages-h">Packages and prices</h2>
-            <p>
-              Start with the free audit. The setup price depends on how many jobs go in your price
-              book.
-            </p>
+          <div className="section-head section-head--row">
+            <div>
+              <h2 id="packages-h">Packages and prices</h2>
+              <p>
+                AI booking is changing fast. Start now, and we keep your shop current as each new
+                assistant and booking channel arrives.
+              </p>
+            </div>
+            <PayToggle scopeId="packages" />
           </div>
           <div className="grid">
-            {packages.map((p) => (
+            <a href="/audit" className="card card--plan ground-base glass-light span-3">
+              <h3>{audit.name}</h3>
+              <FreePrice />
+              <ul className="plan-list">
+                {audit.includes.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+              <span className="link card__action">Request the audit</span>
+            </a>
+            {tiers.map((t) => (
               <a
-                key={p.id}
-                href={p.id === "audit" ? "/audit" : `/packages#${p.id}`}
-                className={`card card--plan ground-base glass-light span-3${p.featured ? " is-featured timber-edge" : ""}`}
+                key={t.id}
+                href={`/packages#${t.id}`}
+                className={`card card--plan ground-base glass-light span-3${t.featured ? " is-featured timber-edge" : ""}`}
               >
-                <h3>{p.name}</h3>
-                <p className="figures">
-                  <strong>{priceLabel(p)}</strong>
-                </p>
+                <h3>{t.name}</h3>
+                <TierPrice tier={t} />
                 <ul className="plan-list">
-                  {p.includes.slice(0, 3).map((item) => (
+                  {t.includes.slice(0, 3).map((item) => (
                     <li key={item}>{item}</li>
                   ))}
                 </ul>
                 <span className="link card__action">
-                  {p.id === "audit"
-                    ? "Request the audit"
-                    : `See the ${p.name.toLowerCase()} details`}
+                  See details<span className="visually-hidden">: {t.name}</span>
                 </span>
               </a>
             ))}
           </div>
+          <p className="addon-note">
+            Optional add-on: an {aiLine.name} that only answers AI assistants calling for prices,
+            never people. Off unless you turn it on.
+          </p>
+          <p className="founding-link">
+            <a className="link" href="/case-studies#volunteer">
+              Interested in being a founding partner?
+            </a>
+          </p>
         </div>
       </section>
 
       {/* 6 QUESTIONS (calm, before the last visual section) */}
-      <section className="section" id="faq" aria-labelledby="faq-h">
+      <section className="section section--fit" id="faq" aria-labelledby="faq-h">
         <div className="wrap">
-          <div className="grid">
-            <div className="span-6 section-head">
-              <h2 id="faq-h">Questions owners ask first</h2>
-              <p>
-                Anything else:{" "}
-                <a className="link" href={`mailto:${site.email}`}>
-                  Email us
-                </a>
-              </p>
-            </div>
-            <div className="span-6 start-7 faq">
-              {faqs.map((f) => (
-                <details key={f.q} open>
-                  <summary>{f.q}</summary>
-                  <p>{f.a}</p>
-                </details>
-              ))}
-            </div>
+          <div className="section-head">
+            <h2 id="faq-h">Questions owners ask first</h2>
+            <p>
+              Anything else:{" "}
+              <a className="link" href={`mailto:${site.email}`}>
+                Email us
+              </a>
+            </p>
+          </div>
+          {/* the questions across the full width, two columns from 1024px */}
+          <div className="faq faq--cols">
+            {faqs.map((f) => (
+              <details key={f.q} open>
+                <summary>{f.q}</summary>
+                <p>{f.a}</p>
+              </details>
+            ))}
           </div>
         </div>
       </section>

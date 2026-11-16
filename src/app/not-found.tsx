@@ -1,4 +1,4 @@
-import { Arrow } from "@/components/Arrow";
+﻿import { Arrow } from "@/components/Arrow";
 import { MAIN_ACTION } from "@/lib/site";
 
 export default function NotFound() {
@@ -11,7 +11,7 @@ export default function NotFound() {
       <div className="wrap">
         <div className="section-head">
           <p className="t-label">Error 404</p>
-          <h1 id="hero-h" className="t-h2">
+          <h1 id="hero-h">
             This page is not on the plans
           </h1>
           <p>The link may be old, or the address may have a typo.</p>

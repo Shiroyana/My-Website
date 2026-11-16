@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { TrackConversion } from "@/components/TrackConversion";
 import { site } from "@/lib/site";
 
@@ -15,7 +15,7 @@ export default function ThanksPage() {
       <TrackConversion event="audit-request" />
       <div className="wrap">
         <div className="section-head">
-          <h1 id="hero-h" className="t-h2">
+          <h1 id="hero-h">
             Your audit request is in
           </h1>
           <p>
