@@ -1,14 +1,4 @@
-﻿import {
-  SITE_URL,
-  aiLine,
-  audit,
-  faqs,
-  rubric,
-  site,
-  tiers,
-  upfrontLabel,
-  zeroDownLabel,
-} from "@/lib/site";
+﻿import { SITE_URL, aiLine, audit, faqs, rubric, site, tiers } from "@/lib/site";
 
 export const dynamic = "force-static";
 
@@ -24,18 +14,16 @@ export function GET() {
     `- Contact: ${site.email}`,
     `- Start here: free AI readiness audit at ${SITE_URL}/audit`,
     "",
-    "## Packages and prices (USD)",
+    "## Packages",
     "",
     `- [${audit.name}](${SITE_URL}/audit): free. ${audit.summary}`,
     ...tiers.flatMap((t) => [
-      `- [${t.name}](${SITE_URL}/packages#${t.id}) (${t.fits}): ${t.summary}`,
-      `  - Standard: ${upfrontLabel(t)}`,
-      `  - $0 down: ${zeroDownLabel(t)}`,
+      `- [${t.name}](${SITE_URL}/packages#${t.id}) (${t.fits}), pricing coming soon: ${t.summary}`,
       `  - Includes: ${t.includes.join("; ")}`,
     ]),
-    `- [${aiLine.name}](${SITE_URL}/packages#${aiLine.id}) (optional add-on, price on request): ${aiLine.summary}`,
+    `- [${aiLine.name}](${SITE_URL}/packages#${aiLine.id}) (optional add-on, in testing): ${aiLine.summary}`,
     "",
-    "Every shop starts with the free audit. The setup already paid counts toward a higher tier.",
+    `Prices for the paid plans are not published yet. The plans are being piloted with founding partner shops (${SITE_URL}/case-studies#volunteer), and prices go on the site once the pilots have results. Every shop can start with the free audit.`,
     "",
     "## The audit's seven checks (100 points)",
     "",

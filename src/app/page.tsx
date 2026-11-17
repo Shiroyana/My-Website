@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import Image from "next/image";
 import { Arrow } from "@/components/Arrow";
 import { HeroVisual } from "@/components/hero/HeroVisual";
@@ -6,12 +6,11 @@ import { JsonLd } from "@/components/JsonLd";
 import { ShopRecord } from "@/components/ShopRecord";
 import { faqJsonLd, servicesJsonLd } from "@/lib/jsonld";
 import { photos } from "@/lib/photos";
-import { PayToggle } from "@/components/PayToggle";
-import { FreePrice, TierPrice } from "@/components/TierPrice";
+import { ComingSoonPrice, FreePrice } from "@/components/TierPrice";
 import { MAIN_ACTION, aiLine, audit, clients, faqs, site, tiers } from "@/lib/site";
 
 /*
-  type: service Â· site-kind other
+  type: service, site-kind other
   deal: hero split, nav nav-split, close close-type, footer footer-dark, rhythm surface-pairs
         (plus the blueprint hero and band, DESIGN.md), buttons solid, mark: the client's logo
   moments: word-highlight (#problem), photo-chapters (#how)
@@ -195,15 +194,12 @@ export default function Home() {
         style={{ ["--h" as string]: 1 }}
       >
         <div className="wrap">
-          <div className="section-head section-head--row">
-            <div>
-              <h2 id="packages-h">Packages and prices</h2>
-              <p>
-                AI booking is changing fast. Start now, and we keep your shop current as each new
-                assistant and booking channel arrives.
-              </p>
-            </div>
-            <PayToggle scopeId="packages" />
+          <div className="section-head">
+            <h2 id="packages-h">Packages and prices</h2>
+            <p>
+              Start with the free audit today. The paid plans are being piloted with founding
+              shops now, and their prices are coming soon.
+            </p>
           </div>
           <div className="grid">
             <a href="/audit" className="card card--plan ground-base glass-light span-3">
@@ -223,7 +219,7 @@ export default function Home() {
                 className={`card card--plan ground-base glass-light span-3${t.featured ? " is-featured timber-edge" : ""}`}
               >
                 <h3>{t.name}</h3>
-                <TierPrice tier={t} />
+                <ComingSoonPrice />
                 <ul className="plan-list">
                   {t.includes.slice(0, 3).map((item) => (
                     <li key={item}>{item}</li>

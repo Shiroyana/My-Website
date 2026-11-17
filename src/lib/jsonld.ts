@@ -1,4 +1,4 @@
-﻿import { SITE_URL, ZERO_DOWN_MONTHS, aiLine, audit, faqs, site, tiers } from "./site";
+﻿import { SITE_URL, aiLine, audit, faqs, site, tiers } from "./site";
 
 const ORG_ID = `${SITE_URL}/#business`;
 
@@ -54,19 +54,10 @@ const audience = {
   audienceType: "HVAC, plumbing and electrical contractors",
 };
 
-const monthly = (price: number, name: string) => ({
-  "@type": "UnitPriceSpecification",
-  name,
-  price,
-  priceCurrency: "USD",
-  unitText: "MONTH",
-  referenceQuantity: { "@type": "QuantitativeValue", value: 1, unitCode: "MON" },
-});
-
 /**
- * One Service per offer: the free audit, each tier with its two ways to pay (setup up front plus the
- * standard monthly, or $0 down with a higher monthly for the first 12 months), and the AI-to-AI line
- * (no price while it is tested).
+ * One Service per offer. Only the free audit carries an Offer and a price (0). The paid plans and the
+ * AI-to-AI line are described without prices: they are being piloted, and prices are published once
+ * the pilots have results.
  */
 export function servicesJsonLd() {
   const service = (id: string, name: string, description: string, offers: unknown) => ({
@@ -91,32 +82,7 @@ export function servicesJsonLd() {
         priceCurrency: "USD",
         availability: "https://schema.org/InStock",
       }),
-      ...tiers.map((t) =>
-        service(t.id, t.name, t.summary, [
-          {
-            "@type": "Offer",
-            name: `${t.name}, standard (setup up front)`,
-            url: serviceId(t.id),
-            priceCurrency: "USD",
-            availability: "https://schema.org/InStock",
-            priceSpecification: [
-              { "@type": "PriceSpecification", name: "Setup", price: t.setup, priceCurrency: "USD" },
-              monthly(t.monthly, "Monthly"),
-            ],
-          },
-          {
-            "@type": "Offer",
-            name: `${t.name}, $0 down`,
-            url: serviceId(t.id),
-            priceCurrency: "USD",
-            availability: "https://schema.org/InStock",
-            priceSpecification: [
-              monthly(t.zeroDownMonthly, `Monthly for the first ${ZERO_DOWN_MONTHS} months`),
-              monthly(t.monthly, `Monthly from month ${ZERO_DOWN_MONTHS + 1}`),
-            ],
-          },
-        ]),
-      ),
+      ...tiers.map((t) => service(t.id, t.name, t.summary, null)),
       service(aiLine.id, aiLine.name, aiLine.summary, null),
     ],
   };

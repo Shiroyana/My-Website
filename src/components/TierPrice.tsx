@@ -1,32 +1,24 @@
-import { ZERO_DOWN_MONTHS, money, type Tier } from "@/lib/site";
-
 /**
- * Both ways to pay, always in the HTML (crawlers and AI assistants read both). The PayToggle on the
- * section shows one at a time; without JavaScript both stay visible.
+ * Price blocks for the plan cards. Paid plans show "Coming soon": the plans are being piloted with
+ * founding shops and prices are published once the pilots have results (roadmap.md, Pricing plans,
+ * holds the working numbers).
  */
-export function TierPrice({ tier }: { tier: Tier }) {
+export function ComingSoonPrice() {
   return (
-    <div className="tier-price figures">
-      <p className="tier-price__line" data-pay="zerodown">
-        <span className="tier-price__mode">$0 down</span>
-        <strong className="tier-price__main">{money(tier.zeroDownMonthly)}/mo</strong>
-        <span className="tier-price__note">
-          for {ZERO_DOWN_MONTHS} months, then {money(tier.monthly)}/mo
-        </span>
-      </p>
-      <p className="tier-price__line" data-pay="upfront">
-        <span className="tier-price__mode">Standard</span>
-        <strong className="tier-price__main">{money(tier.monthly)}/mo</strong>
-        <span className="tier-price__note">+ {money(tier.setup)} setup</span>
+    <div className="tier-price">
+      <p className="tier-price__line">
+        <span className="tier-price__mode">Pricing</span>
+        <strong className="tier-price__main">Coming soon</strong>
+        <span className="tier-price__note">Being piloted with founding shops</span>
       </p>
     </div>
   );
 }
 
-/** The free audit's price block, the same shape as a tier's so the cards line up. */
+/** The free audit's price block, the same shape so the cards line up. */
 export function FreePrice() {
   return (
-    <div className="tier-price figures">
+    <div className="tier-price">
       <p className="tier-price__line">
         <span className="tier-price__mode">Start here</span>
         <strong className="tier-price__main">Free</strong>

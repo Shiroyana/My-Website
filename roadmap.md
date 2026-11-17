@@ -1,6 +1,6 @@
 ﻿# Cambi Growth Roadmap: Agent-Ready Trades
 
-Last updated Nov 12, 2026 Â· Yan
+Last updated Nov 16, 2026 · Yan
 
 The working roadmap for the Cambi Growth pivot, kept in the website repo. It started as the "Cambi Growth Pivot: Agent-Ready Trades, Phased Plan" doc and now also carries the pricing plans, the website rebuild and the voice decision.
 
@@ -13,6 +13,8 @@ The working roadmap for the Cambi Growth pivot, kept in the website repo. It sta
 | Partners | Fixed packages | Plans built to evolve with each shop: upgrade credit, new AI channels as they launch, founding partner terms, a partner council |
 | Website | "Add a trades landing page as a test" | Whole site rebuilt around the pivot (Next.js); runs locally, not deployed yet (see Website) |
 | Know Your Agent | "Treat every agent request as untrusted input" (one Phase 4 design rule) | KYA is part of the product: Cambi decides which AI agents may read, check availability or request a booking for a shop, and logs every one (see Know Your Agent) |
+| Review (Nov 16) | Starter promised a new website plus MCP; founding offer on every tier; the key decision on 1 March judged on finished lift data | Starter adds AI-readable pages to the shop's own site (a full new website is a paid add-on); MCP is a pilot experiment (H10); founding offer on Starter and Booked only; the 1 March decision rests on early signals and lift (H5) is confirmed mid-April; a handoff clause protects shops if Cambi stops |
+| Published prices (Nov 16) | Tier prices and a $0 down / Standard switch on the website | The website shows the plans with "Coming soon" in place of prices: an unpiloted product is not sold at a list price. The numbers in Pricing plans are internal hypotheses until Gate 2b |
 
 ## Executive summary
 
@@ -38,17 +40,18 @@ gantt
     dateFormat YYYY-MM-DD
     axisFormat %b %Y
     section Phase 0
-    Foundations: LLC, insurance, rubric        :p0, 2026-11-16, 3w
-    Gate 0: LLC filed, rubric reliable          :milestone, g0, 2026-12-07, 0d
+    Foundations (LLC, insurance, rubric)        :p0, 2026-11-16, 3w
+    Gate 0 (LLC filed, rubric reliable)          :milestone, g0, 2026-12-07, 0d
     section Phase 1
-    Problem validation: audits, interviews      :p1, 2026-11-30, 6w
-    Gate 1: H1-H3 pass                          :milestone, g1, 2027-01-04, 0d
+    Problem validation (audits, interviews)      :p1, 2026-11-30, 6w
+    Gate 1 (H1 to H3 pass)                          :milestone, g1, 2027-01-04, 0d
     section Phase 2
-    Concierge pilots, 3 to 5 shops              :p2, 2027-01-04, 8w
-    Gate 2: KEY DECISION, continue alongside a 2027 job? :crit, milestone, g2, 2027-03-01, 0d
+    Concierge pilots, 3 to 5 shops (measured to mid-April)              :p2, 2027-01-04, 14w
+    Gate 2 (KEY DECISION on early signals, continue alongside a 2027 job)  :crit, milestone, g2, 2027-03-01, 0d
+    Gate 2b (lift H5 confirmed before scaling past the pilots)  :milestone, g2b, 2027-04-12, 0d
     section Phase 3
     Productized service and rollout             :p3, 2027-03-01, 16w
-    Gate 3: 10+ paying shops                    :milestone, g3, 2027-06-21, 0d
+    Gate 3 (10+ paying shops)                    :milestone, g3, 2027-06-21, 0d
     section Phase 4
     Platform build (only after Gate 3)          :p4, 2027-06-21, 12w
 ```
@@ -57,11 +60,11 @@ gantt
 | --- | --- | --- | --- |
 | 0. Foundations | 1-3 | 16 Nov to 6 Dec 2026 | LLC filed, insurance quoted, rubric scored consistently by two people |
 | 1. Problem validation | 3-8 | 30 Nov 2026 to 3 Jan 2027 | H1, H2, H3 pass; 5+ owners agree to a second meeting |
-| 2. Concierge pilots | 8-16 | 4 Jan to 28 Feb 2027 | 3+ paid pilots, measurable lift, **decision on running Cambi alongside a 2027 role** |
+| 2. Concierge pilots | 8-16, measured to about 22 | Set up 4 Jan to 28 Feb 2027, measured to mid-April | By 1 March: 3+ paying pilots and early signals, and the **decision on running Cambi alongside a 2027 role**. By mid-April (Gate 2b): lift (H5) confirmed before scaling past the pilot shops |
 | 3. Productized service | 16-32 | Mar to Jun 2027 | 10+ paying shops, churn under 5%, delivery under 6 hours |
 | 4. Platform build | 32+ | From late Jun 2027 | Software margins; a second city works without Yan on site |
 
-The gate after Phase 2 is the key decision: whether Cambi continues alongside a 2027 full-time role.
+The gate after Phase 2 is the key decision: whether Cambi continues alongside a 2027 full-time role. It is made on 1 March on early signals (see the Phase 2 gate), not on finished lift data: pilots set up in January cannot show 60 to 90 days of results by then. The lift test (H5) closes at a second checkpoint in mid-April, before Phase 3 takes on shops beyond the pilots.
 
 **Capacity constraint.** Yan is a full-time master's student until May 2027 and recruiting for 2027 roles. The plan assumes 10-15 hours per week and treats affordable loss (time and money) as a hard limit, not a target.
 
@@ -95,9 +98,10 @@ The riskiest assumption is not the gap (already visible) but whether small-shop 
 | H4 | At least 3 of 10 pitched owners sign the founding-partner offer (6-month minimum) and pay the first discounted monthly within 30 days | Signed agreements, first payments | Concierge offer (Phase 2) | 3+ signed and paid | 0-1 paid after 20 pitches: price or offer is wrong, rework |
 | H5 | Agent-ready shops get measurably more inbound jobs within 60 days | Calls, form fills, bookings, AI-call outcomes before vs after | Pilot baseline then after | +15% booked jobs or AI-call answer rate over 90% | No lift: value is unproven, do not scale |
 | H6 | Delivery takes under 6 hours per shop after the 5th shop | Time log per shop | Phase 2-3 tracking | Under 6 hrs | Over 12 hrs: not productizable at target price |
-| H7 | Shops retain on a monthly plan | Monthly churn | Phase 3 | Under 5%/month | Over 10%/month: sell one-time setup only |
+| H7 | Shops retain on a monthly plan | Monthly churn after the minimum term (6 months founding, 12 months $0 down); engagement before it (report opened, price updates requested) | Phase 3 and after | Under 5%/month | Over 10%/month: sell one-time setup only |
 | H8 | Consumer agents read and use structured shop data (schema, GBP, MCP) | Test queries in ChatGPT, Gemini, Claude, Muse before vs after | Controlled test per pilot shop | Agent quotes or books correctly in 2+ assistants | Agents ignore it: lean on GBP and the AI-to-AI line, skip MCP |
 | H9 | An AI-to-AI line can tell AI callers from people without making people wait or press anything | Share of Google AI calls answered with a price; any human caller routed to the line by mistake | Test line with Google's AI calling in Phase 2 | 90%+ of AI calls get a price, 0 people misrouted | Any person misrouted: drop the voice line and rely on published data only |
+| H10 | AI assistants discover and use a shop's MCP endpoint, not just its website | Endpoint logs: which agents called it and what they retrieved; controlled test queries | Free read-only endpoint on pilot shops, Phase 2 | At least one assistant or agent platform retrieves a price range through the endpoint for 2+ pilot shops | No retrieval in 60 days: leave MCP out of the offer and rely on the website, Google profile and schema |
 
 **Data hygiene.** One spreadsheet tab per hypothesis, raw rows only, date-stamped. Interview notes written within 24 hours. No hypothesis is marked passed on stated interest alone.
 
@@ -121,7 +125,7 @@ Phase 0 reuses what Cambi already has and adds only the legal and tooling minimu
 - [ ] Form a NY LLC (NY also requires the LLC publication step within 120 days; budget for it, cost varies by county)
 - [ ] EIN, business bank account, simple bookkeeping
 - [ ] Insurance: E&O / professional liability plus cyber liability (you will handle client data and accounts)
-- [ ] Standard client agreement: scope, data access, who owns the price book and data (the shop does), cancellation, liability cap
+- [ ] Standard client agreement: scope, data access, who owns the price book, data and website (the shop does), cancellation, liability cap, and the handoff and wind-down terms (see Phase 2, Pilot terms)
 - [ ] Data processing terms: what you store, retention, revocation of access on exit
 - [ ] Access hygiene: password manager, GBP "manager" (not owner) roles, per-client credentials, 2FA
 
@@ -184,7 +188,7 @@ Never ask "would you pay for X?". Close with: "Can I send you your audit score? 
 
 - **Pull** Census County Business Patterns for NAICS 238220 (plumbing, heating, AC) and 238210 (electrical) for the five NYC counties, by employee-size class. Secondary sources put New York State at about 7,300 plumbing/HVAC and 5,700 electrical establishments (2024); verify against the Census table before using.
 - **Beachhead** = NYC establishments with 1-9 employees, residential service (not new construction).
-- **Unit economics model** (assumptions to test, not facts): setup fee $1,500, retainer $300/month, 24-month average life, gross margin 70% â†’ LTV about $6,100. COCA must stay under one third of LTV, about $2,000 per shop, including your time at a stated hourly rate.
+- **Unit economics model** (assumptions to test, not facts): modeled on Starter: setup $2,250, monthly $375, 24-month average life, gross margin 70%, so LTV is about $7,875 (Booked about $12,700). COCA must stay under one third of LTV, about $2,600 per Starter shop, including your time at a stated hourly rate. The first draft used $1,500 setup and $300/month (LTV about $6,100).
 
 ### Phase 1 gate
 
@@ -201,7 +205,7 @@ Pass all: go to Phase 2. Fail H2 or H3: pivot the offer (e.g. sell inbound call 
 
 ## Phase 2: solution validation through concierge pilots (weeks 8-16)
 
-Phase 2 delivers the full outcome by hand for 3-5 shops, using off-the-shelf tools, to test H4, H5, H6 and H8. Nothing is coded that a person or an existing tool can do.
+Phase 2 delivers the full outcome by hand for 3-5 shops, using off-the-shelf tools, to test H4, H5, H6, H8 and H10. Nothing is coded that a person or an existing tool can do, with one exception: a small read-only MCP endpoint for H10, run from one hosted template and given free to pilot shops (not custom software per shop).
 
 ### Pilot selection
 
@@ -209,16 +213,17 @@ Pick from Phase 1 interviewees who scored under 50, told a lost-job story, agree
 
 ### Pilot terms
 
-- The founding-partner offer (see Pricing plans): setup waived, 50% off the tier's monthly for the first 6 months, a 6-month minimum, then the full monthly with the founding rate locked for 24 months. Measurement runs over the first 90 days. The shop pays from month one: payment is the evidence for H4, and a free pilot proves nothing.
+- The founding-partner offer (see Pricing plans), on Starter and Booked only: setup waived, 50% off the tier's monthly for the first 6 months, a 6-month minimum, then the full monthly with the founding rate locked for 24 months. Measurement runs over the first 90 days. The shop pays from month one: payment is the evidence for H4, and a free pilot proves nothing.
 - No pay-per-lead pricing, even to start: it contradicts "we are not a lead seller", and AI-sourced calls cannot be attributed fairly without tracking numbers, which the plan rules out.
 - In exchange: GBP manager access, read access to their schedule or FSM, permission to measure and to publish an anonymized or named case study.
 - Written scope, success metrics, and an exit: they keep everything built, you remove your access.
+- **Handoff clause.** If Cambi stops or winds down, every shop gets 90 days' notice and a handoff pack: its website files, with the domain and hosting in the shop's own account (or moved there), the price book, Google profile access returned, and the rate lock and any $0-down balance ended without penalty. The long terms (6-month minimum, 12-month $0 down, 24-month rate lock) bind a shop only while Cambi is delivering. Draft this before the first pilot signs, because those commitments start before the March decision.
 
 ### Baseline (weeks 8-10)
 
 Measure 2-4 weeks before changing anything: GBP insights (calls, website clicks, booking clicks), jobs booked per week from the owner's records, missed-call count (from phone carrier log or FSM), readiness score, and the agent test results.
 
-Do not swap their main phone number for a tracking number: it breaks name/address/phone consistency across listings, which hurts local ranking. Use FSM or carrier call logs instead.
+January and February are heating season, which inflates HVAC and plumbing call volume: compare against the same weeks last year where the shop has records (or Google profile insights year over year), not against the weeks just before. Do not swap their main phone number for a tracking number: it breaks name/address/phone consistency across listings, which hurts local ranking. Use FSM or carrier call logs instead.
 
 ### Delivery (concierge, per shop)
 
@@ -226,7 +231,7 @@ Do not swap their main phone number for a tracking number: it breaks name/addres
 2. **Google Business Profile.** Correct hours, service area, categories, services with prices, booking link, photos.
 3. **Website page.** Services and price ranges in plain text plus schema.org markup (LocalBusiness / Plumber / HVACBusiness, Service, Offer with PriceSpecification, areaServed, OpeningHoursSpecification). Validate with Google's Rich Results test.
 4. **Booking.** Use their FSM's online booking if they have one; otherwise a request form with a 15-minute confirm promise (Wizard of Oz: a human confirms behind it).
-5. **AI-to-AI line (opt-in, test only).** Only for pilots that agree to test it: configure an existing AI answering vendor with the price book so that calls placed by AI assistants (Google's AI calling first) get prices, hours and open slots. It never answers a person; every human call reaches the shop as today. Test H9 before offering it to anyone else.
+5. **AI-to-AI line (opt-in, test only).** Only for pilots that agree to test it: configure an existing AI answering vendor with the price book so that calls placed by AI assistants (Google's AI calling first) get prices, hours and service area (public facts only: no open slots, no bookings). It never answers a person; every human call reaches the shop as today. Test H9 before offering it to anyone else.
 6. **Agent tests.** Re-run the Phase 1 scripted queries in Muse, ChatGPT, Claude, Gemini and Google's AI calling; log changes.
 7. **Time log.** Every hour spent, by task (H6).
 
@@ -240,13 +245,15 @@ After each pilot, fill a Value Proposition Canvas: which pains the owner mention
 | --- | --- |
 | Pilots live | 3+ |
 | Pilots signed and paying the discounted monthly (H4) | 3+ |
-| Measurable lift: +15% booked jobs, or AI calls answered with a price 90%+ (H5) | 2+ shops |
+| Early signals by 1 March (proposed thresholds): readiness score up 20+ points, and an assistant quotes the shop correctly | 2+ shops |
+| Gate 2b, mid-April: measurable lift, +15% booked jobs or AI calls answered with a price 90%+ (H5), against last year's same weeks | 2+ shops |
+| MCP endpoint retrieved by an assistant or agent platform (H10) | 2+ pilot shops, or MCP is left out of the offer |
 | AI-to-AI line misroutes no person (H9, only if tested) | 0 misrouted |
 | Agents quote correctly in 2+ assistants (H8) | 2+ shops |
 | Pilots converting to monthly plan | 2+ |
 | Hours per shop, trend | Falling toward 6 |
 
-If lift is unclear after 90 days, extend one pilot 30 days rather than declaring success. Small samples are noisy; report ranges, not single numbers.
+The 1 March decision does not wait for lift; Gate 2b does. If lift is unclear after 90 days, extend one pilot 30 days rather than declaring success. Small samples are noisy; report ranges, not single numbers.
 
 ## Phase 3: productized service and rollout (weeks 16-32)
 
@@ -254,7 +261,7 @@ Phase 3 turns the pilot checklist into fixed packages with fixed prices and writ
 
 ### Packages
 
-The free Agent Readiness Audit stays the lead magnet and pitch opener (score, 1-page report, Google AI-call result, top 3 fixes). The paid packages are the three tiers in **Pricing plans** below, each with a pay-up-front or $0-down option; they replace the first draft's setup-plus-monthly placeholders ($1,500-2,500 setup, $250-400/month). Prices stay hypotheses until Phase 2 data confirms them.
+The free Agent Readiness Audit stays the lead magnet and pitch opener (score, 1-page report, Google AI-call result, top 3 fixes). The paid packages are the three tiers in **Pricing plans** below, each with a Standard or $0-down option; they replace the first draft's setup-plus-monthly placeholders ($1,500-2,500 setup, $250-400/month). Prices stay hypotheses until Phase 2 data confirms them.
 
 Pricing method: anchor against what owners already pay per job from Angi, Thumbtack or Local Services Ads (collected in Phase 1 interviews). The setup should pay back within a few extra booked jobs; check that against real ticket sizes from the interviews. Test two price points across the first 10 sales and keep the one with the better close rate times price.
 
@@ -263,7 +270,7 @@ Pricing method: anchor against what owners already pay per job from Angi, Thumbt
 - Standard operating procedure per delivery step, with screenshots, written from the pilot time logs.
 - Templates: price book sheet per trade, schema snippets, GBP checklist, monthly report.
 - The Agent Readiness Monitor (the pivoted dashboard) runs weekly checks for every client.
-- Capacity math: at 10-15 hours per week, 6 hours per setup and about 1 hour per client per month, Yan can add 2-3 shops a month while maintaining about 15. Beyond that, hire a part-time contractor (an NYU student works well) and train them on the procedures before adding more clients.
+- Capacity math: at 10-15 hours per week, 6 hours per setup and about 1 hour per client per month, Yan can add 2-3 shops a month while maintaining about 15. That math holds for Starter as redefined (AI-readable pages added to the shop's own site). A full new website adds roughly 15 to 20 hours (an estimate to confirm in the Phase 2 time logs): price it as a separate add-on and take at most one such build a month. Beyond that, hire a part-time contractor (an NYU student works well) and train them on the procedures before adding more clients.
 
 ### Rollout sequence
 
@@ -285,12 +292,12 @@ Pricing method: anchor against what owners already pay per job from Angi, Thumbt
 
 ## Pricing plans: tiers and payment options
 
-Three tiers, each paid one of two ways: pay the setup up front for the lowest monthly, or start at $0 down with a higher monthly for the first 12 months, after which it drops to the standard rate. This replaces the placeholder package table in Phase 3. Every price here is a hypothesis to validate in Phase 2 (H4), not a final number.
+Three tiers, each paid one of two ways: Standard (the setup up front, for the lowest monthly), or start at $0 down with a higher monthly for the first 12 months, after which it drops to the standard rate. This replaces the placeholder package table in Phase 3. Every price here is a hypothesis to validate in Phase 2 (H4), not a final number.
 
-| Tier | Fits | Pay up front | $0 down |
+| Tier | Fits | Standard | $0 down |
 | --- | --- | --- | --- |
-| Agent-Ready Starter | 1 to 3 trucks, prices given on the phone today | $2,250 setup + $375/mo | $600/mo for 12 months, then $375/mo |
-| Agent-Ready Booked (expected most chosen) | 4 to 10 trucks, runs Jobber, Housecall Pro, ServiceTitan or a shared calendar | $3,750 setup + $600/mo | $940/mo for 12 months, then $600/mo |
+| Starter | 1 to 3 trucks, prices given on the phone today | $2,250 setup + $375/mo | $600/mo for 12 months, then $375/mo |
+| Booked (expected most chosen) | 4 to 10 trucks, runs Jobber, Housecall Pro, ServiceTitan or a shared calendar | $3,750 setup + $600/mo | $940/mo for 12 months, then $600/mo |
 | Growth Partner | Multi-crew shops that want to be first on every new AI channel | $6,000 setup + $1,125/mo | $1,650/mo for 12 months, then $1,125/mo |
 
 **What each tier includes**
@@ -300,51 +307,53 @@ Three tiers, each paid one of two ways: pay the setup up front for the lowest mo
 | Free audit plus before and after assistant tests | Yes | Yes | Yes |
 | Price book (ranges, owner approves every number) | Top 10 jobs | Top 20 jobs, diagnostic and emergency fees | Full price book, every trade the shop runs |
 | Google Business Profile cleanup | Yes | Yes | Yes |
-| Website | New website, up to 6 pages, with hosting (or AI-readable pages added to the shop's own site) | Same, plus a page per service and per borough | Same as Booked |
-| MCP connection for AI assistants | Read-only: prices, hours, area | Plus booking requests from verified agents | Same as Booked |
+| Website | AI-readable pages added to the shop's own site (a full new website, up to 6 pages with hosting, is a paid add-on) | Same, plus a page per service and per borough | Same as Booked |
+| MCP connection for AI assistants | Pilot experiment only: a free read-only endpoint on pilot shops (H10); not sold until tested | Same, plus booking requests from verified agents once built (Phase 4) | Same as Booked |
 | Services pages AI can read (schema.org) | One services page | A page per service and per borough | Same as Booked |
-| Booking | Request form, owner confirms within 15 minutes | Live open slots from the shop's FSM or calendar | Live open slots, owner confirms each booking |
+| Booking | Request form, owner confirms within 15 minutes | Open slots from the shop's own booking tool; automatic sync from the FSM or calendar once built (Phase 4) | Same as Booked, owner confirms each booking |
 | Monitoring and report | Monthly checks, monthly report | Weekly checks, monthly report | Weekly checks, monthly report, quarterly strategy review |
 | Price updates | Up to 2 a month | Unlimited | Unlimited |
-| AI-to-AI phone line: answers calls placed by AI assistants only, never people | Add-on | Add-on | Optional add-on, off by default |
+| AI-to-AI phone line: answers calls placed by AI assistants only, never people | Add-on, only after H9 passes | Add-on, only after H9 passes | Optional add-on after H9 passes, off by default |
 | New AI channels as they launch (agent endpoint, new assistants) | Add-on when available | Included at a standard setup fee | Included first, no setup fee |
-| Know Your Agent: which AI agents asked, verified or not, and what they did | Monthly agent log in the report | Agent log, plus only verified agents can request bookings | Agent log, verified-only booking, and the shop's own allow and block rules per agent |
+| Know Your Agent: which AI agents asked, verified or not, and what they did (assembled by hand from logs until the Phase 4 gate exists) | Monthly agent log in the report | Agent log, plus only verified agents can request bookings | Agent log, verified-only booking, and the shop's own allow and block rules per agent |
 | Partner council: quarterly roadmap call | No | No | Yes |
 
 **How the two payment options work**
 
-- **Pay up front:** the setup fee once, then the standard monthly. Month to month after the first 3 months.
-- **$0 down:** no setup fee; the setup is spread across a 12-month term at a higher monthly. After month 12 the monthly drops to the standard rate and runs month to month. Over the first year this costs $450 more than paying up front on Starter, $330 more on Booked and $300 more on Growth Partner, which is the cost of spreading the setup.
+- **Standard:** the setup fee once, then the standard monthly. Month to month after the first 3 months.
+- **$0 down:** no setup fee; the setup is spread across a 12-month term at a higher monthly. After month 12 the monthly drops to the standard rate and runs month to month. Over the first year this costs $450 more than the Standard option on Starter, $330 more on Booked and $300 more on Growth Partner, which is the cost of spreading the setup.
 - **Switching:** a $0 down shop can pay off the rest of its setup at any time and move to the standard monthly from the next bill.
 
 **Evolving with partners.** AI booking is new, and the channels will keep changing, so the plans are built to grow with each shop rather than lock it into one package.
 
-- **Upgrade credit:** setup already paid counts in full toward the next tier's setup.
+- **Upgrade credit:** setup already paid counts in full toward the next tier's setup. Founding shops pay no setup, so after their 6-month minimum they pay only the difference between their tier's setup and the next tier's.
 - **New channels:** as assistants add direct booking and agent standards (MCP and others) settle, Growth Partners get each new channel first with no setup fee; Booked shops get it at a standard setup fee; Starter shops can add it.
-- **Founding partners (first 10 shops):** setup waived, 50% off the monthly for the first 6 months, a 6-month minimum, then the full monthly with the founding rate locked for 24 months. In return the shop gives monthly feedback, the data access the pilot needs, and a case study if it agrees to one.
+- **Founding partners (first 10 shops, Starter and Booked only; Growth Partner is by arrangement):** setup waived, 50% off the monthly for the first 6 months, a 6-month minimum, then the full monthly with the founding rate locked for 24 months. In return the shop gives monthly feedback, the data access the pilot needs, and a case study if it agrees to one.
 
-  | Founding offer | Starter | Booked | Growth Partner |
-  | --- | --- | --- | --- |
-  | Setup | Waived | Waived | Waived |
-  | Months 1 to 6 | $187.50/mo | $300/mo | $562.50/mo |
-  | From month 7 (locked 24 months) | $375/mo | $600/mo | $1,125/mo |
+  | Founding offer | Starter | Booked |
+  | --- | --- | --- |
+  | Setup | Waived | Waived |
+  | Months 1 to 6 | $187.50/mo | $300/mo |
+  | From month 7 (locked 24 months) | $375/mo | $600/mo |
 
-  Waiving setup for 10 shops forgoes $22,500 to $60,000 at list price that early adopters were unlikely to pay anyway; the discounted monthlies still cover delivery time. Pay-per-lead was considered and rejected (see Phase 2, Pilot terms).
+  Waiving setup for 10 shops forgoes $22,500 to $37,500 at list price that early adopters were unlikely to pay anyway. The discounted months bring in $1,125 (Starter) or $1,800 (Booked) per shop over the first six months, which covers about 6 hours of setup plus monthly care at a reasonable rate only because the website is a paid add-on and not part of the tier. A full website build inside a founding Starter would not pay for itself. Pay-per-lead was considered and rejected (see Phase 2, Pilot terms).
 - **Price changes:** rates are reviewed once a year, with 60 days' notice to existing shops. Founding rates are not affected during their lock.
+- **Handoff:** if Cambi stops, every shop gets 90 days' notice and a handoff pack; the terms are in Phase 2, Pilot terms.
 
 **Add-ons**
 
 | Add-on | Available on | Price |
 | --- | --- | --- |
-| AI-to-AI phone line | All tiers | $450 setup + $225/mo, 150 minutes included, extra minutes at vendor cost plus 20% |
+| AI-to-AI phone line (indicative; on the website the price is "on request" until H9 passes) | All tiers | $450 setup + $225/mo, 150 minutes included, extra minutes at vendor cost plus 20% |
 | Extra AI-to-AI minutes | Shops with the AI-to-AI line | Vendor cost plus 20% above the 150 included |
+| Full new website (up to 6 pages, with hosting in the shop's own account) | All tiers | Priced separately; anchor: the old Foundation package, $1,500 setup + $75/mo, to be confirmed against real build hours |
 | Second trade or location | All tiers | $150/mo |
 
 No automated texting or outbound calling is offered as an add-on, in line with the TCPA position in the risk register.
 
-**People talk to people; AI talks to AI.** Customers calling a trade shop want a person, and many dislike an AI voice, so voice is never a headline feature and never answers a person. The only voice piece is an opt-in AI-to-AI line: when an AI assistant phones the shop for a customer (Google's AI calling to check prices is the first case), it gets the shop's price ranges, hours and open slots from the price book. Every call from a person reaches the shop exactly as it does today. The pitch leads with prices, hours and open slots that AI assistants can read, not with a robot on the phone.
+**People talk to people; AI talks to AI.** Customers calling a trade shop want a person, and many dislike an AI voice, so voice is never a headline feature and never answers a person. The only voice piece is an opt-in AI-to-AI line: when an AI assistant phones the shop for a customer (Google's AI calling to check prices is the first case), it gets the shop's price ranges, hours and service area from the price book (public facts only; it never takes a booking). Every call from a person reaches the shop exactly as it does today. The pitch leads with prices, hours and open slots that AI assistants can read, not with a robot on the phone.
 
-**Unit economics check** (pay up front, 24-month life, 70% gross margin, as in Phase 1's model)
+**Unit economics check** (Standard option, 24-month life, 70% gross margin, as in Phase 1's model)
 
 | Tier | 24-month revenue | LTV | COCA ceiling (one third of LTV) |
 | --- | --- | --- | --- |
@@ -362,7 +371,7 @@ Phase 1's base case ($1,500 setup, $300/mo, LTV about $6,100) now sits below Sta
 
 **Decisions still open**
 
-- [ ] 12-month term on $0 down (recommended, since the setup is spread across it) or the old 6-month minimum
+- [x] 12-month term on $0 down (decided Nov 16: the setup is spread across it, and the website already states it)
 - [ ] How the AI-to-AI line tells an AI caller from a person without making people wait or press anything (test with Google's AI calling in Phase 2 before selling it)
 - [x] Starter stays at $2,250 setup + $375/mo (decided Nov 13): a small-business website alone often costs that much, and Starter adds the price book, Google profile work and monitoring. Revisit only if Booked becomes the natural entry once FSM connections are routine.
 - [x] Phase 2 pilot price: replaced by the founding-partner offer (setup waived, 50% off monthlies for 6 months, 6-month minimum), decided Nov 13
@@ -404,7 +413,7 @@ So Cambi stays **standard-neutral**: verify with whatever signals an agent offer
 
 The site is the demo: it has to be as readable by AI assistants as the shops it sells to. Rebuilt in November 2026 on the `redesign` branch; the live site (getcambi.com, from `main`) is unchanged until the rebuild is merged.
 
-**Status:** built and reviewed locally (http://localhost:3000 via `npm run build` then `npm start`). Not deployed: the Netlify branch preview has not built yet, and nothing is pushed or merged without Yan's go-ahead.
+**Status:** committed on the `redesign` branch and pushed to GitHub on Nov 16 on Yan's go-ahead; also runs locally (http://localhost:3000 via `npm run build` then `npm start`). The Netlify branch preview has not built yet, and nothing is merged to `main` without Yan's go-ahead.
 
 **What it is**
 
@@ -418,13 +427,17 @@ The site is the demo: it has to be as readable by AI assistants as the shops it 
 | Main action | "Get my free audit": a server-side form with validation, a bot trap and a rate limit, sending to Netlify Forms |
 | Machine-readable | JSON-LD for the business, each package and the FAQ; /llms.txt; sitemap; robots; share image; all prices in plain HTML |
 
-**Checks so far:** form tested end to end (9 of 9 pass); no broken links; accessibility, best practices and SEO 96-100 in Lighthouse; performance 79-88 on mobile measured on a slow laptop, to be re-measured on the Netlify preview against the 95 target. The 3D hero costs about 23 desktop points and none on mobile.
+**Checks so far:** form tested end to end (9 of 9 pass); no broken links; accessibility, best practices and SEO 96-100 in Lighthouse; performance 79-88 on mobile measured on a slow laptop, to be re-measured on the Netlify preview against the 95 target. The earlier frame hero cost about 23 desktop points and none on mobile; the duplex hero has not been re-measured.
 
 **Still to do on the site**
 
 - [x] Put the tier prices and the up-front / $0-down switch on /packages and the home page (done Nov 13; Starter now lists website building and a read-only MCP connection)
 - [x] Reword the voice package and the "Will a robot answer my phone?" answer to the AI-to-AI position (done Nov 13; the FAQ also gained "Who are these AI agents booking my jobs?" for KYA)
 - [x] Case studies: dated, sourced evidence that AI calling and booking are rising, and a "Volunteer your shop" form (Netlify form `case-study-volunteer`) offering founding-partner terms (done Nov 13)
+- [x] No prices on the site until the pilots have results (decided Nov 16): the plan cards, the comparison table, the structured data and llms.txt show "Coming soon" in place of prices; the working numbers stay in this roadmap. Starter now shows AI-readable pages, MCP as "in testing with pilot shops", and the AI-to-AI line as "in testing"
+- [ ] Publish prices on the site once Gate 2b passes, using the tiers in Pricing plans as confirmed or corrected by the pilots
+- [ ] Still to soften on the site: the "report of the AI agents that asked" and "open slots" lines read as available today
+- [ ] Change the case-studies line "Our first pilot shop is being set up now" unless a shop is actually in progress
 - [ ] Keep the case-study evidence current: add a line only from a source that has been opened and read (src/lib/evidence.ts)
 - [ ] Get the Netlify branch preview building, then run the Claude SEO audits, the Rich Results test and PageSpeed Insights on it
 - [ ] Approve the privacy page's 30-day deletion promise and the case studies' "90-day pilot" wording
@@ -459,7 +472,7 @@ Every channel reads the same record, so a price change made once reaches the web
 1. **Shop data store.** Price book, service area, hours, licenses, capacity. One record per shop, owner-editable from a phone.
 2. **Publishers.** Generates schema.org markup and the services page; syncs GBP through the Business Profile API; keeps them consistent automatically.
 3. **Capacity sync.** Read-only connection to FSM schedules (Jobber, Housecall Pro, ServiceTitan APIs where the shop's plan allows) or Google Calendar for shops without FSM.
-4. **Agent endpoint.** Pulled forward in part (decided Nov 13): every tier from Starter up includes a **read-only** MCP connection (get\_services, get\_price\_range) from Phase 2, since public facts carry little risk; booking over MCP (Booked and up) stays here, behind the KYA gate. The full build: a multi-tenant remote MCP server where each shop is addressable: get\_services, get\_price\_range, check\_availability, request\_booking. KYA gate in front of it (see Know Your Agent): public facts for any agent, check\_availability for verified agents, request\_booking for verified agents acting for an identified customer. Booking writes a request to the FSM or texts the owner to confirm; nothing is final without a human yes in v1.
+4. **Agent endpoint.** Tested early as a pilot experiment (revised Nov 16): a **read-only** MCP endpoint (get\_services, get\_price\_range) is given free to pilot shops in Phase 2, because public facts carry little risk, but it is not sold as a tier feature until H10 shows assistants actually discover and use it. Booking over MCP (Booked and up) stays here, behind the KYA gate. The full build: a multi-tenant remote MCP server where each shop is addressable: get\_services, get\_price\_range, check\_availability, request\_booking. KYA gate in front of it (see Know Your Agent): public facts for any agent, check\_availability for verified agents, request\_booking for verified agents acting for an identified customer. Booking writes a request to the FSM or texts the owner to confirm; nothing is final without a human yes in v1.
 5. **Discovery.** Publish the endpoint where agents look: links from the shop's site and GBP, a /.well-known manifest, MCP registry listing. Standards here are still forming; track them quarterly rather than betting on one.
 6. **AI-to-AI line (only if H9 passed).** Keep buying the voice layer from a vendor; point it at the same data store, and keep it answering AI callers only.
 7. **Monitor.** The Agent Readiness Monitor becomes the client-facing dashboard and the retention tool.
@@ -563,6 +576,8 @@ The plan's design choices (inbound only, owner-approved ranges, shop-owned data)
 | Fake or spam bookings from unverified agents | Medium | High | KYA trust levels: bookings only from verified agents acting for an identified customer; owner confirms each one | Abandoned or no-show agent bookings in the log |
 | KYA standards fragment or change | High | Medium | Stay standard-neutral; start with Web Bot Auth; review quarterly | New schemes from payment networks or assistant makers |
 | Owners pick $0 down and leave before month 12 | Medium | Medium | 12-month term on $0 down; pay-off option; track the $0-down share | $0-down share above 70% |
+| Shops hold long terms and hosted websites that outlive Cambi's availability (a stop decision, a job, burnout) | Medium | High | Handoff clause; websites, domains and hosting in the shop's own account; no commitments longer than Cambi can deliver | Gate 2 fails, or any gate date missed twice |
+| Delivery hours blow the budget (a website inside a tier, MCP work) | Medium | High | Website is a paid add-on; MCP stays a pilot experiment; the Phase 2 time log (H6) decides what each tier can include | Any setup over 12 hours |
 | AI quotes a wrong price, customer disputes | Medium | Medium | Ranges only, human confirms bookings, E&O insurance, clear terms | Any complaint |
 | High churn among micro-shops | Medium | High | Annual prepay discount; monthly report proves value | Churn over 5% |
 | Time conflict with studies and 2027 recruiting | High | High | 10-15 hr/week cap; gates allow pausing between phases without loss | Missed gate dates twice |
@@ -571,13 +586,13 @@ The plan's design choices (inbound only, owner-approved ranges, shop-owned data)
 
 ## Metrics, timeline and next 14 days
 
-Phase 3 lands around graduation (May 2027), so the go/no-go on running Cambi alongside a full-time job is made at the Phase 2 gate in late February 2027, not later.
+Phase 3 lands around graduation (May 2027), so the go/no-go on running Cambi alongside a full-time job is made at the Phase 2 gate on 1 March 2027, on early signals rather than finished lift data. The lift check (Gate 2b) follows in mid-April.
 
 ### Timeline notes
 
 - Start Monday 16 Nov 2026. Phase 0 overlaps finals in December: keep it to admin and the rubric.
 - Winter break (late Dec to mid Jan) is the best window for interviews and audits. Heating season makes HVAC and plumbing owners busiest, so book interviews for slow mornings and expect reschedules.
-- Phase 2 pilots run January to February 2027; Phase 3 runs March to June 2027.
+- Phase 2 pilots are set up in January and February 2027 and measured to mid-April. Phase 3 starts on 1 March, on early signals, and takes on shops beyond the pilots only after the mid-April lift check (Gate 2b). Phase 3 runs March to June 2027.
 
 ### Innovation accounting (track weekly)
 
@@ -606,7 +621,8 @@ Phase 3 lands around graduation (May 2027), so the go/no-go on running Cambi alo
 - [ ] Tell the 3 current clients about the readiness upgrade; schedule Vital Care as the first test bed
 - [ ] Add readiness columns to the monitoring dashboard fix
 - [ ] Review the rebuilt website on localhost and list changes (see Website)
-- [ ] Settle the open pricing decisions (12-month $0-down term, Starter tier)
+- [ ] Draft the handoff and wind-down clause for the client agreement (needed before the first pilot signs)
+- [ ] Decide the price of the full-website add-on from real build hours
 
 ## Sources
 

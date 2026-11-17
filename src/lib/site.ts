@@ -24,9 +24,9 @@ export const site = {
 export const MAIN_ACTION = { label: "Get my free audit", href: "/audit" } as const;
 
 /**
- * Pricing (roadmap.md, Pricing plans). Every shop starts with the free audit, then picks a tier and
- * pays one of two ways: the setup up front for the standard monthly, or $0 down with a higher monthly
- * for the first 12 months, after which it drops to the standard monthly.
+ * The plans. Every shop starts with the free audit. The paid tiers are being piloted, so the site
+ * shows "Coming soon" in place of prices; the working numbers below (and in roadmap.md, Pricing
+ * plans) are hypotheses and are not rendered anywhere until the pilots have results.
  */
 export const audit = {
   id: "audit",
@@ -65,11 +65,11 @@ export const tiers: Tier[] = [
     monthly: 375,
     zeroDownMonthly: 600,
     summary:
-      "A new website built for AI assistants, with your prices, hours and area they can read directly.",
+      "Your prices, hours and area published where AI assistants can read them, with a request form you confirm.",
     includes: [
-      "A new website, up to 6 pages, with hosting (or AI-readable pages added to yours)",
+      "AI-readable pages added to your website (a full new website is available as an add-on)",
       "Price book for your 10 most common jobs",
-      "MCP connection: AI assistants read your prices, hours and area directly",
+      "A direct connection for AI assistants (MCP), in testing with pilot shops",
       "Google Business Profile cleaned up, with prices and a request link",
       "Request form you confirm within 15 minutes",
       "Monthly checks, up to 2 price updates a month, and a report of every AI agent that asked",
@@ -86,7 +86,7 @@ export const tiers: Tier[] = [
       "Live open slots from your schedule, so AI assistants can request real bookings that you confirm.",
     includes: [
       "Everything in Starter, plus live open slots from your scheduling tool or calendar",
-      "MCP booking: verified AI agents can request a booking that you confirm",
+      "Booking requests from verified AI agents, which you confirm (coming with the pilots)",
       "Price book for your top 20 jobs, plus diagnostic and emergency fees",
       "A page for each service and each borough you cover",
       "Weekly checks and unlimited price updates",
