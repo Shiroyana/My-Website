@@ -5,5 +5,9 @@
 [build.environment]
   NODE_VERSION = "22"
 
-# Next.js runs on Netlify's Next.js runtime (detected automatically).
+# Run the site on Netlify's Next.js runtime. Declared explicitly: without it Netlify uploaded the
+# raw .next folder as static files and every page returned 404 (deploy of Nov 16).
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
 # Security headers are set in next.config.ts so they apply locally and in production alike.
