@@ -12,7 +12,7 @@ export const site = {
   name: "Cambi Growth",
   brandLine: "Get booked by AI, not just found",
   description:
-    "Cambi Growth sets up NYC HVAC, plumbing and electrical shops so AI assistants like ChatGPT and Google can find their prices, hours and open slots, and book jobs into their schedule.",
+    "Cambi Growth sets up NYC HVAC, plumbing and electrical shops so AI assistants like ChatGPT and Google can find their prices, hours and availability, and send booking requests the owner confirms.",
   email: "getcambi@gmail.com",
   founder: "Yan",
   city: "New York City",
@@ -72,7 +72,7 @@ export const tiers: Tier[] = [
       "A direct connection for AI assistants (MCP), in testing with pilot shops",
       "Google Business Profile cleaned up, with prices and a request link",
       "Request form you confirm within 15 minutes",
-      "Monthly checks, up to 2 price updates a month, and a report of every AI agent that asked",
+      "Monthly checks, up to 2 price updates a month, and a monthly report of the AI assistants we can identify (in testing with pilot shops)",
     ],
   },
   {
@@ -83,9 +83,9 @@ export const tiers: Tier[] = [
     monthly: 600,
     zeroDownMonthly: 940,
     summary:
-      "Live open slots from your schedule, so AI assistants can request real bookings that you confirm.",
+      "Open slots from your schedule, so AI assistants can request real bookings that you confirm. Being built with pilot shops.",
     includes: [
-      "Everything in Starter, plus live open slots from your scheduling tool or calendar",
+      "Everything in Starter, plus open slots from your scheduling tool or calendar (being built with the pilots)",
       "Booking requests from verified AI agents, which you confirm (coming with the pilots)",
       "Price book for your top 20 jobs, plus diagnostic and emergency fees",
       "A page for each service and each borough you cover",
@@ -160,7 +160,7 @@ export const faqs = [
   },
   {
     q: "Who are these AI agents booking my jobs?",
-    a: "We check which AI assistant is asking and who it acts for before it can see your open slots or request a booking. Your monthly report lists every one, and you confirm each booking yourself.",
+    a: "We are building this with our pilot shops. The aim: check which AI assistant is asking and who it acts for before it can see your open slots or request a booking, and list the ones we can identify in a monthly report. You confirm each booking yourself.",
   },
   {
     q: "Do I need new scheduling software?",

@@ -38,9 +38,7 @@ const template = [
 ];
 
 const volunteerTerms = [
-  "No setup fee: it is waived for founding shops",
-  "50% off your monthly for the first 6 months (6-month minimum)",
-  "Your founding rate locked for 24 months after that",
+  "Founding pricing well below the planned rates, agreed in writing before any work starts",
   "Before and after numbers for your own shop, whether or not we publish them",
   "In return: your feedback each month, and a case study if you agree to one",
 ];
@@ -76,10 +74,10 @@ export default function CaseStudiesPage() {
             <div className="span-6 start-7">
               {studies.length === 0 ? (
                 <div className="card empty-state bp-sheet ground-inverse">
-                  <h2 className="t-h3">First NYC pilot underway</h2>
+                  <h2 className="t-h3">First NYC pilots being lined up</h2>
                   <p>
-                    Our first pilot shop is being set up now. Its before and after results go here
-                    when the 90-day pilot ends.
+                    We are signing up our first pilot shops now. Their before and after results go
+                    here when each 90-day pilot ends.
                   </p>
                 </div>
               ) : null}

@@ -17,7 +17,7 @@ const rows = [
 const channels = [
   { name: "Your website", note: "Services page with price ranges" },
   { name: "Google Business Profile", note: "Hours, services, prices, booking link" },
-  { name: "Booking link", note: "Open slots from your schedule" },
+  { name: "Booking link", note: "Customers request a time; you confirm" },
 ] as const;
 
 export function ShopRecord() {

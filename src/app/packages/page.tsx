@@ -19,7 +19,7 @@ const pricingFaqs = [
   },
   {
     q: "Can I start before prices are published?",
-    a: "Yes. The audit is free today, and a few shops can join as founding partners: no setup fee, and half the monthly rate for the first 6 months.",
+    a: "Yes. The audit is free today, and a few shops can join as founding partners, on founding pricing we agree in writing before any work starts.",
   },
   {
     q: "Do you charge per lead or per booking?",
@@ -27,7 +27,7 @@ const pricingFaqs = [
   },
   {
     q: "Will there be a setup fee?",
-    a: "Founding partners pay none. For everyone else, the setup and monthly prices are being set from the pilots, with a $0 down option planned.",
+    a: "That is being set from the pilots, along with the monthly prices. A $0 down option is planned, and founding partners get reduced terms.",
   },
 ] as const;
 
@@ -37,11 +37,11 @@ const compare: { row: string; cols: (boolean | string)[] }[] = [
   { row: "AI-readable pages added to your website", cols: [false, true, true, true] },
   { row: "Price book (ranges you approve)", cols: [false, "Top 10 jobs", "Top 20 jobs + fees", "Every trade"] },
   { row: "Google Business Profile cleaned up", cols: [false, true, true, true] },
-  { row: "Booking", cols: [false, "Request form", "Open slots", "Open slots"] },
+  { row: "Booking", cols: [false, "Request form", "Open slots (with the pilots)", "Open slots (with the pilots)"] },
   { row: "Booking requests from verified AI agents", cols: [false, false, "With the pilots", "With the pilots"] },
   { row: "Pages per service and per borough", cols: [false, false, true, true] },
   { row: "Checks and price updates", cols: [false, "Monthly, 2 updates", "Weekly, unlimited", "Weekly, unlimited"] },
-  { row: "Report of the AI agents that asked", cols: [false, true, true, true] },
+  { row: "Monthly report of the AI assistants we can identify", cols: [false, "With the pilots", "With the pilots", "With the pilots"] },
   { row: "Your own allow and block rules per AI agent", cols: [false, false, false, true] },
   { row: "New AI channels as they launch", cols: [false, "Add-on", "Included", "First"] },
   { row: "Quarterly strategy review and roadmap call", cols: [false, false, false, true] },

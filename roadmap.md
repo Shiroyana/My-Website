@@ -436,8 +436,8 @@ The site is the demo: it has to be as readable by AI assistants as the shops it 
 - [x] Case studies: dated, sourced evidence that AI calling and booking are rising, and a "Volunteer your shop" form (Netlify form `case-study-volunteer`) offering founding-partner terms (done Nov 13)
 - [x] No prices on the site until the pilots have results (decided Nov 16): the plan cards, the comparison table, the structured data and llms.txt show "Coming soon" in place of prices; the working numbers stay in this roadmap. Starter now shows AI-readable pages, MCP as "in testing with pilot shops", and the AI-to-AI line as "in testing"
 - [ ] Publish prices on the site once Gate 2b passes, using the tiers in Pricing plans as confirmed or corrected by the pilots
-- [ ] Still to soften on the site: the "report of the AI agents that asked" and "open slots" lines read as available today
-- [ ] Change the case-studies line "Our first pilot shop is being set up now" unless a shop is actually in progress
+- [x] Softened on the site (Nov 16): the AI agent report and open slots are marked as being built with the pilots; general copy says "availability"; the founding offer is described as "founding pricing agreed in writing" with no terms published (the terms in Pricing plans stay internal)
+- [x] Case-studies line changed to "We are signing up our first pilot shops now" while the first shop is being sourced (Nov 16); update it when a shop starts
 - [ ] Keep the case-study evidence current: add a line only from a source that has been opened and read (src/lib/evidence.ts)
 - [ ] Get the Netlify branch preview building, then run the Claude SEO audits, the Rich Results test and PageSpeed Insights on it
 - [ ] Approve the privacy page's 30-day deletion promise and the case studies' "90-day pilot" wording

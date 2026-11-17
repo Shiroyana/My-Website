@@ -21,7 +21,7 @@ import { MAIN_ACTION, aiLine, audit, clients, faqs, site, tiers } from "@/lib/si
 export const metadata: Metadata = {
   title: { absolute: `${site.name}: ${site.brandLine}` },
   description:
-    "AI booking setup for NYC HVAC, plumbing and electrical shops. We publish your prices, hours and open slots so ChatGPT and Google can find, price and book you. Free audit.",
+    "AI booking setup for NYC HVAC, plumbing and electrical shops. We publish your prices, hours and availability so ChatGPT and Google can find, price and book you. Free audit.",
   alternates: { canonical: "/" },
 };
 
@@ -65,7 +65,7 @@ export default function Home() {
               <h1 id="hero-h">AI booking setup for NYC trade shops</h1>
               <p className="hero__lead">
                 When customers ask ChatGPT or Google for a plumber, the AI needs your prices, hours
-                and open slots. We publish them so the job lands in your schedule.
+                and availability. We publish them so the job lands in your schedule.
               </p>
               <div className="btn-row">
                 <a className="btn btn--primary" href={MAIN_ACTION.href}>
@@ -119,7 +119,7 @@ export default function Home() {
               aria-label, which a paragraph may not carry */}
           <div className="mo-wh__text" role="group">
             AI assistants now search and even phone shops on a customer&rsquo;s behalf. When your
-            prices, hours and open slots are missing, the assistant moves on and books{" "}
+            prices, hours and availability are missing, the assistant moves on and books{" "}
             <strong>the next shop</strong> it can read.
           </div>
         </div>
@@ -138,7 +138,7 @@ export default function Home() {
               <div className="section-head">
                 <h2 id="record-h">Your shop record, written so AI can read it</h2>
                 <p>
-                  One record of your prices, hours, service area and open slots, published on your
+                  One record of your prices, hours, service area and availability, published on your
                   website, your Google profile and a booking link. When you change a price, we
                   change it everywhere.
                 </p>
