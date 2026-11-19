@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { Component, useEffect, useRef, useState, type ReactNode } from "react";
+import { LIVE_ATTR } from "./live-check";
 
 const TimberFrame3D = dynamic(() => import("./TimberFrame3D"), { ssr: false });
 
@@ -28,11 +29,19 @@ function canRunLive(): boolean {
   return true;
 }
 
-/** If WebGL fails at runtime, keep the still and drop the live layer quietly. */
+/** Show the finished still again (the live build will not play or failed). */
+function showStill() {
+  document.documentElement.removeAttribute(LIVE_ATTR);
+}
+
+/** If WebGL fails at runtime, show the still and drop the live layer quietly. */
 class Quiet extends Component<{ children: ReactNode }, { failed: boolean }> {
   state = { failed: false };
   static getDerivedStateFromError() {
     return { failed: true };
+  }
+  componentDidCatch() {
+    showStill();
   }
   render() {
     return this.state.failed ? null : this.props.children;
@@ -66,12 +75,22 @@ export function HeroVisual({ children }: { children: ReactNode }) {
   useEffect(() => () => window.clearTimeout(fadeTimer.current), []);
 
   useEffect(() => {
-    if (!canRunLive()) return;
+    if (!canRunLive()) {
+      showStill();
+      return;
+    }
     const idle = window.requestIdleCallback ?? ((cb: () => void) => window.setTimeout(cb, 1200));
     const cancel = window.cancelIdleCallback ?? window.clearTimeout;
     const id = idle(() => setLive(true));
     return () => cancel(id);
   }, []);
+
+  // a safety net: if the first live frame has not drawn after 8 seconds, show the still
+  useEffect(() => {
+    if (ready) return;
+    const t = window.setTimeout(showStill, 8000);
+    return () => window.clearTimeout(t);
+  }, [ready]);
 
   return (
     <>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { Arrow } from "@/components/Arrow";
 import { HeroVisual } from "@/components/hero/HeroVisual";
+import { HERO_LIVE_CHECK } from "@/components/hero/live-check";
 import { JsonLd } from "@/components/JsonLd";
 import { ShopRecord } from "@/components/ShopRecord";
 import { faqJsonLd, servicesJsonLd } from "@/lib/jsonld";
@@ -78,6 +79,8 @@ export default function Home() {
               </div>
             </div>
             <div className="hero__media span-6 start-7 hero-visual">
+              {/* before the still paints: hide it when the live build is going to play */}
+              <script dangerouslySetInnerHTML={{ __html: HERO_LIVE_CHECK }} />
               <HeroVisual>
                 {/* eslint-disable-next-line @next/next/no-img-element -- a capture of the finished 3D build (scripts/capture-hero-still.mjs), the LCP image */}
                 <img
@@ -111,6 +114,7 @@ export default function Home() {
         className="section statement"
         id="problem"
         data-moment="word-highlight"
+        data-moment-opts='{"done": 0.6}'
         aria-label="The problem"
       >
         <div className="wrap">

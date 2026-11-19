@@ -157,7 +157,7 @@ One family, two weights: **400** for headings and text, **500** for buttons, lab
 ### Principles
 
 - Sentence case everywhere, including buttons and nav.
-- Headings name a thing (a noun in every heading). Buttons are a verb and an object: "Get my free audit".
+- Headings name a thing (a noun in every heading). Buttons are a verb and an object: "Get audit".
 - Prices and figures use tabular numerals so columns line up like a schedule on a drawing.
 - The blueprint feel comes from linework and labels set beside lines, not from a mono or a stencil face.
 - Measure 42 to 68 characters for text blocks.
@@ -241,7 +241,7 @@ Page links on the left, the logo in the middle (`brand-mark.png` icon plus the w
 - **Primary:** `accent` fill, `cream` text on light; `accent-on-dark` fill, `blueprint` text on dark. 44px tall (48px on phones), radius 8, 24px side padding, weight 500.
 - **Secondary:** the ground's own colour, a `line-strong` border, `ink` text.
 - Hover steps the fill toward the ink by 14%. Press scales to 0.98. Focus: a 2px ring in `accent` (light) or `accent-on-dark` (dark), 2px offset, visible at once.
-- At most two actions in the hero. The primary action site-wide is **Get my free audit**.
+- At most two actions in the hero. The primary action site-wide is **Get audit**.
 
 ### Cards
 

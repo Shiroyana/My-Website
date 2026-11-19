@@ -21,7 +21,7 @@ export const site = {
 } as const;
 
 /** Main action, word for word everywhere it appears (Taste copy rule 5). */
-export const MAIN_ACTION = { label: "Get my free audit", href: "/audit" } as const;
+export const MAIN_ACTION = { label: "Get audit", href: "/audit" } as const;
 
 /**
  * The plans. Every shop starts with the free audit. The paid tiers are being piloted, so the site

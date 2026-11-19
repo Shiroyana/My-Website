@@ -51,7 +51,7 @@ Proof: there is no client result yet, so proof is the three real client sites pl
 - **/audit:** hero split (h1 "Free AI readiness audit for your shop"; the form on the right: business name, trade, borough, website, phone, email). Then the **sample report** as an architectural drawing sheet (title block, score, seven checks, leader lines to three fixes), headed "Sample report". Then "What we check": the seven-check rubric with points (from the pivot plan). Then what happens next, in three steps.
 - **/packages:** the four packages in detail (what you get, from $X, who it suits), a comparison table, pricing FAQ. Each package also goes into JSON-LD as a Service with an Offer.
 - **/case-studies:** the template (shop, trade, borough, before and after readiness score, booked-jobs change, owner quote) rendered once as an empty state: "First NYC pilot underway." No fake entry.
-- **/about:** Yan: NYU, based in NYC, engineering plus finance, why it matters to small shops. Portrait slot clearly marked until a photograph arrives.
+- **/about:** Yan: NYU, based in NYC, engineering plus finance, why it matters to small shops. No portrait (removed Nov 19 at the owner's request).
 - **/contact:** email (getcambi@gmail.com), area served (five boroughs), a short message form using the same server action, the audit as the recommended path.
 - **/work:** the three existing client sites, a screenshot and one line each, linking out.
 

@@ -424,7 +424,7 @@ The site is the demo: it has to be as readable by AI assistants as the shops it 
 | Design process | Taste Skill for the look and its finish gate; Vercel web-interface guidelines for accessibility and forms; Hallmark and Claude SEO as audits only |
 | Hero | A 3D mass-timber duplex (react-three-fiber) that assembles on its blueprint plan: structure falls into place storey by storey, HVAC, plumbing and electrical go in before each deck closes, windows slide in from the sides, lights come on; stops within 5 seconds, with a replay button; a still image on phones, slow devices and reduced motion |
 | Pages | Home, free audit (form plus sample report), packages, case studies (honest empty state), about, contact, web design work, privacy |
-| Main action | "Get my free audit": a server-side form with validation, a bot trap and a rate limit, sending to Netlify Forms |
+| Main action | "Get audit": a server-side form with validation, a bot trap and a rate limit, sending to Netlify Forms |
 | Machine-readable | JSON-LD for the business, each package and the FAQ; /llms.txt; sitemap; robots; share image; all prices in plain HTML |
 
 **Checks so far:** form tested end to end (9 of 9 pass); no broken links; accessibility, best practices and SEO 96-100 in Lighthouse; performance 79-88 on mobile measured on a slow laptop, to be re-measured on the Netlify preview against the 95 target. The earlier frame hero cost about 23 desktop points and none on mobile; the duplex hero has not been re-measured.
@@ -441,7 +441,7 @@ The site is the demo: it has to be as readable by AI assistants as the shops it 
 - [ ] Keep the case-study evidence current: add a line only from a source that has been opened and read (src/lib/evidence.ts)
 - [ ] Get the Netlify branch preview building, then run the Claude SEO audits, the Rich Results test and PageSpeed Insights on it
 - [ ] Approve the privacy page's 30-day deletion promise and the case studies' "90-day pilot" wording
-- [ ] Supply a portrait of Yan, an SVG logo if one exists, and the Umami analytics ID
+- [ ] Supply an SVG logo if one exists, and the Umami analytics ID (the About page has no portrait, by choice, Nov 19)
 - [ ] Turn on email notifications for Netlify form submissions
 - [ ] Merge to `main` only when ready to replace the live site
 

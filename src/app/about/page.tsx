@@ -35,7 +35,7 @@ export default function AboutPage() {
       >
         <div className="wrap">
           <div className="grid">
-            <div className="span-6 split-col">
+            <div className="span-8 split-col">
               <div className="section-head">
                 <h1 id="hero-h">
                   An NYC business that builds for NYC shops
@@ -57,16 +57,6 @@ export default function AboutPage() {
                   {MAIN_ACTION.label}
                   <Arrow />
                 </a>
-              </div>
-            </div>
-            <div className="span-6 start-7">
-              {/* PLACEHOLDER: replace with a real portrait of Yan (public/about/yan.jpg, 4:5). */}
-              <div
-                className="frame frame--portrait bp-sheet ground-inverse photo-slot"
-                role="img"
-                aria-label="Placeholder for a portrait of Yan"
-              >
-                <p className="placeholder-note">Portrait of {site.founder} goes here</p>
               </div>
             </div>
           </div>

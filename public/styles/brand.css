@@ -283,6 +283,12 @@ body {
 .hero-visual:has(.hero-visual__live[data-ready]) .hero-visual__still {
   opacity: 0;
 }
+/* when the live build will play (set before first paint, HeroVisual), keep the finished still hidden
+   so the page does not show the finished house and then start building it */
+html[data-hero-live] .hero-visual__still {
+  opacity: 0;
+  transition: none;
+}
 
 /* ---------- Timber edge: a three-band lamination stripe, twice on the site at most ---------- */
 .timber-edge {
@@ -313,7 +319,18 @@ body {
 /* (the kit makes every section's .wrap a flex column; this centres it, matching its specificity) */
 main > section.statement > .wrap:not(.grid) {
   justify-content: center;
+  align-items: center;
+  text-align: center;
   gap: var(--s-4);
+}
+main > section.statement .mo-wh__text {
+  margin-inline: auto;
+}
+/* the section itself centres its .wrap in the screen (the .wrap is only as tall as the statement) */
+main > section.statement {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 /* package card: what is included, as a short list under the summary */

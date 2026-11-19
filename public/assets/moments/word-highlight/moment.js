@@ -9,7 +9,8 @@
     </section>
 
   opts: from 0.85 (the statement's top at this share of the screen's height turns the first word),
-        to 0.45 (its bottom at this share turns the last).
+        to 0.45 (its bottom at this share turns the last),
+        done 1 (the share of that scroll by which every word is lit: 0.67 lights the last word two thirds of the way).
   Reduced motion, no script: the whole statement in ink. It runs on a phone too (one paragraph's
   colours, no layout, no pin).
 */
@@ -20,11 +21,11 @@ export default function (root, opts, lib) {
   root.classList.add('mo-wh');
   const words = lib.split(text, 'words').map(i => i.parentElement);
   if (lib.reduced()) { words.forEach(w => w.classList.add('is-on')); root.classList.add('is-done'); return {}; }
-  const from = opts.from ?? 0.85, to = opts.to ?? 0.45;
+  const from = opts.from ?? 0.85, to = opts.to ?? 0.45, done = opts.done ?? 1;
   let n = -1;
   const s = lib.scrub(text, (p, r) => {
     const vh = innerHeight, start = vh * from, end = vh * to;
-    const t = lib.clamp((start - r.top) / Math.max(1, (start - end) + r.height));
+    const t = lib.clamp((start - r.top) / Math.max(1, (start - end) + r.height) / done);
     const atEnd = innerHeight + scrollY >= document.documentElement.scrollHeight - 2;   // page bottom: it can climb no further, the statement stands in full ink
     const k = atEnd ? words.length : Math.round(t * words.length);
     if (k === n) return;
